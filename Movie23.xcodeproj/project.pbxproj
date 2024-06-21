@@ -14,6 +14,14 @@
 		4B5BF9C02C254015004370DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B5BF9BF2C254015004370DE /* Assets.xcassets */; };
 		4B5BF9C32C254015004370DE /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 4B5BF9C22C254015004370DE /* Base */; };
 		4B5BF9CD2C258015004370DE /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5BF9CC2C258015004370DE /* RegistrationViewController.swift */; };
+		4B5BF9CF2C2582FA004370DE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4B5BF9CE2C2582FA004370DE /* GoogleService-Info.plist */; };
+		4B5BF9D22C258455004370DE /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 4B5BF9D12C258455004370DE /* FirebaseAnalytics */; };
+		4B5BF9D42C258455004370DE /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4B5BF9D32C258455004370DE /* FirebaseAnalyticsSwift */; };
+		4B5BF9D72C258843004370DE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5BF9D62C258843004370DE /* User.swift */; };
+		4B5BF9D92C258858004370DE /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5BF9D82C258858004370DE /* Movie.swift */; };
+		4B5BF9DB2C258937004370DE /* Cast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5BF9DA2C258937004370DE /* Cast.swift */; };
+		4B5BF9DE2C2595D6004370DE /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 4B5BF9DD2C2595D6004370DE /* FirebaseAuth */; };
+		4B5BF9E02C2595E6004370DE /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 4B5BF9DF2C2595E6004370DE /* FirebaseFirestore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +34,10 @@
 		4B5BF9C22C254015004370DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4B5BF9C42C254015004370DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4B5BF9CC2C258015004370DE /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		4B5BF9CE2C2582FA004370DE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4B5BF9D62C258843004370DE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		4B5BF9D82C258858004370DE /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		4B5BF9DA2C258937004370DE /* Cast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cast.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +45,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B5BF9D42C258455004370DE /* FirebaseAnalyticsSwift in Frameworks */,
+				4B5BF9E02C2595E6004370DE /* FirebaseFirestore in Frameworks */,
+				4B5BF9DE2C2595D6004370DE /* FirebaseAuth in Frameworks */,
+				4B5BF9D22C258455004370DE /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +60,7 @@
 			children = (
 				4B5BF9B52C254014004370DE /* Movie23 */,
 				4B5BF9B42C254014004370DE /* Products */,
+				4B5BF9DC2C2595D6004370DE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,6 +75,7 @@
 		4B5BF9B52C254014004370DE /* Movie23 */ = {
 			isa = PBXGroup;
 			children = (
+				4B5BF9D52C258831004370DE /* Model */,
 				4B5BF9CB2C257FA8004370DE /* Authentication */,
 				4B5BF9CA2C257F95004370DE /* View */,
 				4B5BF9B62C254014004370DE /* AppDelegate.swift */,
@@ -65,6 +83,7 @@
 				4B5BF9BF2C254015004370DE /* Assets.xcassets */,
 				4B5BF9C12C254015004370DE /* LaunchScreen.storyboard */,
 				4B5BF9C42C254015004370DE /* Info.plist */,
+				4B5BF9CE2C2582FA004370DE /* GoogleService-Info.plist */,
 			);
 			path = Movie23;
 			sourceTree = "<group>";
@@ -86,6 +105,23 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
+		4B5BF9D52C258831004370DE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4B5BF9D62C258843004370DE /* User.swift */,
+				4B5BF9D82C258858004370DE /* Movie.swift */,
+				4B5BF9DA2C258937004370DE /* Cast.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4B5BF9DC2C2595D6004370DE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -102,6 +138,12 @@
 			dependencies = (
 			);
 			name = Movie23;
+			packageProductDependencies = (
+				4B5BF9D12C258455004370DE /* FirebaseAnalytics */,
+				4B5BF9D32C258455004370DE /* FirebaseAnalyticsSwift */,
+				4B5BF9DD2C2595D6004370DE /* FirebaseAuth */,
+				4B5BF9DF2C2595E6004370DE /* FirebaseFirestore */,
+			);
 			productName = Movie23;
 			productReference = 4B5BF9B32C254014004370DE /* Movie23.app */;
 			productType = "com.apple.product-type.application";
@@ -130,6 +172,9 @@
 				Base,
 			);
 			mainGroup = 4B5BF9AA2C254014004370DE;
+			packageReferences = (
+				4B5BF9D02C258455004370DE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 4B5BF9B42C254014004370DE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -144,6 +189,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B5BF9CF2C2582FA004370DE /* GoogleService-Info.plist in Resources */,
 				4B5BF9C02C254015004370DE /* Assets.xcassets in Resources */,
 				4B5BF9C32C254015004370DE /* Base in Resources */,
 				4B5BF9BE2C254014004370DE /* Base in Resources */,
@@ -159,7 +205,10 @@
 			files = (
 				4B5BF9BB2C254014004370DE /* SignInViewController.swift in Sources */,
 				4B5BF9B72C254014004370DE /* AppDelegate.swift in Sources */,
+				4B5BF9DB2C258937004370DE /* Cast.swift in Sources */,
+				4B5BF9D92C258858004370DE /* Movie.swift in Sources */,
 				4B5BF9CD2C258015004370DE /* RegistrationViewController.swift in Sources */,
+				4B5BF9D72C258843004370DE /* User.swift in Sources */,
 				4B5BF9B92C254014004370DE /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -383,6 +432,40 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4B5BF9D02C258455004370DE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.28.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4B5BF9D12C258455004370DE /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4B5BF9D02C258455004370DE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		4B5BF9D32C258455004370DE /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4B5BF9D02C258455004370DE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
+		};
+		4B5BF9DD2C2595D6004370DE /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4B5BF9D02C258455004370DE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		4B5BF9DF2C2595E6004370DE /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4B5BF9D02C258455004370DE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4B5BF9AB2C254014004370DE /* Project object */;
 }

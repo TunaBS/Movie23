@@ -156,6 +156,10 @@
                                 <buttonConfiguration key="configuration" style="filled" title="Create Account">
                                     <color key="baseBackgroundColor" red="0.34509804840000002" green="0.33725491169999999" blue="0.81176471709999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="registeredButtonPressed:" destination="633-hV-Aa3" eventType="touchUpInside" id="AIW-0y-98r"/>
+                                    <segue destination="HKw-0b-bN3" kind="show" identifier="RegisterToHomePage" id="llI-gb-3K5"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fAF-dq-p5B"/>
@@ -173,10 +177,43 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="8Uh-ht-ZMG"/>
+                    <connections>
+                        <outlet property="confirmPasswordTextFied" destination="iS6-4N-nAS" id="uFw-M4-Zrl"/>
+                        <outlet property="email" destination="83n-ba-Am7" id="h3Z-IM-BUx"/>
+                        <outlet property="emailTextField" destination="83n-ba-Am7" id="AFU-nh-byu"/>
+                        <outlet property="passwordTextField" destination="Dd6-pG-Rlo" id="dL1-R3-lfe"/>
+                        <outlet property="userName" destination="TQ4-0s-RCC" id="kcy-ok-26n"/>
+                        <outlet property="userNameTextField" destination="TQ4-0s-RCC" id="B3Q-60-Y2u"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lMb-1N-TWd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1350.3816793893129" y="-7.042253521126761"/>
+            <point key="canvasLocation" x="1347" y="-560"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Szb-7a-MLp">
+            <objects>
+                <viewController id="HKw-0b-bN3" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9Xd-QS-bcF">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rOX-wB-GT4">
+                                <rect key="frame" x="28" y="85" width="113" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="q4u-Uv-JX9"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="EVc-gF-5Px"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Whs-qS-UKP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2129" y="-15"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="29p-Cy-sAO">
