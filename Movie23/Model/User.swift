@@ -9,8 +9,9 @@ import Foundation
 
 struct User: Identifiable, Codable {
     let id: String
-    let email: String?
-    let userName: String?
+    let userName: String
+    let email: String
+//    let password: String
     var movies : [Movie]?
-    static var userShowForTest = User(id: "abcd", email: "helloworld@gmail.com", userName: "Fairuz Ahmed Tuna", movies: Movie.movieArrayShowForTest)
+    static var userShowForTest = User(id: "10", userName: "Fairuz Ahmed", email: "fairuz@gmail.com", /*password: "fairuz",*/ movies: Movie.movieArrayShowForTest)
 }

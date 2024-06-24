@@ -8,17 +8,9 @@
 import UIKit
 
 class CustomButton: UIButton {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
     enum FontSize {
         case big
-        case med
+        case medium
         case small
     }
     
@@ -37,7 +29,7 @@ class CustomButton: UIButton {
         case .big:
             self.titleLabel?.font = .systemFont(ofSize: 22, weight: .bold)
             
-        case .med:
+        case .medium:
             self.titleLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
             
         case .small:
