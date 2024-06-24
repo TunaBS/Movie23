@@ -10,7 +10,6 @@ import FirebaseAuth
 
 class RegistrationViewController: UIViewController {
 
-    
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -28,8 +27,8 @@ class RegistrationViewController: UIViewController {
     
     @IBAction func registeredButtonPressed(_ sender: UIButton) {
         
-        if let emailId = emailTextField.text, let passwords = passwordTextField.text {
-            Auth.auth().createUser(withEmail: emailId, password: passwords) { authResult, error in
+        if let emailId = emailTextField.text, let password = passwordTextField.text, let userName = userNameTextField.text, let confirmPassword = confirmPasswordTextFied.text {
+            Auth.auth().createUser(withEmail: emailId, password: password) { authResult, error in
                 // ...
                 if let e = error {
                     print(e)
