@@ -13,8 +13,8 @@ class LoginViewController: UIViewController {
     private let emailField = CustomTextField(fieldType: .email)
     private let passwordField = CustomTextField(fieldType: .password)
     private let signInButton = CustomButton(title: "Sign In", hasBackground: true, fontSize: .big)
-    private let signInWithGoogle = CustomButton(title: "Sign In with Google", hasBackground: false, fontSize: .big)
-    private let newUser = CustomButton(title: "Don't have an account? Create one", fontSize: .medium)
+    private let signInWithGoogle = CustomButton(title: "Sign In with Google", hasBackground: false, fontSize: .big, titleColor: .darkText)
+    private let newUser = CustomButton(title: "Don't have an account? Create one", fontSize: .medium, titleColor: .darkGray)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,12 +83,12 @@ class LoginViewController: UIViewController {
         let password = passwordField.text ?? ""
         Task {
             try await AuthenticationManager.shared.signIn(email: email, password: password)
+            print("login called")
+            if let sceneDelegate = self.view.window?.windowScene?.delegate as? SceneDelegate {
+                sceneDelegate.checkSignInUser()
+                print("into scene delegate")
+            }
         }
-        
-        let vc = HomeViewController()
-        let navigation = UINavigationController(rootViewController: vc)
-        navigation.modalPresentationStyle = .fullScreen
-        self.present(navigation, animated: false, completion: nil)
     }
     
     @objc private func didTapNewUser() {

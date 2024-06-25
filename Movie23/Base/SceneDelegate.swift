@@ -20,17 +20,33 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //    }
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-            guard let windowScene = (scene as? UIWindowScene) else { return }
-            let window = UIWindow(windowScene: windowScene)
-            
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        let window = UIWindow(windowScene: windowScene)
+        //
+        
+        //
+        self.window = window
+        self.window?.makeKeyAndVisible()
+        checkSignInUser()
+    }
+    
+    func checkSignInUser() {
+        if AuthenticationManager.shared.userFirebaseSession == nil {
+            //go to sign in
             let vc = LoginViewController()
             let nav = UINavigationController(rootViewController: vc)
             nav.modalPresentationStyle = .fullScreen
-//            
-            window.rootViewController = nav
-            self.window = window
-            self.window?.makeKeyAndVisible()
+            self.window?.rootViewController = nav
+            print("no user")
+        } else {
+            // go to home screen
+            let vc = HomeViewController()
+            let nav = UINavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            self.window?.rootViewController = nav
+            print("user found")
         }
+    }
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.

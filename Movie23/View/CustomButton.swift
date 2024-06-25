@@ -14,16 +14,17 @@ class CustomButton: UIButton {
         case small
     }
     
-    init(title: String, hasBackground: Bool = false, fontSize: FontSize) {
+    init(title: String, hasBackground: Bool = false, fontSize: FontSize, titleColor: UIColor? = nil, backgroundColor: UIColor? = nil) {
         super.init(frame: .zero)
         self.setTitle(title, for: .normal)
         self.layer.cornerRadius = 12
         self.layer.masksToBounds = true
         
-        self.backgroundColor = hasBackground ? .systemPurple : .clear
+        self.backgroundColor = backgroundColor ?? (hasBackground ? .systemPurple : .clear)
         
-        let titleColor: UIColor = hasBackground ? .white : .systemPurple
-        self.setTitleColor(titleColor, for: .normal)
+        // Use provided title color if any, otherwise use default
+        let finalTitleColor: UIColor = titleColor ?? (hasBackground ? .white : .systemPurple)
+        self.setTitleColor(finalTitleColor, for: .normal)
         
         switch fontSize {
         case .big:

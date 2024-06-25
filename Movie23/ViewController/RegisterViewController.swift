@@ -69,6 +69,11 @@ class RegisterViewController: UIViewController {
         let password = self.passwordField.text ?? ""
         Task {
             try await AuthenticationManager.shared.createUser(userName: userName, email: email, password: password)
+            print("create account called")
+            if let sceneDelegate = self.view.window?.windowScene?.delegate as? SceneDelegate {
+                sceneDelegate.checkSignInUser()
+                print("into scene delegate")
+            }
         }
     }
 }
