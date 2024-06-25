@@ -20,7 +20,7 @@ class MoviePosterView: UIView {
         let label = UILabel()
         label.textColor = .label
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: 20, weight: .bold)
+        label.font = .systemFont(ofSize: 18, weight: .bold)
         label.text = "Error"
         return label
     }()
@@ -57,9 +57,9 @@ class MoviePosterView: UIView {
 
 
         NSLayoutConstraint.activate([
-            self.imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 30),
+            self.imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
             self.imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5),
-            self.imageView.widthAnchor.constraint(equalToConstant: 90),
+            self.imageView.widthAnchor.constraint(equalToConstant: 100),
             self.imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 1.5),
             
             self.titleLabel.topAnchor.constraint(equalTo: self.imageView.bottomAnchor, constant: 2),

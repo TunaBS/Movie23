@@ -29,10 +29,11 @@ class HeaderView: UIView {
     }()
 
     // MARK: - LifeCycle
-    init(title: String, subTitle: String? = nil) {
+    init(title: String, subTitle: String? = nil, backgroundColor: UIColor? = nil) {
         super.init(frame: .zero)
         self.titleLabel.text = title
         self.subTitleLabel.text = subTitle
+        self.backgroundColor = backgroundColor
         self.setupUI()
     }
     
@@ -51,6 +52,7 @@ class HeaderView: UIView {
             self.titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
             self.titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             self.titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+//            self.subTitleLabel.heightAnchor.constraint(equalToConstant: 20),
             
             self.subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 2),
             self.subTitleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
