@@ -19,6 +19,7 @@ class TopMovieViewController: UIViewController {
     private let stackview: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
+        stackView.backgroundColor = .red
         stackView.distribution = .equalSpacing
         stackView.spacing = 10
         return stackView
@@ -31,7 +32,8 @@ class TopMovieViewController: UIViewController {
     }
     
     private func setUpUI() {
-        self.view.backgroundColor = .systemBackground
+        self.view.backgroundColor = .yellow
+        
         
         self.view.addSubview(scrollView)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -40,16 +42,16 @@ class TopMovieViewController: UIViewController {
             scrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            scrollView.heightAnchor.constraint(equalToConstant: 200) // Adjust height as needed
+            scrollView.heightAnchor.constraint(equalTo: self.view.heightAnchor)
         ])
         
         scrollView.addSubview(stackview)
         stackview.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             stackview.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            stackview.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 10),
+            stackview.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 5),
             stackview.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -10),
-            stackview.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            stackview.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -5),
             stackview.heightAnchor.constraint(equalTo: scrollView.heightAnchor)
         ])
     }

@@ -9,13 +9,16 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
-    private let headerView = HeaderView(title: "Welcome", subTitle: "Home Page")
+    private let headerView = HeaderView(title: "Welcome", subTitle: "Home Page", backgroundColor: .red)
     private let topMoviePicksText = HeaderView(title: "Top Movie Picks", backgroundColor: .green)
-    private let upComingMoviePicksText = HeaderView(title: "Up coming Movie Picks", backgroundColor: .cyan)
+    private let upComingMoviePicksText = HeaderView(title: "Up coming Movie Picks", backgroundColor: .green)
 //    private let moviePosterView = MoviePosterView(title: "Movie name", subTitle: "Year")
     private let movieListButton = CustomButton(title: "See all", fontSize: .small, titleColor: .darkText)
     private let logOutButton = CustomButton(title: "Log out", hasBackground: false, fontSize: .small, titleColor: .red)
     private let deleteAccountButton = CustomButton(title: "Delete Account", hasBackground: false, fontSize: .small, titleColor: .red)
+    /*private */let movieListPlaceholder = UIView() // Placeholder view
+
+    
      
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +38,8 @@ class HomeViewController: UIViewController {
         self.view.addSubview(logOutButton)
         self.view.addSubview(deleteAccountButton)
         self.view.addSubview(movieListButton)
+        self.view.addSubview(movieListPlaceholder)
+        self.movieListPlaceholder.backgroundColor = .brown
         
         headerView.translatesAutoresizingMaskIntoConstraints = false
 //        moviePosterView.translatesAutoresizingMaskIntoConstraints = false
@@ -43,21 +48,32 @@ class HomeViewController: UIViewController {
         logOutButton.translatesAutoresizingMaskIntoConstraints = false
         deleteAccountButton.translatesAutoresizingMaskIntoConstraints = false
         movieListButton.translatesAutoresizingMaskIntoConstraints = false
+        movieListPlaceholder.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             self.headerView.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor),
             self.headerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10),
-            self.headerView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            self.headerView.heightAnchor.constraint(equalToConstant: 25),
+            self.headerView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.75),
+            self.headerView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.08),
             
-            self.topMoviePicksText.topAnchor.constraint(equalTo: self.headerView.topAnchor, constant: 80),
+            self.topMoviePicksText.topAnchor.constraint(equalTo: self.headerView.bottomAnchor),
             self.topMoviePicksText.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10),
-            self.topMoviePicksText.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            self.topMoviePicksText.heightAnchor.constraint(equalToConstant: 25),
+            self.headerView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.75),
+            self.topMoviePicksText.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.05),
             
-            self.upComingMoviePicksText.topAnchor.constraint(equalTo: self.logOutButton.topAnchor, constant: -100),
+            self.movieListPlaceholder.topAnchor.constraint(equalTo: self.topMoviePicksText.bottomAnchor),
+//            self.movieListPlaceholder.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+//            self.movieListPlaceholder.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+//            self.movieListPlaceholder.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.25),
+            self.movieListPlaceholder.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            self.movieListPlaceholder.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+            self.movieListPlaceholder.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.25),
+            
+            self.upComingMoviePicksText.topAnchor.constraint(equalTo:  /*self.*/movieListPlaceholder.bottomAnchor, constant: 5),
+//            self.upComingMoviePicksText.topAnchor.constraint(equalTo: self.movieListVC.bottomAnchor, constant: 0.5),
             self.upComingMoviePicksText.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10),
-            self.upComingMoviePicksText.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.upComingMoviePicksText.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.75),
+            self.upComingMoviePicksText.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.05),
             
             self.movieListButton.bottomAnchor.constraint(equalTo: self.logOutButton.bottomAnchor, constant: -20),
             self.movieListButton.centerXAnchor.constraint(equalTo: self.headerView.centerXAnchor),
@@ -82,14 +98,15 @@ class HomeViewController: UIViewController {
         self.addChild(movieListVC)
         self.view.addSubview(movieListVC.view)
         movieListVC.didMove(toParent: self)
+        movieListPlaceholder.removeFromSuperview()
         
         movieListVC.view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            movieListVC.view.topAnchor.constraint(equalTo: /*self.*/topMoviePicksText.bottomAnchor, constant: 2),
+            movieListVC.view.topAnchor.constraint(equalTo: /*self.*/topMoviePicksText.bottomAnchor),
             movieListVC.view.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            movieListVC.view.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
             movieListVC.view.widthAnchor.constraint(equalTo: self.view.widthAnchor),
             movieListVC.view.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.25)
+            
         ])
     }
     
