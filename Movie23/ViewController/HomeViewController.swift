@@ -54,7 +54,6 @@ class HomeViewController: UIViewController {
             self.upComingMoviePicksText.topAnchor.constraint(equalTo: self.logOutButton.topAnchor, constant: -100),
             self.upComingMoviePicksText.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10),
             self.upComingMoviePicksText.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-//            self.upComingMoviePicksText.heightAnchor.constraint(equalToConstant: 25),
             
             self.logOutButton.bottomAnchor.constraint(equalTo: self.deleteAccountButton.bottomAnchor, constant: -20),
             self.logOutButton.centerXAnchor.constraint(equalTo: self.headerView.centerXAnchor),
@@ -71,19 +70,17 @@ class HomeViewController: UIViewController {
     private func setupMovieListViewController() {
         let movieListVC = TopMovieViewController()
         
-        // Add movieListVC as a child view controller
         self.addChild(movieListVC)
         self.view.addSubview(movieListVC.view)
         movieListVC.didMove(toParent: self)
         
-        // Set up constraints for movieListVC's view
         movieListVC.view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             movieListVC.view.topAnchor.constraint(equalTo: /*self.*/topMoviePicksText.bottomAnchor, constant: 2),
             movieListVC.view.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             movieListVC.view.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
             movieListVC.view.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-            movieListVC.view.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.25) // Adjust height as needed
+            movieListVC.view.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.25)
         ])
     }
     
