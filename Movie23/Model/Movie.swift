@@ -24,9 +24,11 @@ struct Movie : Codable, Hashable, Identifiable{
     static var movieShowForTest = Movie(id: 10, title: "", year: 0, rating: 0, runtime: 0, genres: ["", ""], descriptionFull: "", backgroundImage: "background_dummy_img", largeCoverImage: "background_dummy_img", mpaRating: "", cast: [Cast.castForTest, Cast.castForTest, Cast.castForTest])
     
     static var movieArrayShowForTest = [
-        Movie(id: 11, title: "", year: 0, rating: 0, runtime: 0, genres: ["", ""], descriptionFull: "", backgroundImage: "background_dummy_img", largeCoverImage: "background_dummy_img", mpaRating: "", cast: [Cast.castForTest, Cast.castForTest, Cast.castForTest]),
-        Movie(id: 12, title: "", year: 0, rating: 0, runtime: 0, genres: ["", ""], descriptionFull: "", backgroundImage: "background_dummy_img", largeCoverImage: "background_dummy_img", mpaRating: "", cast: [Cast.castForTest, Cast.castForTest, Cast.castForTest]),
+        Movie(id: 11, title: "No Title Found", year: 2012, rating: 8.7, runtime: 255, genres: ["", ""], descriptionFull: "No Description Found", backgroundImage: "background_dummy_img", largeCoverImage: "background_dummy_img", mpaRating: "N/A2012", cast: [Cast.castForTest, Cast.castForTest, Cast.castForTest]),
+        Movie(id: 12, title: "No Title Found", year: 0, rating: 0, runtime: 0, genres: ["", ""], descriptionFull: "", backgroundImage: "background_dummy_img", largeCoverImage: "background_dummy_img", mpaRating: "", cast: [Cast.castForTest, Cast.castForTest, Cast.castForTest]),
         Movie(id: 13, title: "", year: 0, rating: 0, runtime: 0, genres: ["", ""], descriptionFull: "", backgroundImage: "background_dummy_img", largeCoverImage: "background_dummy_img", mpaRating: "", cast: [Cast.castForTest, Cast.castForTest, Cast.castForTest]),
-        Movie(id: 14, title: "", year: 0, rating: 0, runtime: 0, genres: ["", ""], descriptionFull: "", backgroundImage: "background_dummy_img", largeCoverImage: "background_dummy_img", mpaRating: "", cast: [Cast.castForTest, Cast.castForTest, Cast.castForTest])
+        Movie(id: 14, title: "", year: 0, rating: 0, runtime: 0, genres: ["", ""], descriptionFull: "", backgroundImage: "background_dummy_img", largeCoverImage: "background_dummy_img", mpaRating: "", cast: [Cast.castForTest, Cast.castForTest, Cast.castForTest]),
+        Movie(id: 15, title: "", year: 0, rating: 0, runtime: 0, genres: ["", ""], descriptionFull: "", backgroundImage: "background_dummy_img", largeCoverImage: "background_dummy_img", mpaRating: "", cast: [Cast.castForTest, Cast.castForTest, Cast.castForTest]),
+        Movie(id: 16, title: "", year: 0, rating: 0, runtime: 0, genres: ["", ""], descriptionFull: "", backgroundImage: "background_dummy_img", largeCoverImage: "background_dummy_img", mpaRating: "", cast: [Cast.castForTest, Cast.castForTest, Cast.castForTest])
     ]
 }

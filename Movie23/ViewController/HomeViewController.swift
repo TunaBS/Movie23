@@ -13,6 +13,7 @@ class HomeViewController: UIViewController {
     private let topMoviePicksText = HeaderView(title: "Top Movie Picks", backgroundColor: .green)
     private let upComingMoviePicksText = HeaderView(title: "Up coming Movie Picks", backgroundColor: .cyan)
 //    private let moviePosterView = MoviePosterView(title: "Movie name", subTitle: "Year")
+    private let movieListButton = CustomButton(title: "See all", fontSize: .small, titleColor: .darkText)
     private let logOutButton = CustomButton(title: "Log out", hasBackground: false, fontSize: .small, titleColor: .red)
     private let deleteAccountButton = CustomButton(title: "Delete Account", hasBackground: false, fontSize: .small, titleColor: .red)
      
@@ -22,6 +23,7 @@ class HomeViewController: UIViewController {
         self.setupMovieListViewController()
         self.logOutButton.addTarget(self, action: #selector(didTapLogOut), for: .touchUpInside)
         self.deleteAccountButton.addTarget(self, action: #selector(didTapDeleteAccount), for: .touchUpInside)
+        self.movieListButton.addTarget(self, action: #selector(didTapSeeAll), for: .touchUpInside)
     }
 
     private func setUpUI(){
@@ -32,6 +34,7 @@ class HomeViewController: UIViewController {
         self.view.addSubview(upComingMoviePicksText)
         self.view.addSubview(logOutButton)
         self.view.addSubview(deleteAccountButton)
+        self.view.addSubview(movieListButton)
         
         headerView.translatesAutoresizingMaskIntoConstraints = false
 //        moviePosterView.translatesAutoresizingMaskIntoConstraints = false
@@ -39,6 +42,7 @@ class HomeViewController: UIViewController {
         upComingMoviePicksText.translatesAutoresizingMaskIntoConstraints = false
         logOutButton.translatesAutoresizingMaskIntoConstraints = false
         deleteAccountButton.translatesAutoresizingMaskIntoConstraints = false
+        movieListButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             self.headerView.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor),
@@ -54,6 +58,11 @@ class HomeViewController: UIViewController {
             self.upComingMoviePicksText.topAnchor.constraint(equalTo: self.logOutButton.topAnchor, constant: -100),
             self.upComingMoviePicksText.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10),
             self.upComingMoviePicksText.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            
+            self.movieListButton.bottomAnchor.constraint(equalTo: self.logOutButton.bottomAnchor, constant: -20),
+            self.movieListButton.centerXAnchor.constraint(equalTo: self.headerView.centerXAnchor),
+            self.movieListButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+            self.movieListButton.heightAnchor.constraint(equalToConstant: 25),
             
             self.logOutButton.bottomAnchor.constraint(equalTo: self.deleteAccountButton.bottomAnchor, constant: -20),
             self.logOutButton.centerXAnchor.constraint(equalTo: self.headerView.centerXAnchor),
@@ -82,6 +91,11 @@ class HomeViewController: UIViewController {
             movieListVC.view.widthAnchor.constraint(equalTo: self.view.widthAnchor),
             movieListVC.view.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.25)
         ])
+    }
+    
+    @objc private func didTapSeeAll() {
+        let vc = MovieListViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func didTapLogOut() {
