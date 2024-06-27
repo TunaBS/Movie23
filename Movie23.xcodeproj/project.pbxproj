@@ -135,8 +135,8 @@
 		4B5BF9D52C258831004370DE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4B5BF9D62C258843004370DE /* User.swift */,
 				4B5BF9D82C258858004370DE /* Movie.swift */,
+				4B5BF9D62C258843004370DE /* User.swift */,
 				4B5BF9DA2C258937004370DE /* Cast.swift */,
 			);
 			path = Model;
