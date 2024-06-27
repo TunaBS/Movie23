@@ -34,7 +34,6 @@
 		4B893F2C2C2976FD004720C4 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B893F2B2C2976FD004720C4 /* AlertManager.swift */; };
 		4B893F2E2C297F93004720C4 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B893F2D2C297F93004720C4 /* AuthenticationManager.swift */; };
 		4BAACE102C2D5E4300832C34 /* PaddedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAACE0F2C2D5E4300832C34 /* PaddedLabel.swift */; };
-		4BAACE122C2D601900832C34 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAACE112C2D601900832C34 /* Colors.swift */; };
 		4BAACE142C2D604700832C34 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAACE132C2D604700832C34 /* UIColor.swift */; };
 		4BB0C96C2C298A7900DAF725 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4BB0C96B2C298A7900DAF725 /* FirebaseFirestoreSwift */; };
 /* End PBXBuildFile section */
@@ -65,7 +64,6 @@
 		4B893F2B2C2976FD004720C4 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		4B893F2D2C297F93004720C4 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		4BAACE0F2C2D5E4300832C34 /* PaddedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddedLabel.swift; sourceTree = "<group>"; };
-		4BAACE112C2D601900832C34 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		4BAACE132C2D604700832C34 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -184,7 +182,6 @@
 				4B893F2B2C2976FD004720C4 /* AlertManager.swift */,
 				4B4F8F682C2BED7D007415F5 /* UIView.swift */,
 				4BAACE0F2C2D5E4300832C34 /* PaddedLabel.swift */,
-				4BAACE112C2D601900832C34 /* Colors.swift */,
 				4BAACE132C2D604700832C34 /* UIColor.swift */,
 			);
 			path = Core;
@@ -282,7 +279,6 @@
 				4B5BF9DB2C258937004370DE /* Cast.swift in Sources */,
 				4B893F252C294748004720C4 /* HeaderView.swift in Sources */,
 				4B69D7E62C2A9B6C0009D357 /* TopMovieViewController.swift in Sources */,
-				4BAACE122C2D601900832C34 /* Colors.swift in Sources */,
 				4B5BF9D92C258858004370DE /* Movie.swift in Sources */,
 				4B893F2E2C297F93004720C4 /* AuthenticationManager.swift in Sources */,
 				4B893F1C2C294000004720C4 /* CustomTextField.swift in Sources */,

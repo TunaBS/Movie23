@@ -26,12 +26,41 @@ extension UIView {
         widthAnchor.constraint(equalTo: superview.widthAnchor, multiplier: 0.4).isActive = true
     }
     
-    func pinToTheRightAndBottomOfSomething(to superview: UIView, to leftview: UIView? = nil, to upview: UIView? = nil){
+    func pinButtonToBottomOfSomethingTrailing(to superview: UIView, to levelWithYAxis: UIView? = nil) {
         translatesAutoresizingMaskIntoConstraints = false
-        topAnchor.constraint(equalTo: upview?.bottomAnchor ?? superview.topAnchor, constant: 10).isActive = true
-        leadingAnchor.constraint(equalTo: leftview?.trailingAnchor ?? superview.leadingAnchor, constant: 10).isActive = true
-        heightAnchor.constraint(equalToConstant: 20).isActive = true
+        trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -0.05).isActive = true
+        centerYAnchor.constraint(equalTo: levelWithYAxis?.centerYAnchor ?? superview.centerYAnchor).isActive = true
+        heightAnchor.constraint(equalToConstant: 30).isActive = true
+        widthAnchor.constraint(equalTo: superview.widthAnchor, multiplier: 0.25).isActive = true
     }
+    
+    func pinToTheRightAndBottomOfSomething(height: Float, to superview: UIView, to rightOf: UIView? = nil, to bottomOf: UIView? = nil, topPlace: Bool? = nil){
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        if let topPlace = topPlace {
+            if topPlace {
+                topAnchor.constraint(equalTo: superview.layoutMarginsGuide.topAnchor).isActive = true
+            }
+        } else {
+            topAnchor.constraint(equalTo: bottomOf?.bottomAnchor ?? superview.topAnchor, constant: 10).isActive = true
+        }
+        leadingAnchor.constraint(equalTo: rightOf?.trailingAnchor ?? superview.leadingAnchor, constant: 10).isActive = true
+//        heightAnchor.constraint(equalToConstant: 25).isActive = true
+        heightAnchor.constraint(equalTo: superview.heightAnchor, multiplier: CGFloat(height)).isActive = true
+    }
+    
+//    func pinToTheRightAndBottomOfSomethingForHeader(to superview: UIView, to leftview: UIView? = nil, to upview: UIView? = nil, topPlace: Bool? = nil){
+//        translatesAutoresizingMaskIntoConstraints = false
+//        if let topPlace = topPlace {
+//            if topPlace {
+//                topAnchor.constraint(equalTo: superview.layoutMarginsGuide.topAnchor).isActive = true
+//            }
+//        } else {
+//            topAnchor.constraint(equalTo: upview?.bottomAnchor ?? superview.topAnchor, constant: 5).isActive = true
+//        }
+//        leadingAnchor.constraint(equalTo: leftview?.trailingAnchor ?? superview.leadingAnchor, constant: 10).isActive = true
+//        heightAnchor.constraint(equalToConstant: 50).isActive = true
+//    }
     
     func setupRoundedCorners(for label: PaddedLabel) {
         label.layer.cornerRadius = 10

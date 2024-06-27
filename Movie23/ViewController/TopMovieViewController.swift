@@ -12,14 +12,14 @@ class TopMovieViewController: UIViewController {
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsHorizontalScrollIndicator = false
-        scrollView.backgroundColor = .blue
+//        scrollView.backgroundColor = .blue         //use color for testing
         return scrollView
     } ()
     
     private let stackview: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.backgroundColor = .red
+//        stackView.backgroundColor = .red          //use color for testing
         stackView.distribution = .equalSpacing
         stackView.spacing = 10
         return stackView
@@ -32,7 +32,7 @@ class TopMovieViewController: UIViewController {
     }
     
     private func setUpUI() {
-        self.view.backgroundColor = .yellow
+//        self.view.backgroundColor = .yellow         //use color for testing
         
         
         self.view.addSubview(scrollView)

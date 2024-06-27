@@ -38,15 +38,15 @@ class MovieListTableViewCell: UITableViewCell {
         smallLabelSizeFixing()
         
         setImageConstraints()
-        movieGenre.pinToTheRightAndBottomOfSomething(to: contentView, to: movieImage)
-        movieTitle.pinToTheRightAndBottomOfSomething(to: contentView, to: movieImage, to: movieGenre)
-        mpaRating.pinToTheRightAndBottomOfSomething(to: contentView, to: movieImage, to: movieTitle)
-        year.pinToTheRightAndBottomOfSomething(to: contentView, to: mpaRating, to: movieTitle)
-        time.pinToTheRightAndBottomOfSomething(to: contentView, to: year, to: movieTitle)
+        movieGenre.pinToTheRightAndBottomOfSomething(height: 0.1, to: contentView, to: movieImage)
+        movieTitle.pinToTheRightAndBottomOfSomething(height: 0.15, to: contentView, to: movieImage, to: movieGenre)
+        mpaRating.pinToTheRightAndBottomOfSomething(height: 0.15, to: contentView, to: movieImage, to: movieTitle)
+        year.pinToTheRightAndBottomOfSomething(height: 0.15, to: contentView, to: mpaRating, to: movieTitle)
+        time.pinToTheRightAndBottomOfSomething(height: 0.15, to: contentView, to: year, to: movieTitle)
         
         watchListButton.pinButtonToBottomTrailing(to: contentView)
-        starIcon.pinToTheRightAndBottomOfSomething(to: contentView, to: movieImage, to: mpaRating)
-        rating.pinToTheRightAndBottomOfSomething(to: contentView, to: starIcon, to: mpaRating)
+        starIcon.pinToTheRightAndBottomOfSomething(height: 0.15, to: contentView, to: movieImage, to: mpaRating)
+        rating.pinToTheRightAndBottomOfSomething(height: 0.15, to: contentView, to: starIcon, to: mpaRating)
     }
     
     required init?(coder: NSCoder) {
@@ -108,59 +108,4 @@ class MovieListTableViewCell: UITableViewCell {
         setupRoundedCorners(for: time)
         setupRoundedCorners(for: mpaRating)
     }
-    //
-//    func setGenreConstraints() {
-//        movieGenre.translatesAutoresizingMaskIntoConstraints = false
-//        movieGenre.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
-//        movieGenre.leadingAnchor.constraint(equalTo: movieImage.trailingAnchor, constant: 5).isActive = true
-//        movieGenre.heightAnchor.constraint(equalToConstant: 20).isActive = true
-//    }
-//    
-//    func setTitleConstraints() {
-//        movieTitle.translatesAutoresizingMaskIntoConstraints = false
-////        movieTitle.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-//        movieTitle.leadingAnchor.constraint(equalTo: movieImage.trailingAnchor, constant: 5).isActive = true
-//        movieTitle.heightAnchor.constraint(equalToConstant: 20).isActive = true
-//        movieTitle.topAnchor.constraint(equalTo: movieGenre.bottomAnchor, constant: 5).isActive = true
-//    }
-//    
-//    func setMpaConstraints() {
-//        mpaRating.translatesAutoresizingMaskIntoConstraints = false
-////        mpaRating.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-//        mpaRating.leadingAnchor.constraint(equalTo: movieImage.trailingAnchor, constant: 5).isActive = true
-//        mpaRating.heightAnchor.constraint(equalToConstant: 20).isActive = true
-//        mpaRating.topAnchor.constraint(equalTo: movieTitle.bottomAnchor, constant: 5).isActive = true
-//    }
-    
-//    func setYearConstraints() {
-//        year.translatesAutoresizingMaskIntoConstraints = false
-////        year.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-//        year.leadingAnchor.constraint(equalTo: mpaRating.trailingAnchor, constant: 5).isActive = true
-//        year.heightAnchor.constraint(equalToConstant: 20).isActive = true
-//        year.topAnchor.constraint(equalTo: movieTitle.bottomAnchor, constant: 5).isActive = true
-//    }
-//    
-//    func setTimeConstraints() {
-//        time.translatesAutoresizingMaskIntoConstraints = false
-////        time.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-//        time.leadingAnchor.constraint(equalTo: year.trailingAnchor, constant: 5).isActive = true
-//        time.heightAnchor.constraint(equalToConstant: 20).isActive = true
-//        time.topAnchor.constraint(equalTo: movieTitle.bottomAnchor, constant: 5).isActive = true
-//    }
-    
-//    func setStarIconConstraints() {
-//        starIcon.translatesAutoresizingMaskIntoConstraints = false
-//        starIcon.centerYAnchor.constraint(equalTo: watchListButton.centerYAnchor).isActive = true
-//        starIcon.leadingAnchor.constraint(equalTo: movieImage.trailingAnchor, constant: 5).isActive = true
-//        starIcon.heightAnchor.constraint(equalToConstant: 20).isActive = true
-////        starIcon.topAnchor.constraint(equalTo: mpaRating.bottomAnchor, constant: 20).isActive = true
-//    }
-//    
-//    func setRatingConstraints() {
-//        rating.translatesAutoresizingMaskIntoConstraints = false
-//        rating.centerYAnchor.constraint(equalTo: watchListButton.centerYAnchor).isActive = true
-//        rating.leadingAnchor.constraint(equalTo: starIcon.trailingAnchor, constant: 5).isActive = true
-//        rating.heightAnchor.constraint(equalToConstant: 20).isActive = true
-////        rating.topAnchor.constraint(equalTo: mpaRating.bottomAnchor, constant: 20).isActive = true
-//    }
 }
