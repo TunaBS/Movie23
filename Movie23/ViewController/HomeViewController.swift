@@ -8,6 +8,18 @@
 import UIKit
 
 class HomeViewController: UIViewController {
+    
+    private let scrollView: UIScrollView = {
+        let sv = UIScrollView()
+//        sv.backgroundColor = .darkerYellow
+        return sv
+    } ()
+    
+    private let contentView: UIView = {
+        let cv = UIView()
+//        cv.backgroundColor = .blue
+        return cv
+    } ()
 
     private let headerView = HeaderView(title: "Welcome", subTitle: "Home Page"/*, backgroundColor: .red*/)
     private let topMoviePicksText = HeaderView(title: "Top Movie Picks"/*, backgroundColor: .green*/)
@@ -33,35 +45,64 @@ class HomeViewController: UIViewController {
 
     private func setUpUI(){
         self.view.backgroundColor = .systemBackground
-        self.view.addSubview(headerView)
-        self.view.addSubview(topMoviePicksText)
-        self.view.addSubview(upComingMoviePicksText)
-        self.view.addSubview(logOutButton)
-        self.view.addSubview(deleteAccountButton)
-        self.view.addSubview(seeAllButtonWithTopMovie)
-        self.view.addSubview(seeAllButtonWithUpcomingMovie)
-        self.view.addSubview(movieListPlaceholderTopMovie)
         
-        headerView.pinToTheRightAndBottomOfSomething(height: 0.08, to: view, to: nil, to: nil, topPlace: true)
-        topMoviePicksText.pinToTheRightAndBottomOfSomething(height: 0.05, to: view, to: nil, to: headerView)
-        upComingMoviePicksText.pinToTheRightAndBottomOfSomething(height: 0.05, to: view, to: nil, to: movieListPlaceholderTopMovie)
-        movieListPlaceholderTopMovie.pinToTheRightAndBottomOfSomething(height: 0.5, to: view)
-        seeAllButtonWithTopMovie.pinButtonToBottomOfSomethingTrailing(to: view, to: topMoviePicksText)
-        seeAllButtonWithUpcomingMovie.pinButtonToBottomOfSomethingTrailing(to: view, to: upComingMoviePicksText)
+        self.view.addSubview(scrollView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.scrollView.addSubview(contentView)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let hConst = contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor)
+        hConst.isActive = true
+        hConst.priority = UILayoutPriority(50)
+        
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            
+            contentView.topAnchor.constraint(equalTo: self.scrollView.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor),
+            contentView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 10),
+            contentView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: -10),
+            contentView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor, constant: -20),
+        ])
+        
+        self.contentView.addSubview(headerView)
+        self.contentView.addSubview(topMoviePicksText)
+        self.contentView.addSubview(upComingMoviePicksText)
+        self.contentView.addSubview(logOutButton)
+        self.contentView.addSubview(deleteAccountButton)
+        self.contentView.addSubview(seeAllButtonWithTopMovie)
+        self.contentView.addSubview(seeAllButtonWithUpcomingMovie)
+        self.contentView.addSubview(movieListPlaceholderTopMovie)
+        
         
         logOutButton.translatesAutoresizingMaskIntoConstraints = false
         deleteAccountButton.translatesAutoresizingMaskIntoConstraints = false
         
+        headerView.pinToTheRightAndBottomOfSomething(height: 0.08, to: contentView, to: nil, to: nil, topPlace: true)
+        topMoviePicksText.pinToTheRightAndBottomOfSomething(height: 0.05, to: contentView, to: nil, to: headerView)
+        upComingMoviePicksText.pinToTheRightAndBottomOfSomething(height: 0.05, to: contentView, to: nil, to: movieListPlaceholderTopMovie)
+        movieListPlaceholderTopMovie.pinToTheRightAndBottomOfSomething(height: 0.5, to: contentView)
+        seeAllButtonWithTopMovie.pinButtonToBottomOfSomethingTrailing(to: contentView, to: topMoviePicksText)
+        seeAllButtonWithUpcomingMovie.pinButtonToBottomOfSomethingTrailing(to: contentView, to: upComingMoviePicksText)
+        
+        
+        
         NSLayoutConstraint.activate([
             self.logOutButton.bottomAnchor.constraint(equalTo: self.deleteAccountButton.bottomAnchor, constant: -20),
-            self.logOutButton.centerXAnchor.constraint(equalTo: self.headerView.centerXAnchor),
+            self.logOutButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             self.logOutButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
             self.logOutButton.heightAnchor.constraint(equalToConstant: 25),
             
-            self.deleteAccountButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
-            self.deleteAccountButton.centerXAnchor.constraint(equalTo: self.headerView.centerXAnchor),
+//            self.deleteAccountButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            self.deleteAccountButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             self.deleteAccountButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
             self.deleteAccountButton.heightAnchor.constraint(equalToConstant: 25),
+            
+            self.deleteAccountButton.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
         ])
     }
     
