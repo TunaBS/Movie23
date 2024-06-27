@@ -11,9 +11,9 @@ class MovieListTableViewCell: UITableViewCell {
     var movieImage = UIImageView()
     var movieGenre = UILabel()
     var movieTitle = UILabel()
-    var mpaRating = UILabel()
-    var year = UILabel()
-    var time = UILabel()
+    var mpaRating = PaddedLabel()
+    var year = PaddedLabel()
+    var time = PaddedLabel()
     var starIcon = UIImageView()
     var rating = UILabel()
     var watchListButton = CustomButton(title: "Add to WatchList", hasBackground: true, fontSize: .small)
@@ -33,7 +33,9 @@ class MovieListTableViewCell: UITableViewCell {
         configureImageView()
         configureGenreView()
         configureTitleView()
+        setupRoundedCornersForLabels()
         configureStarIcon()
+        smallLabelSizeFixing()
         
         setImageConstraints()
         movieGenre.pinToTheRightAndBottomOfSomething(to: contentView, to: movieImage)
@@ -79,7 +81,15 @@ class MovieListTableViewCell: UITableViewCell {
     }
     
     func configureStarIcon() {
-        starIcon.image = UIImage(systemName: "star.fill")
+        starIcon.image = UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysTemplate)
+        starIcon.tintColor = .darkerYellow
+    }
+    
+    func smallLabelSizeFixing(){
+        year.font = UIFont.systemFont(ofSize: 12)
+        time.font = UIFont.systemFont(ofSize: 12)
+        mpaRating.font = UIFont.systemFont(ofSize: 12)
+        movieGenre.font = UIFont.systemFont(ofSize: 12)
     }
     
     func setImageConstraints() {
@@ -93,7 +103,12 @@ class MovieListTableViewCell: UITableViewCell {
     private func genresString(from genres: [String]) -> String {
         genres.joined(separator: " • ")
     }
-//
+    private func setupRoundedCornersForLabels() {
+        setupRoundedCorners(for: year)
+        setupRoundedCorners(for: time)
+        setupRoundedCorners(for: mpaRating)
+    }
+    //
 //    func setGenreConstraints() {
 //        movieGenre.translatesAutoresizingMaskIntoConstraints = false
 //        movieGenre.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true

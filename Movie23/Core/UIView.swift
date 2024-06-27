@@ -31,11 +31,13 @@ extension UIView {
         topAnchor.constraint(equalTo: upview?.bottomAnchor ?? superview.topAnchor, constant: 10).isActive = true
         leadingAnchor.constraint(equalTo: leftview?.trailingAnchor ?? superview.leadingAnchor, constant: 10).isActive = true
         heightAnchor.constraint(equalToConstant: 20).isActive = true
-        
-//        movieTitle.translatesAutoresizingMaskIntoConstraints = false
-////        movieTitle.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-//        movieTitle.leadingAnchor.constraint(equalTo: movieImage.trailingAnchor, constant: 5).isActive = true
-//        movieTitle.heightAnchor.constraint(equalToConstant: 20).isActive = true
-//        movieTitle.topAnchor.constraint(equalTo: movieGenre.bottomAnchor, constant: 5).isActive = true
+    }
+    
+    func setupRoundedCorners(for label: PaddedLabel) {
+        label.layer.cornerRadius = 10
+        label.layer.masksToBounds = true
+        label.layer.borderColor = UIColor.black.cgColor
+        label.layer.borderWidth = 1.0
+        label.textInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
     }
 }
