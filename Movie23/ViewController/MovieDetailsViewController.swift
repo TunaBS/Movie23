@@ -9,6 +9,18 @@ import UIKit
 
 class MovieDetailsViewController: UIViewController {
     
+    private let scrollView: UIScrollView = {
+        let sv = UIScrollView()
+//        sv.backgroundColor = .darkerYellow
+        return sv
+    } ()
+    
+    private let contentView: UIView = {
+        let cv = UIView()
+//        cv.backgroundColor = .darkerYellow
+        return cv
+    } ()
+    
     var movieImage = UIImageView()
     var movieGenre = UILabel()
     var movieTitle = UILabel()
@@ -23,20 +35,38 @@ class MovieDetailsViewController: UIViewController {
     override func viewDidLoad() {
         self.view.backgroundColor = .systemBackground
         super.viewDidLoad()
-        setUpUI()
+        setUpScrollView()
     }
     
-    private func setUpUI() {
-        self.view.addSubview(movieImage)
-        self.view.addSubview(movieTitle)
-        self.view.addSubview(movieGenre)
-        self.view.addSubview(mpaRating)
-        self.view.addSubview(year)
-        self.view.addSubview(time)
-        self.view.addSubview(descriptionOfMovie)
-        self.view.addSubview(starIcon)
+    private func setUpScrollView() {
+        self.view.addSubview(scrollView)
+        scrollView.pin(to: view)
+        
+        self.scrollView.addSubview(contentView)
+        contentView.pin(to: scrollView)
+        
+        let hConst = contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor)
+        hConst.isActive = true
+        hConst.priority = UILayoutPriority(50)
+        
+        NSLayoutConstraint.activate([
+            contentView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor, constant: -20),
+        ])
+        
+        setUpUIInsideScrollView()
+    }
+    
+    private func setUpUIInsideScrollView() {
+        self.contentView.addSubview(movieImage)
+        self.contentView.addSubview(movieTitle)
+        self.contentView.addSubview(movieGenre)
+        self.contentView.addSubview(mpaRating)
+        self.contentView.addSubview(year)
+        self.contentView.addSubview(time)
+        self.contentView.addSubview(descriptionOfMovie)
+        self.contentView.addSubview(starIcon)
 //        self.view.addSubview(rating)
-        self.view.addSubview(watchListButton)
+        self.contentView.addSubview(watchListButton)
         
         setMovieValues(movie: Movie.movieShowForTest1)
         
@@ -48,14 +78,15 @@ class MovieDetailsViewController: UIViewController {
         smallLabelSizeFixing()
         setupRoundedCornersForLabels()
         
-        movieGenre.pinToTheRightAndBottomOfSomething(height: 0.015, to: self.view, to: nil, to: movieImage)
-        movieTitle.pinToTheRightAndBottomOfSomething(height: 0.02, to: self.view, to: nil, to: movieGenre)
-        mpaRating.pinToTheRightAndBottomOfSomething(height: 0.025, to: self.view, to: nil, to: movieTitle)
-        year.pinToTheRightAndBottomOfSomething(height: 0.025, to: self.view, to: mpaRating, to: movieTitle)
-        time.pinToTheRightAndBottomOfSomething(height: 0.025, to: self.view, to: year, to: movieTitle)
-        descriptionOfMovie.pinToTheRightAndBottomOfSomething(height: 0.05, to: self.view, to: nil, to: mpaRating)
+        movieGenre.pinToTheRightAndBottomOfSomething(height: 0.015, to: self.contentView, to: nil, to: movieImage)
+        movieTitle.pinToTheRightAndBottomOfSomething(height: 0.02, to: self.contentView, to: nil, to: movieGenre)
+        mpaRating.pinToTheRightAndBottomOfSomething(height: 0.025, to: self.contentView, to: nil, to: movieTitle)
+        year.pinToTheRightAndBottomOfSomething(height: 0.025, to: self.contentView, to: mpaRating, to: movieTitle)
+        time.pinToTheRightAndBottomOfSomething(height: 0.025, to: self.contentView, to: year, to: movieTitle)
+        descriptionOfMovie.pinToTheRightAndBottomOfSomething(height: 0.05, to: self.contentView, to: nil, to: mpaRating)
         watchListButtonAlignment()
-        setUpRatingView()
+        setUpRatingView(to: contentView, to: watchListButton)
+        
     }
     
     func setMovieValues(movie: Movie) {
@@ -116,31 +147,24 @@ class MovieDetailsViewController: UIViewController {
         watchListButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.9).isActive = true
     }
     
-    /*private */func setUpRatingView() {
+    private func setUpRatingView(to contentView: UIView, to watchlistButton: UIView) {
         let superview = UIView()
         superview.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(superview)
+        contentView.addSubview(superview)
         
-        var firstRatingView = UIView()
-        var secondRatingView = UIView()
-        /*var*/ firstRatingView = setUpSingleRatingView(to: superview, header: "Overall Rating", ratingValue: movieRating)
-        /*var*/ secondRatingView = setUpSingleRatingView(to: superview, header: "Your Rating", ratingValue: 0.0)
-        
-//        superview.addSubview(firstRatingView)
-//        superview.addSubview(secondRatingView)
-        
+        var firstRatingView = setUpSingleRatingView(to: superview, header: "Overall Rating", ratingValue: movieRating)
+        var secondRatingView = setUpSingleRatingView(to: superview, header: "Your Rating", ratingValue: 0.0)
         
         firstRatingView.leadingAnchor.constraint(equalTo: superview.leadingAnchor).isActive = true
-        secondRatingView.leadingAnchor.constraint(equalTo: firstRatingView.trailingAnchor, constant: 10).isActive = true
+        secondRatingView.trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: 5).isActive = true
         
-        
-        superview.pinToTheRightAndBottomOfSomething(height: 0.05, to: view, to: nil, to: watchListButton)
-        
-        superview.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
-        superview.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        superview.topAnchor.constraint(equalTo: watchlistButton.bottomAnchor, constant: 10).isActive = true
+        superview.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        superview.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.1).isActive = true
+        superview.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.8).isActive = true
     }
     
-    /*private */func setUpSingleRatingView(to superview: UIView, header: String, ratingValue: Double) -> UIView {
+    private func setUpSingleRatingView(to superview: UIView, header: String, ratingValue: Double) -> UIView {
         let ratingView = UIView()
         ratingView.translatesAutoresizingMaskIntoConstraints = false
         superview.addSubview(ratingView)
@@ -155,15 +179,12 @@ class MovieDetailsViewController: UIViewController {
         ratingLabel.translatesAutoresizingMaskIntoConstraints = false
         ratingView.addSubview(ratingLabel)
 
-        ratingView.pinToTheRightAndBottomOfSomething(height: 0.05, to: view, to: nil, to: nil)
-        
         headingLabel.topAnchor.constraint(equalTo: ratingView.topAnchor).isActive = true
         headingLabel.centerXAnchor.constraint(equalTo: ratingView.centerXAnchor).isActive = true
         ratingLabel.topAnchor.constraint(equalTo: headingLabel.bottomAnchor, constant: 10).isActive = true
         ratingLabel.centerXAnchor.constraint(equalTo: ratingView.centerXAnchor).isActive = true
         
-//        ratingView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7).isActive = true
-//        ratingView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        ratingView.widthAnchor.constraint(equalTo: superview.widthAnchor, multiplier: 0.5).isActive = true
         
         return ratingView
     }
