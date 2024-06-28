@@ -10,7 +10,7 @@ import UIKit
 class MovieListViewController: UIViewController {
     
     var tableView = UITableView()
-    var movies: [Movie] = []
+    var movies: [MovieDetailsResponse.Movie] = []
     
     struct Cells {
         static let movieCell = "MovieCell"
@@ -58,7 +58,7 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension MovieListViewController {
-    func fetchMovieList() -> [Movie] {
-        return Movie.movieArrayShowForTest
+    func fetchMovieList() -> [MovieDetailsResponse.Movie] {
+        return MovieDetailsResponse.Movie.movieArrayShowForTest
     }
 }

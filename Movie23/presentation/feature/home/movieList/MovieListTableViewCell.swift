@@ -53,7 +53,7 @@ class MovieListTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setCellValue(movie: Movie) {
+    func setCellValue(movie: MovieDetailsResponse.Movie) {
         movieImage.image = UIImage(named: "background_dummy_img")
         var genreList = genresString(from: movie.genres)
         movieGenre.text = genreList

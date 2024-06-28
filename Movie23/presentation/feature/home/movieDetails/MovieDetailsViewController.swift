@@ -68,7 +68,7 @@ class MovieDetailsViewController: UIViewController {
 //        self.view.addSubview(rating)
         self.contentView.addSubview(watchListButton)
         
-        setMovieValues(movie: Movie.movieShowForTest1)
+        setMovieValues(movie: MovieDetailsResponse.Movie.movieShowForTest1)
         
         configureImageView()
         setImageConstraints()
@@ -89,7 +89,7 @@ class MovieDetailsViewController: UIViewController {
         
     }
     
-    func setMovieValues(movie: Movie) {
+    func setMovieValues(movie: MovieDetailsResponse.Movie) {
         movieImage.image = UIImage(named: "background_dummy_img")
         var genreList = genresString(from: movie.genres)
         movieGenre.text = genreList
