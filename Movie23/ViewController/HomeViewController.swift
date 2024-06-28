@@ -28,6 +28,7 @@ class HomeViewController: UIViewController {
     private let seeAllButtonWithUpcomingMovie = CustomButton(title: "See all", fontSize: .small, titleColor: .darkText)
     private let logOutButton = CustomButton(title: "Log out", hasBackground: false, fontSize: .small, titleColor: .red)
     private let deleteAccountButton = CustomButton(title: "Delete Account", hasBackground: false, fontSize: .small, titleColor: .red)
+    private let movieDetailsButton = CustomButton(title: "Movie Details", hasBackground: false, fontSize: .small, titleColor: .red)
     let movieListPlaceholderTopMovie = UIView()
     let movieListPlaceholderUpcomingMovie = UIView()
     
@@ -37,10 +38,13 @@ class HomeViewController: UIViewController {
         self.setUpUI()
         self.setupMovieListViewController(to: topMoviePicksText)
         self.setupMovieListViewController(to: upComingMoviePicksText)
-        self.logOutButton.addTarget(self, action: #selector(didTapLogOut), for: .touchUpInside)
-        self.deleteAccountButton.addTarget(self, action: #selector(didTapDeleteAccount), for: .touchUpInside)
         self.seeAllButtonWithTopMovie.addTarget(self, action: #selector(didTapSeeAll), for: .touchUpInside)
         self.seeAllButtonWithUpcomingMovie.addTarget(self, action: #selector(didTapSeeAll), for: .touchUpInside)
+        
+        self.logOutButton.addTarget(self, action: #selector(didTapLogOut), for: .touchUpInside)
+        self.deleteAccountButton.addTarget(self, action: #selector(didTapDeleteAccount), for: .touchUpInside)
+        self.movieDetailsButton.addTarget(self, action: #selector(didTapMovieDetails), for: .touchUpInside)
+        
     }
 
     private func setUpUI(){
@@ -72,15 +76,16 @@ class HomeViewController: UIViewController {
         self.contentView.addSubview(headerView)
         self.contentView.addSubview(topMoviePicksText)
         self.contentView.addSubview(upComingMoviePicksText)
-        self.contentView.addSubview(logOutButton)
-        self.contentView.addSubview(deleteAccountButton)
         self.contentView.addSubview(seeAllButtonWithTopMovie)
         self.contentView.addSubview(seeAllButtonWithUpcomingMovie)
         self.contentView.addSubview(movieListPlaceholderTopMovie)
-        
+        self.contentView.addSubview(logOutButton)
+        self.contentView.addSubview(deleteAccountButton)
+        self.contentView.addSubview(movieDetailsButton)
         
         logOutButton.translatesAutoresizingMaskIntoConstraints = false
         deleteAccountButton.translatesAutoresizingMaskIntoConstraints = false
+        movieDetailsButton.translatesAutoresizingMaskIntoConstraints = false
         
         headerView.pinToTheRightAndBottomOfSomething(height: 0.08, to: contentView, to: nil, to: nil, topPlace: true)
         topMoviePicksText.pinToTheRightAndBottomOfSomething(height: 0.05, to: contentView, to: nil, to: headerView)
@@ -92,6 +97,11 @@ class HomeViewController: UIViewController {
         
         
         NSLayoutConstraint.activate([
+            self.movieDetailsButton.bottomAnchor.constraint(equalTo: self.logOutButton.bottomAnchor, constant: -20),
+            self.movieDetailsButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            self.movieDetailsButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+            self.movieDetailsButton.heightAnchor.constraint(equalToConstant: 25),
+            
             self.logOutButton.bottomAnchor.constraint(equalTo: self.deleteAccountButton.bottomAnchor, constant: -20),
             self.logOutButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             self.logOutButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
@@ -147,6 +157,11 @@ class HomeViewController: UIViewController {
                 print("into scene delegate")
             }
         }
+    }
+    
+    @objc private func didTapMovieDetails() {
+        let vc = MovieDetailsViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 }
