@@ -9,6 +9,8 @@ import UIKit
 
 class MovieDetailsViewController: UIViewController {
     
+    let viewModel = MovieDetailsViewModel(movieRepositoy: MovieRepositoryImpl(apiService: APIServiceImplemention(apiClient: APIClientImp())))
+    
     private let scrollView: UIScrollView = {
         let sv = UIScrollView()
 //        sv.backgroundColor = .darkerYellow
@@ -68,7 +70,8 @@ class MovieDetailsViewController: UIViewController {
 //        self.view.addSubview(rating)
         self.contentView.addSubview(watchListButton)
         
-        setMovieValues(movie: MovieDetailsResponse.Movie.movieShowForTest1)
+//        setMovieValues(movie: viewModel.movieDetails)
+        bindViewModel()
         
         configureImageView()
         setImageConstraints()
@@ -89,14 +92,24 @@ class MovieDetailsViewController: UIViewController {
         
     }
     
-    func setMovieValues(movie: MovieDetailsResponse.Movie) {
+    private func bindViewModel() {
+        viewModel.movieDetailsUpdated = { [weak self] in
+            self?.setMovie()
+        }
+    }
+    
+    private func setMovie() {
+        setMovieValues(movie: viewModel.movieDetails ?? MovieDetailsModel(id: 10, title: "", description: "", largeCoverImage: "", releaseYear: 2012, rating: 8.0, duration: "", mpaRating: "", genres: ["",""], descriptionFull: ""))
+    }
+    
+    func setMovieValues(movie: MovieDetailsModel) {
         movieImage.image = UIImage(named: "background_dummy_img")
         var genreList = genresString(from: movie.genres)
         movieGenre.text = genreList
         movieTitle.text = movie.title
         mpaRating.text = movie.mpaRating
-        year.text = "\(movie.year)"
-        time.text = "\(movie.runtime)"
+        year.text = "\(movie.releaseYear)"
+        time.text = "\(movie.duration)"
 //        rating.text = "\(movie.rating)"
         movieRating = movie.rating
         descriptionOfMovie.text = movie.descriptionFull
