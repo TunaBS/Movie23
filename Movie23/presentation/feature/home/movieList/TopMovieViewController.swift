@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import Combine
 
 class TopMovieViewController: UIViewController {
+    let viewModel = MovieListViewModel(movieRepository: MovieRepositoryImpl(apiService: APIServiceImplemention(apiClient: APIClientImp())))
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
 //        scrollView.backgroundColor = .blue         //use color for testing
         return scrollView
     } ()
@@ -27,14 +29,13 @@ class TopMovieViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        bindViewModel()
         self.setUpUI()
-        self.addPosterViews()
+        
     }
     
     private func setUpUI() {
-//        self.view.backgroundColor = .yellow         //use color for testing
-        
-        
         self.view.addSubview(scrollView)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -49,23 +50,27 @@ class TopMovieViewController: UIViewController {
         stackview.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             stackview.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            stackview.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 5),
-            stackview.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -10),
-            stackview.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -5),
+            stackview.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            stackview.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            stackview.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             stackview.heightAnchor.constraint(equalTo: scrollView.heightAnchor)
         ])
     }
     
-    private func addPosterViews() {
-        let movieTitles = ["Movie 1", "Movie 2", "Movie 3", "Movie 4", "Movie 5"]
-        let movieSubtitles = ["Subtitle 1", "Subtitle 2", "Subtitle 3", "Subtitle 4", "Subtitle 5"]
+    private func bindViewModel() {
+        viewModel.movieListUpdated = { [weak self] in
+            self?.addPosterViews()
+        }
+    }
+    
+    private func addPosterViews(/*with movieList: [MovieListItemModel]*/) {
         
-        for (index, title) in movieTitles.enumerated() {
-            let posterView = MoviePosterView(title: title, subTitle: movieSubtitles[index])
+        for movie in viewModel.movieList {
+            let posterView = MoviePosterView(image: movie.poster, title: movie.title, year: movie.releaseYear, mpaRating: movie.mpaRating, runtime: movie.duration)
             stackview.addArrangedSubview(posterView)
             posterView.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
-                posterView.widthAnchor.constraint(equalToConstant: 100) 
+                posterView.widthAnchor.constraint(equalToConstant: 100)
             ])
         }
     }

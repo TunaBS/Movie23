@@ -20,7 +20,7 @@ class MoviePosterView: UIView {
         let label = UILabel()
         label.textColor = .label
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: 18, weight: .bold)
+        label.font = .systemFont(ofSize: 16, weight: .bold)
         label.text = "Error"
         return label
     }()
@@ -29,17 +29,23 @@ class MoviePosterView: UIView {
         let label = UILabel()
         label.textColor = .secondaryLabel
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: 16, weight: .regular)
+        label.font = .systemFont(ofSize: 12, weight: .regular)
         label.text = "Error"
         return label
     }()
 
     // MARK: - LifeCycle
-    init(/*image: UIImage?,*/ title: String, subTitle: String) {
+    init(image: String, title: String, year: Int, mpaRating: String, runtime: String) {
         super.init(frame: .zero)
-//        self.imageView.image = image
+        self.imageView.setImage(with: image)
         self.titleLabel.text = title
-        self.subTitleLabel.text = subTitle
+        let yearString = "\(year)"
+//        let runtimeString = "\(runtime)"
+        var mpaRatingString = mpaRating
+        if mpaRating == "" {
+            mpaRatingString = "N/A"
+        }
+        self.subTitleLabel.text = genresString(from: [yearString, mpaRatingString, runtime])
         self.setupUI()
     }
     
@@ -71,5 +77,7 @@ class MoviePosterView: UIView {
             self.subTitleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
         ])
     }
-    
+    private func genresString(from genres: [String]) -> String {
+        genres.joined(separator: " • ")
+    }
 }

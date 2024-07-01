@@ -68,9 +68,9 @@ class HomeViewController: UIViewController {
             
             contentView.topAnchor.constraint(equalTo: self.scrollView.topAnchor),
             contentView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor),
-            contentView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 10),
-            contentView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: -10),
-            contentView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor, constant: -20),
+            contentView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor/*, constant: 10*/),
+            contentView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor/*, constant: -10*/),
+            contentView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor/*, constant: -20*/),
         ])
         
         self.contentView.addSubview(headerView)
@@ -90,13 +90,19 @@ class HomeViewController: UIViewController {
         headerView.pinToTheRightAndBottomOfSomething(height: 0.08, to: contentView, to: nil, to: nil, topPlace: true)
         topMoviePicksText.pinToTheRightAndBottomOfSomething(height: 0.05, to: contentView, to: nil, to: headerView)
         upComingMoviePicksText.pinToTheRightAndBottomOfSomething(height: 0.05, to: contentView, to: nil, to: movieListPlaceholderTopMovie)
-        movieListPlaceholderTopMovie.pinToTheRightAndBottomOfSomething(height: 0.5, to: contentView)
+        movieListPlaceholderTopMovie.pinToTheRightAndBottomOfSomething(height: 0.4, to: contentView)
         seeAllButtonWithTopMovie.pinButtonToBottomOfSomethingTrailing(to: contentView, to: topMoviePicksText)
         seeAllButtonWithUpcomingMovie.pinButtonToBottomOfSomethingTrailing(to: contentView, to: upComingMoviePicksText)
         
         
         
         NSLayoutConstraint.activate([
+            
+//            self.upComingMoviePicksText.topAnchor.constraint(equalTo: topMoviePicksText.bottomAnchor, constant: 750),
+//            self.upComingMoviePicksText.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+//            self.upComingMoviePicksText.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+//            self.upComingMoviePicksText.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.05),
+            
             self.movieDetailsButton.bottomAnchor.constraint(equalTo: self.logOutButton.bottomAnchor, constant: -20),
             self.movieDetailsButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             self.movieDetailsButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),

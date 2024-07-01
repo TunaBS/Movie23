@@ -11,6 +11,7 @@ class MovieListViewController: UIViewController {
     
     var tableView = UITableView()
     var movies: [MovieDetailsResponse.Movie] = []
+    var viewModel: MovieListViewModel?
     
     struct Cells {
         static let movieCell = "MovieCell"
@@ -18,6 +19,16 @@ class MovieListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        do {
+            viewModel = MovieListViewModel(
+                movieRepository: try DiContainer.shared.resolve(type: MovieRepository.self)
+                // navigationViewModel: NavigationViewModel.shared
+            )
+        } catch {
+            print("Failed to initialize MovieListViewModel: \(error)")
+        }
+        
         title = "Movie Lists"
         movies = fetchMovieList()
         setUpTableUI()
@@ -36,6 +47,20 @@ class MovieListViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
     }
+    
+//    private func bindViewModel() {
+//        // Observe changes in the view model and update the UI accordingly
+//        guard let viewModel = viewModel else {
+//            print("viewModel is nil")
+//            return
+//        }
+//        
+//        // Observe changes in the view model and update the UI accordingly
+//        viewModel.movieListUpdated = { [weak self] movies in
+//            // Update your UI with the new movies
+//            print("entered into poster view")
+//        }
+//    }
     
     
 }
