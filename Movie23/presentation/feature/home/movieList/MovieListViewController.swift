@@ -8,10 +8,11 @@
 import UIKit
 
 class MovieListViewController: UIViewController {
+    let viewModel = MovieListViewModel(movieRepository: MovieRepositoryImpl(apiService: APIServiceImplemention(apiClient: APIClientImp())))
     
     var tableView = UITableView()
-    var movies: [MovieDetailsResponse.Movie] = []
-    var viewModel: MovieListViewModel?
+    var movies: [MovieListItemModel] = []
+//    var viewModel: MovieListViewModel?
     
     struct Cells {
         static let movieCell = "MovieCell"
@@ -20,17 +21,9 @@ class MovieListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        do {
-            viewModel = MovieListViewModel(
-                movieRepository: try DiContainer.shared.resolve(type: MovieRepository.self)
-                // navigationViewModel: NavigationViewModel.shared
-            )
-        } catch {
-            print("Failed to initialize MovieListViewModel: \(error)")
-        }
-        
         title = "Movie Lists"
-        movies = fetchMovieList()
+//        movies = viewModel.movieList
+        bindViewModel()
         setUpTableUI()
     }
     
@@ -48,27 +41,23 @@ class MovieListViewController: UIViewController {
         tableView.dataSource = self
     }
     
-//    private func bindViewModel() {
-//        // Observe changes in the view model and update the UI accordingly
-//        guard let viewModel = viewModel else {
-//            print("viewModel is nil")
-//            return
-//        }
-//        
-//        // Observe changes in the view model and update the UI accordingly
-//        viewModel.movieListUpdated = { [weak self] movies in
-//            // Update your UI with the new movies
-//            print("entered into poster view")
-//        }
-//    }
+    private func bindViewModel() {
+        viewModel.movieListUpdated = { [weak self] in
+            self?.loadMovies()
+        }
+    }
     
+    private func loadMovies() {
+        movies = viewModel.movieList
+        tableView.reloadData()
+    }
     
 }
 
 extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(movies.count)
-        return movies.count
+        print(viewModel.movieList.count)
+        return viewModel.movieList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

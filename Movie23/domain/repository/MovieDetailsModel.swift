@@ -35,17 +35,5 @@ struct MovieDetailsModel {
             isFavourite: isFavourite
         )
     }
-    
-//    func toMovieListItem() -> MovieListItemModel {
-//        return MovieListItemModel(
-//            id: id,
-//            title: title,
-//            poster: largeCoverImage,
-//            rating: rating,
-//            releaseYear: releaseYear,
-//            mpaRating: mpaRating,
-//            duration: duration,
-//            isFavourite: isFavourite
-//        )
-//    }
+   
 }

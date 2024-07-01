@@ -53,14 +53,14 @@ class MovieListTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setCellValue(movie: MovieDetailsResponse.Movie) {
-        movieImage.image = UIImage(named: "background_dummy_img")
-        var genreList = genresString(from: movie.genres)
+    func setCellValue(movie: MovieListItemModel) {
+        movieImage.setImage(with: movie.poster)
+        var genreList = genresString(from: movie.genre)
         movieGenre.text = genreList
         movieTitle.text = movie.title
-        mpaRating.text = movie.mpaRating
-        year.text = "\(movie.year)"
-        time.text = "\(movie.runtime)"
+        mpaRating.text = movie.mpaRating == "" ? "N/A" : movie.mpaRating
+        year.text = "\(movie.releaseYear)"
+        time.text = "\(movie.duration)"
         rating.text = "\(movie.rating)"
         
     }

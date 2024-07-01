@@ -16,6 +16,7 @@ struct MovieListItemModel: Identifiable {
     var releaseYear: Int
     var mpaRating: String
     var duration: String
+    var genre: [String]
     var isFavourite: Bool
     
     init(
@@ -26,6 +27,7 @@ struct MovieListItemModel: Identifiable {
         releaseYear: Int,
         mpaRating: String,
         duration: String,
+        genre: [String],
         isFavourite: Bool = false
     ) {
         self.id = id
@@ -35,6 +37,7 @@ struct MovieListItemModel: Identifiable {
         self.releaseYear = releaseYear
         self.mpaRating = mpaRating
         self.duration = duration
+        self.genre = genre
         self.isFavourite = isFavourite
     }
     
@@ -47,6 +50,7 @@ struct MovieListItemModel: Identifiable {
             releaseYear: movie.year,
             mpaRating: movie.mpaRating,
             duration: convertMinutesToHoursAndMinutes(minutes: movie.runtime),
+            genre: movie.genres,
             isFavourite: isFavourite
         )
     }
