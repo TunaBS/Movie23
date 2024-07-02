@@ -60,7 +60,7 @@ class MovieListTableViewCell: UITableViewCell {
         movieTitle.text = movie.title
         mpaRating.text = movie.mpaRating == "" ? "N/A" : movie.mpaRating
         year.text = "\(movie.releaseYear)"
-        time.text = "\(movie.duration)"
+        time.text = movie.duration == "" ? "N/A" : movie.duration
         rating.text = "\(movie.rating)"
         
     }

@@ -13,7 +13,7 @@ func convertMinutesToHoursAndMinutes(minutes: Int) -> String {
     
     var result = ""
     if hours > 0 {
-        result += "\(hours) H"
+        result += "\(hours)H"
     }
     
     if hours > 0 && remainingMinutes > 0 {
@@ -21,7 +21,7 @@ func convertMinutesToHoursAndMinutes(minutes: Int) -> String {
     }
     
     if remainingMinutes > 0 {
-        result += "\(remainingMinutes) M"
+        result += "\(remainingMinutes)M"
     }
     
     return result

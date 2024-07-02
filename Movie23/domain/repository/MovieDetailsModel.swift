@@ -17,7 +17,6 @@ struct MovieDetailsModel {
     let rating: Double
     let duration: String
     let mpaRating: String
-//    let genres: [MovieGenre]
     let genres: [String]
     let descriptionFull: String
     var isFavourite: Bool = false
@@ -33,7 +32,6 @@ struct MovieDetailsModel {
             rating: movie.rating,
             duration: convertMinutesToHoursAndMinutes(minutes: movie.runtime),
             mpaRating: movie.mpaRating,
-//            genres: movie.genres.map({ MovieGenre.fromString($0) }),
             genres: movie.genres,
             descriptionFull: movie.descriptionFull,
             isFavourite: isFavourite

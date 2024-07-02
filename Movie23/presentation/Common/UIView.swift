@@ -49,6 +49,35 @@ extension UIView {
         heightAnchor.constraint(equalTo: superview.heightAnchor, multiplier: CGFloat(height)).isActive = true
     }
     
+    func pinToRightAndBottomOfSomething(height: Float, to superview: UIView, to rightOf: UIView? = nil, to bottomOf: UIView? = nil, topPlace: Bool? = nil){
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        if let topPlace = topPlace {
+            if topPlace {
+                topAnchor.constraint(equalTo: superview.layoutMarginsGuide.topAnchor).isActive = true
+            }
+        } else {
+            topAnchor.constraint(equalTo: bottomOf?.bottomAnchor ?? superview.topAnchor, constant: 10).isActive = true
+        }
+        leadingAnchor.constraint(equalTo: rightOf?.trailingAnchor ?? superview.leadingAnchor, constant: 10).isActive = true
+        heightAnchor.constraint(equalToConstant: CGFloat(height)).isActive = true
+    }
+    
+    func pinToBottomOfSomethingCenter(height: Float, to superview: UIView, to bottomOf: UIView? = nil, topPlace: Bool? = nil){
+        translatesAutoresizingMaskIntoConstraints = false
+        if let topPlace = topPlace {
+            if topPlace {
+                topAnchor.constraint(equalTo: superview.layoutMarginsGuide.topAnchor).isActive = true
+            }
+        } else {
+            topAnchor.constraint(equalTo: bottomOf?.bottomAnchor ?? superview.topAnchor, constant: 10).isActive = true
+        }
+        centerXAnchor.constraint(equalTo: superview.centerXAnchor).isActive = true
+//        heightAnchor.constraint(equalTo: superview.heightAnchor, multiplier: CGFloat(height)).isActive = true
+        heightAnchor.constraint(equalToConstant: CGFloat(height)).isActive = true
+        widthAnchor.constraint(equalTo: superview.widthAnchor).isActive = true
+    }
+    
 //    func pinToTheRightAndBottomOfSomethingForHeader(to superview: UIView, to leftview: UIView? = nil, to upview: UIView? = nil, topPlace: Bool? = nil){
 //        translatesAutoresizingMaskIntoConstraints = false
 //        if let topPlace = topPlace {

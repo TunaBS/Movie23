@@ -16,8 +16,9 @@ class MovieDetailsViewModel {
     var movieDetailsUpdated: (() -> Void)?
     private var movieRepository: MovieRepository
     
-    init(movieRepositoy: MovieRepository) {
+    init(movieRepositoy: MovieRepository, movieId: Int) {
         self.movieRepository = movieRepositoy
+        getMovieDetails(movieId: movieId)
     }
     
     func getMovieDetails(movieId: Int) {
