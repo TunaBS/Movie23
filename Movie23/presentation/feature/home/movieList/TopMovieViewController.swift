@@ -72,7 +72,24 @@ class TopMovieViewController: UIViewController {
             NSLayoutConstraint.activate([
                 posterView.widthAnchor.constraint(equalToConstant: 100)
             ])
+            
+            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(posterViewTapped(_:)))
+            posterView.isUserInteractionEnabled = true
+            posterView.addGestureRecognizer(tapGestureRecognizer)
+            posterView.tag = movie.id // Set the tag to the movie's id for identification
         }
     }
     
+    @objc private func posterViewTapped(_ sender: UITapGestureRecognizer) {
+        if let posterView = sender.view as? MoviePosterView {
+            let movieId = posterView.tag
+            navigateToMovieDetails(movieId: movieId)
+        }
+    }
+
+    private func navigateToMovieDetails(movieId: Int) {
+        let movieDetailsViewController = MovieDetailsViewController()
+        movieDetailsViewController.movieId = movieId
+        navigationController?.pushViewController(movieDetailsViewController, animated: true)
+    }
 }

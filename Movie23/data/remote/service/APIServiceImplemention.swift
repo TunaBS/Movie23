@@ -42,9 +42,15 @@ class APIServiceImplemention: APIService {
     
     func getMovieDetails(movieId: Int) async throws -> BaseResponse<MovieDetailsResponse> {
         var components = URLComponents(url: baseURL.appendingPathComponent("/movie_details.json"), resolvingAgainstBaseURL: false)!
-        components.queryItems = [URLQueryItem(name: "movie_id", value: "\(movieId)")]
+        components.queryItems = [
+            URLQueryItem(name: "movie_id", value: "\(movieId)"),
+            URLQueryItem(name: "with_cast", value: "true")
+        ]
         let url = components.url!
         let response: BaseResponse<MovieDetailsResponse> = try await apiClient.get(url: url)
         return response
+//        let url = baseURL.appendingPathComponent("/movie_details.json?movie_id=\(movieId)&with_cast=true")
+//        let response: BaseResponse<MovieDetailsResponse> = try await apiClient.get(url: url)
+//        return response
     }
 }

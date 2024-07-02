@@ -19,6 +19,7 @@ struct MovieDetailsModel {
     let mpaRating: String
     let genres: [String]
     let descriptionFull: String
+    let cast: [Cast]?
     var isFavourite: Bool = false
     
     
@@ -34,6 +35,7 @@ struct MovieDetailsModel {
             mpaRating: movie.mpaRating,
             genres: movie.genres,
             descriptionFull: movie.descriptionFull,
+            cast: movie.cast,
             isFavourite: isFavourite
         )
     }
