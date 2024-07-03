@@ -166,7 +166,7 @@ class SettingsViewController: UIViewController {
         englishButton.topAnchor.constraint(equalTo: fullView.topAnchor).isActive = true
         englishButton.leadingAnchor.constraint(equalTo: fullView.leadingAnchor).isActive = true
         banglaButton.topAnchor.constraint(equalTo: fullView.topAnchor).isActive = true
-        banglaButton.leadingAnchor.constraint(equalTo: englishButton.trailingAnchor).isActive = true
+        banglaButton.leadingAnchor.constraint(equalTo: englishButton.trailingAnchor, constant: 10).isActive = true
         banglaButton.bottomAnchor.constraint(equalTo: fullView.bottomAnchor).isActive = true
         banglaButton.trailingAnchor.constraint(equalTo: fullView.trailingAnchor).isActive = true
 //        deleteAccountButton.trailingAnchor.constraint(lessThanOrEqualTo: fullView.trailingAnchor, constant: -10).isActive = true
