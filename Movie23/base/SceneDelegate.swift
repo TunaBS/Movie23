@@ -40,7 +40,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             print("no user")
         } else {
             // go to home screen
-            let vc = HomeViewController()
+//            let vc = HomeViewController()
+            let vc = TabBarController()
             let nav = UINavigationController(rootViewController: vc)
             nav.modalPresentationStyle = .fullScreen
             self.window?.rootViewController = nav

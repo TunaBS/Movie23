@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B3917F12C35249700D37050 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3917F02C35249700D37050 /* SearchViewController.swift */; };
+		4B3917F32C3524CC00D37050 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3917F22C3524CC00D37050 /* SettingsViewController.swift */; };
+		4B3917F52C3524DD00D37050 /* WatchListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3917F42C3524DD00D37050 /* WatchListViewController.swift */; };
+		4B3917F72C3528FE00D37050 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3917F62C3528FE00D37050 /* TabBarController.swift */; };
+		4B3917F92C3532DB00D37050 /* PaddingForUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3917F82C3532DB00D37050 /* PaddingForUIView.swift */; };
 		4B48B06C2C2EE53200266B78 /* DiContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B48B06B2C2EE53200266B78 /* DiContainer.swift */; };
 		4B48B06E2C2EE56E00266B78 /* DiModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B48B06D2C2EE56E00266B78 /* DiModule.swift */; };
 		4B48B0742C2EE78B00266B78 /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B48B0732C2EE78B00266B78 /* BaseResponse.swift */; };
@@ -60,6 +65,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4B3917F02C35249700D37050 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		4B3917F22C3524CC00D37050 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		4B3917F42C3524DD00D37050 /* WatchListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchListViewController.swift; sourceTree = "<group>"; };
+		4B3917F62C3528FE00D37050 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		4B3917F82C3532DB00D37050 /* PaddingForUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingForUIView.swift; sourceTree = "<group>"; };
 		4B48B06B2C2EE53200266B78 /* DiContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiContainer.swift; sourceTree = "<group>"; };
 		4B48B06D2C2EE56E00266B78 /* DiModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiModule.swift; sourceTree = "<group>"; };
 		4B48B0732C2EE78B00266B78 /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
@@ -125,6 +135,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4B3917ED2C35244C00D37050 /* tabBar */ = {
+			isa = PBXGroup;
+			children = (
+				4B3917F02C35249700D37050 /* SearchViewController.swift */,
+				4B3917F22C3524CC00D37050 /* SettingsViewController.swift */,
+				4B3917F42C3524DD00D37050 /* WatchListViewController.swift */,
+				4B3917F62C3528FE00D37050 /* TabBarController.swift */,
+			);
+			path = tabBar;
+			sourceTree = "<group>";
+		};
 		4B48B05F2C2EE16000266B78 /* domain */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +183,7 @@
 				4B4F8F682C2BED7D007415F5 /* UIView.swift */,
 				4BAACE0F2C2D5E4300832C34 /* PaddedLabel.swift */,
 				4BAACE132C2D604700832C34 /* UIColor.swift */,
+				4B3917F82C3532DB00D37050 /* PaddingForUIView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -178,6 +200,7 @@
 		4B48B0652C2EE20C00266B78 /* home */ = {
 			isa = PBXGroup;
 			children = (
+				4B3917ED2C35244C00D37050 /* tabBar */,
 				4B48B0682C2EE34C00266B78 /* movieDetails */,
 				4B48B0662C2EE27100266B78 /* movieList */,
 				4B893F282C296CD7004720C4 /* HomeViewController.swift */,
@@ -471,6 +494,7 @@
 				4B893F232C294436004720C4 /* LoginViewController.swift in Sources */,
 				4B893F272C29675E004720C4 /* RegisterViewController.swift in Sources */,
 				4B48B0832C2EF73300266B78 /* APIService.swift in Sources */,
+				4B3917F72C3528FE00D37050 /* TabBarController.swift in Sources */,
 				4B5BF9B72C254014004370DE /* AppDelegate.swift in Sources */,
 				4B69D7E42C2A90D40009D357 /* MoviePosterView.swift in Sources */,
 				4B48B0812C2EF63900266B78 /* APIClientImp.swift in Sources */,
@@ -500,14 +524,18 @@
 				4B685F652C32848200DE0E71 /* MovieListViewModel.swift in Sources */,
 				4B685F682C32AF8900DE0E71 /* MovieRepositoryImp.swift in Sources */,
 				4B48B06C2C2EE53200266B78 /* DiContainer.swift in Sources */,
+				4B3917F12C35249700D37050 /* SearchViewController.swift in Sources */,
 				4B48B0742C2EE78B00266B78 /* BaseResponse.swift in Sources */,
 				4B5BF9D72C258843004370DE /* User.swift in Sources */,
+				4B3917F32C3524CC00D37050 /* SettingsViewController.swift in Sources */,
 				4BAACE162C2D9D9B00832C34 /* MovieDetailsViewController.swift in Sources */,
+				4B3917F92C3532DB00D37050 /* PaddingForUIView.swift in Sources */,
 				4B4F8F6B2C2BEEDC007415F5 /* MovieListViewController.swift in Sources */,
 				4B5BF9B92C254014004370DE /* SceneDelegate.swift in Sources */,
 				4B48B06E2C2EE56E00266B78 /* DiModule.swift in Sources */,
 				4B893F292C296CD7004720C4 /* HomeViewController.swift in Sources */,
 				4BAACE102C2D5E4300832C34 /* PaddedLabel.swift in Sources */,
+				4B3917F52C3524DD00D37050 /* WatchListViewController.swift in Sources */,
 				4B4F8F6D2C2C0EC6007415F5 /* MovieListTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
