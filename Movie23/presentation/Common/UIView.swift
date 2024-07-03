@@ -49,7 +49,7 @@ extension UIView {
         heightAnchor.constraint(equalTo: superview.heightAnchor, multiplier: CGFloat(height)).isActive = true
     }
     
-    func pinToRightAndBottomOfSomething(height: Float, to superview: UIView, to rightOf: UIView? = nil, to bottomOf: UIView? = nil, topPlace: Bool? = nil){
+    func pinToRightAndBottomOfSomething(height: Float? = nil, to superview: UIView, to rightOf: UIView? = nil, to bottomOf: UIView? = nil, topPlace: Bool? = nil){
         
         translatesAutoresizingMaskIntoConstraints = false
         if let topPlace = topPlace {
@@ -60,10 +60,12 @@ extension UIView {
             topAnchor.constraint(equalTo: bottomOf?.bottomAnchor ?? superview.topAnchor, constant: 10).isActive = true
         }
         leadingAnchor.constraint(equalTo: rightOf?.trailingAnchor ?? superview.leadingAnchor, constant: 10).isActive = true
-        heightAnchor.constraint(equalToConstant: CGFloat(height)).isActive = true
+        if let height = height {
+            heightAnchor.constraint(equalToConstant: CGFloat(height)).isActive = true
+        }
     }
     
-    func pinToBottomOfSomethingCenter(height: Float, to superview: UIView, to bottomOf: UIView? = nil, topPlace: Bool? = nil){
+    func pinToBottomOfSomethingCenter(height: Float? = nil, to superview: UIView, to bottomOf: UIView? = nil, width: Float? = nil, topPlace: Bool? = nil){
         translatesAutoresizingMaskIntoConstraints = false
         if let topPlace = topPlace {
             if topPlace {
@@ -74,8 +76,14 @@ extension UIView {
         }
         centerXAnchor.constraint(equalTo: superview.centerXAnchor).isActive = true
 //        heightAnchor.constraint(equalTo: superview.heightAnchor, multiplier: CGFloat(height)).isActive = true
-        heightAnchor.constraint(equalToConstant: CGFloat(height)).isActive = true
-        widthAnchor.constraint(equalTo: superview.widthAnchor, multiplier: 0.8).isActive = true
+        if let height = height {
+            heightAnchor.constraint(equalToConstant: CGFloat(height)).isActive = true
+        }
+        if let width = width {
+            widthAnchor.constraint(equalTo: superview.widthAnchor, multiplier: CGFloat(width)).isActive = true
+        } else {
+            widthAnchor.constraint(equalTo: superview.widthAnchor, multiplier: 0.8).isActive = true
+        }
     }
     
 //    func pinToTheRightAndBottomOfSomethingForHeader(to superview: UIView, to leftview: UIView? = nil, to upview: UIView? = nil, topPlace: Bool? = nil){

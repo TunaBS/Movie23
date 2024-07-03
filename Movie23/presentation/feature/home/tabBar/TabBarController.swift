@@ -13,9 +13,10 @@ class TabBarController: UITabBarController {
         super.viewDidLoad()
         setUpTabs()
         
-        self.tabBar.barTintColor = .systemBackground
-        self.tabBar.tintColor = .systemBlue
-        self.tabBar.unselectedItemTintColor = .systemFill
+//        self.tabBar.barTintColor = .systemBackground
+//        self.tabBar.tintColor = .systemBlue
+//        self.tabBar.unselectedItemTintColor = .systemFill
+        
     }
     
 
@@ -32,7 +33,15 @@ class TabBarController: UITabBarController {
         let nav = UINavigationController(rootViewController: vc)
         nav.tabBarItem.title = title
         nav.tabBarItem.image = image
+//        nav.viewControllers.first?.navigationItem.title = title
         
+        let titleLabel = UILabel()
+        titleLabel.text = title
+        titleLabel.textColor = .label
+        titleLabel.font = .systemFont(ofSize: 17, weight: .bold)
+        titleLabel.sizeToFit()
+        let leftItem = UIBarButtonItem(customView: titleLabel)
+        vc.navigationItem.leftBarButtonItem = leftItem
         return nav
     }
 

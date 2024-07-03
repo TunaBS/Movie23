@@ -27,10 +27,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //
         self.window = window
         self.window?.makeKeyAndVisible()
-        checkSignInUser()
+        
+        _ = AuthenticationManager.shared
+        
+        Task {
+            await checkSignInUser()
+        }
+//        checkSignInUser()
     }
     
-    func checkSignInUser() {
+    func checkSignInUser() async {
+        try? await Task.sleep(nanoseconds: 1_000_000_000)
+        
         if AuthenticationManager.shared.userFirebaseSession == nil {
             //go to sign in
             let vc = LoginViewController()

@@ -85,7 +85,7 @@ class LoginViewController: UIViewController {
             try await AuthenticationManager.shared.signIn(email: email, password: password)
             print("login called")
             if let sceneDelegate = self.view.window?.windowScene?.delegate as? SceneDelegate {
-                sceneDelegate.checkSignInUser()
+                await sceneDelegate.checkSignInUser()
                 print("into scene delegate")
             }
         }
