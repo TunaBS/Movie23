@@ -79,15 +79,15 @@ class HomeViewController: UIViewController {
         self.contentView.addSubview(movieListPlaceholderUpcomingMovie)
         
         movieSlideListPlaceholder.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
-        movieSlideListPlaceholder.heightAnchor.constraint(equalToConstant: 220).isActive = true
+        movieSlideListPlaceholder.heightAnchor.constraint(equalToConstant: 230).isActive = true
         movieListPlaceholderTopMovie.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
-        movieListPlaceholderTopMovie.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        movieListPlaceholderTopMovie.heightAnchor.constraint(equalToConstant: 160).isActive = true
         movieListPlaceholderUpcomingMovie.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
-        movieListPlaceholderUpcomingMovie.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        movieListPlaceholderUpcomingMovie.heightAnchor.constraint(equalToConstant: 160).isActive = true
 //        movieListPlaceholderUpcomingMovie.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
 
         
-        headerView.pinToRightAndBottomOfSomething(height: nil, to: contentView, to: nil, to: nil, topPlace: true)
+        headerView.pinToRightAndBottomOfSomething(height: 65, to: contentView, to: nil, to: nil, topPlace: true)
         movieSlideListPlaceholder.pinToRightAndBottomOfSomething(height: nil, to: contentView, to: nil, to: headerView)
         movieSlideListPlaceholder.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true //for overcoming the leading gap defined in the function
         topMoviePicksText.pinToRightAndBottomOfSomething(height: 35, to: contentView, to: nil, to: movieSlideListPlaceholder)
