@@ -24,13 +24,13 @@ class APIServiceImplemention: APIService {
         return response
     }
     
-//    func getMovieListByQuery(query: String) async throws -> BaseResponse<MovieListResponse> {
-//        var components = URLComponents(url: baseURL.appendingPathComponent("/list_movies.json"), resolvingAgainstBaseURL: false)!
-//        components.queryItems = [URLQueryItem(name: "query_term", value: query)]
-//        let url = components.url!
-//        let response: BaseResponse<MovieListResponse> = try await apiClient.get(url: url)
-//        return response
-//    }
+    func getMovieListByQuery(query: String) async throws -> BaseResponse<MovieListResponse> {
+        var components = URLComponents(url: baseURL.appendingPathComponent("/list_movies.json"), resolvingAgainstBaseURL: false)!
+        components.queryItems = [URLQueryItem(name: "query_term", value: query)]
+        let url = components.url!
+        let response: BaseResponse<MovieListResponse> = try await apiClient.get(url: url)
+        return response
+    }
     
 //    func getMovieListByGenre(genre: MovieGenre) async throws -> BaseResponse<MovieListResponse> {
 //        var components = URLComponents(url: baseURL.appendingPathComponent("/list_movies.json"), resolvingAgainstBaseURL: false)!

@@ -8,6 +8,8 @@
 import Foundation
 
 class MovieRepositoryImpl: MovieRepository {
+    
+    
     private let apiService: APIService
     
     init(apiService: APIService) {
@@ -25,7 +27,16 @@ class MovieRepositoryImpl: MovieRepository {
         }
     }
     
-    
+    func getMovieListByQuery(query: String) async throws -> [MovieListItemModel] {
+        let response = try await apiService.getMovieListByQuery(query: query)
+//        let favouriteMovieIds = try await getFavouriteMovieIds()
+        return response.data.movies.map{ movie in
+            MovieListItemModel.fromMovie(
+                movie: movie//,
+//                isFavourite: favouriteMovieIds.contains(movie.id)
+            )
+        }
+    }
     
     
     func getMovieDetails(movieId: Int) async throws -> MovieDetailsModel {
