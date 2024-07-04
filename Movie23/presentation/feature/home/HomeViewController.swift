@@ -31,6 +31,7 @@ class HomeViewController: UIViewController {
 //    private let logOutButton = CustomButton(title: "Log out", hasBackground: false, fontSize: .small, titleColor: .red)
 //    private let deleteAccountButton = CustomButton(title: "Delete Account", hasBackground: false, fontSize: .small, titleColor: .red)
 //    private let movieDetailsButton = CustomButton(title: "Movie Details", hasBackground: false, fontSize: .small, titleColor: .red)
+    let movieSlideListPlaceholder = UIView()
     let movieListPlaceholderTopMovie = UIView()
     let movieListPlaceholderUpcomingMovie = UIView()
     
@@ -39,6 +40,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         headerView = HeaderView(title: "Welcome", subTitle: userNameOfCurrentUser)
         self.setUpUI()
+        self.setupMovieSlideListViewController(to: headerView)
         self.setupMovieListViewController(to: topMoviePicksText)
         self.setupMovieListViewController(to: upComingMoviePicksText)
         self.seeAllButtonWithTopMovie.addTarget(self, action: #selector(didTapSeeAll), for: .touchUpInside)
@@ -73,6 +75,7 @@ class HomeViewController: UIViewController {
         ])
         
         self.contentView.addSubview(headerView)
+        self.contentView.addSubview(movieSlideListPlaceholder)
         self.contentView.addSubview(topMoviePicksText)
         self.contentView.addSubview(upComingMoviePicksText)
         self.contentView.addSubview(seeAllButtonWithTopMovie)
@@ -87,9 +90,10 @@ class HomeViewController: UIViewController {
 //        movieDetailsButton.translatesAutoresizingMaskIntoConstraints = false
         
         headerView.pinToTheRightAndBottomOfSomething(height: 0.08, to: contentView, to: nil, to: nil, topPlace: true)
-        topMoviePicksText.pinToTheRightAndBottomOfSomething(height: 0.05, to: contentView, to: nil, to: headerView)
+        movieSlideListPlaceholder.pinToTheRightAndBottomOfSomething(height: 0.4, to: contentView, to: nil, to: headerView)
+        topMoviePicksText.pinToTheRightAndBottomOfSomething(height: 0.05, to: contentView, to: nil, to: movieSlideListPlaceholder)
         upComingMoviePicksText.pinToTheRightAndBottomOfSomething(height: 0.05, to: contentView, to: nil, to: movieListPlaceholderTopMovie)
-        movieListPlaceholderTopMovie.pinToTheRightAndBottomOfSomething(height: 0.4, to: contentView)
+        movieListPlaceholderTopMovie.pinToTheRightAndBottomOfSomething(height: 0.4, to: contentView, to: nil, to: topMoviePicksText)
         seeAllButtonWithTopMovie.pinButtonToBottomOfSomethingTrailing(to: contentView, to: topMoviePicksText)
         seeAllButtonWithUpcomingMovie.pinButtonToBottomOfSomethingTrailing(to: contentView, to: upComingMoviePicksText)
         
@@ -123,6 +127,23 @@ class HomeViewController: UIViewController {
     
     private func setupMovieListViewController(to bottomOf: UIView) {
         let movieListVC = TopMovieViewController()
+        
+        self.addChild(movieListVC)
+        self.view.addSubview(movieListVC.view)
+        movieListVC.didMove(toParent: self)
+        
+        movieListVC.view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            movieListVC.view.topAnchor.constraint(equalTo: /*self.*/bottomOf.bottomAnchor),
+            movieListVC.view.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            movieListVC.view.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+            movieListVC.view.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.25)
+            
+        ])
+    }
+    
+    private func setupMovieSlideListViewController(to bottomOf: UIView) {
+        let movieListVC = WatchListViewController()
         
         self.addChild(movieListVC)
         self.view.addSubview(movieListVC.view)

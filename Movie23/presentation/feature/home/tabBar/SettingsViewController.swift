@@ -81,8 +81,8 @@ class SettingsViewController: UIViewController {
             for: fullView,
             padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10),
             cornerRadius: 10.0,
-            borderWidth: 2.0,
-            borderColor: .black
+            borderWidth: 0.5,
+            borderColor: .systemGray2
         )
         
         return paddedView
@@ -131,7 +131,7 @@ class SettingsViewController: UIViewController {
             for: fullView,
             padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10),
             cornerRadius: 10.0,
-            borderWidth: 2.0,
+            borderWidth: 0.5,
             borderColor: .systemBackground
         )
         

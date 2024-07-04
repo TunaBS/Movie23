@@ -138,9 +138,9 @@
 		4B3917ED2C35244C00D37050 /* tabBar */ = {
 			isa = PBXGroup;
 			children = (
+				4B8BB6E02C3668C400EE712C /* watchList */,
 				4B3917F02C35249700D37050 /* SearchViewController.swift */,
 				4B3917F22C3524CC00D37050 /* SettingsViewController.swift */,
-				4B3917F42C3524DD00D37050 /* WatchListViewController.swift */,
 				4B3917F62C3528FE00D37050 /* TabBarController.swift */,
 			);
 			path = tabBar;
@@ -406,6 +406,14 @@
 				4B685F752C32D72A00DE0E71 /* TimeConverter.swift */,
 			);
 			path = core;
+			sourceTree = "<group>";
+		};
+		4B8BB6E02C3668C400EE712C /* watchList */ = {
+			isa = PBXGroup;
+			children = (
+				4B3917F42C3524DD00D37050 /* WatchListViewController.swift */,
+			);
+			path = watchList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
