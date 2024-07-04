@@ -11,26 +11,21 @@ class HomeViewController: UIViewController {
     
     private let scrollView: UIScrollView = {
         let sv = UIScrollView()
-//        sv.backgroundColor = .darkerYellow
         return sv
     } ()
     
     private let contentView: UIView = {
         let cv = UIView()
-//        cv.backgroundColor = .blue
         return cv
     } ()
+    
     let userNameOfCurrentUser = AuthenticationManager.shared.currentUser?.userName
     let noUser = "No user name found"
-//    private let headerView = HeaderView(title: "Welcome", subTitle: "Home Page")
     var headerView = HeaderView(title: "Welcome", subTitle: "No user name found")
     private let topMoviePicksText = HeaderView(title: "Top Movie Picks")
     private let upComingMoviePicksText = HeaderView(title: "Up coming Movie Picks")
     private let seeAllButtonWithTopMovie = CustomButton(title: "See all", fontSize: .small, titleColor: .darkText)
     private let seeAllButtonWithUpcomingMovie = CustomButton(title: "See all", fontSize: .small, titleColor: .darkText)
-//    private let logOutButton = CustomButton(title: "Log out", hasBackground: false, fontSize: .small, titleColor: .red)
-//    private let deleteAccountButton = CustomButton(title: "Delete Account", hasBackground: false, fontSize: .small, titleColor: .red)
-//    private let movieDetailsButton = CustomButton(title: "Movie Details", hasBackground: false, fontSize: .small, titleColor: .red)
     let movieSlideListPlaceholder = UIView()
     let movieListPlaceholderTopMovie = UIView()
     let movieListPlaceholderUpcomingMovie = UIView()
@@ -40,9 +35,9 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         headerView = HeaderView(title: "Welcome", subTitle: userNameOfCurrentUser)
         self.setUpUI()
-        self.setupMovieSlideListViewController(to: headerView)
-        self.setupMovieListViewController(to: topMoviePicksText)
-        self.setupMovieListViewController(to: upComingMoviePicksText)
+        self.setupMovieSlideListViewController(to: movieSlideListPlaceholder)
+        self.setupMovieListViewController(to: movieListPlaceholderTopMovie)
+        self.setupMovieListViewController(to: movieListPlaceholderUpcomingMovie)
         self.seeAllButtonWithTopMovie.addTarget(self, action: #selector(didTapSeeAll), for: .touchUpInside)
         self.seeAllButtonWithUpcomingMovie.addTarget(self, action: #selector(didTapSeeAll), for: .touchUpInside)
         
@@ -81,82 +76,67 @@ class HomeViewController: UIViewController {
         self.contentView.addSubview(seeAllButtonWithTopMovie)
         self.contentView.addSubview(seeAllButtonWithUpcomingMovie)
         self.contentView.addSubview(movieListPlaceholderTopMovie)
-//        self.contentView.addSubview(logOutButton)
-//        self.contentView.addSubview(deleteAccountButton)
-//        self.contentView.addSubview(movieDetailsButton)
+        self.contentView.addSubview(movieListPlaceholderUpcomingMovie)
         
-//        logOutButton.translatesAutoresizingMaskIntoConstraints = false
-//        deleteAccountButton.translatesAutoresizingMaskIntoConstraints = false
-//        movieDetailsButton.translatesAutoresizingMaskIntoConstraints = false
+        movieSlideListPlaceholder.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
+        movieSlideListPlaceholder.heightAnchor.constraint(equalToConstant: 220).isActive = true
+        movieListPlaceholderTopMovie.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
+        movieListPlaceholderTopMovie.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        movieListPlaceholderUpcomingMovie.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
+        movieListPlaceholderUpcomingMovie.heightAnchor.constraint(equalToConstant: 150).isActive = true
+//        movieListPlaceholderUpcomingMovie.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
+
         
-        headerView.pinToTheRightAndBottomOfSomething(height: 0.08, to: contentView, to: nil, to: nil, topPlace: true)
-        movieSlideListPlaceholder.pinToTheRightAndBottomOfSomething(height: 0.4, to: contentView, to: nil, to: headerView)
-        topMoviePicksText.pinToTheRightAndBottomOfSomething(height: 0.05, to: contentView, to: nil, to: movieSlideListPlaceholder)
-        upComingMoviePicksText.pinToTheRightAndBottomOfSomething(height: 0.05, to: contentView, to: nil, to: movieListPlaceholderTopMovie)
-        movieListPlaceholderTopMovie.pinToTheRightAndBottomOfSomething(height: 0.4, to: contentView, to: nil, to: topMoviePicksText)
+        headerView.pinToRightAndBottomOfSomething(height: nil, to: contentView, to: nil, to: nil, topPlace: true)
+        movieSlideListPlaceholder.pinToRightAndBottomOfSomething(height: nil, to: contentView, to: nil, to: headerView)
+        movieSlideListPlaceholder.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true //for overcoming the leading gap defined in the function
+        topMoviePicksText.pinToRightAndBottomOfSomething(height: 35, to: contentView, to: nil, to: movieSlideListPlaceholder)
+//        movieListPlaceholderTopMovie.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        movieListPlaceholderTopMovie.pinToRightAndBottomOfSomething(height: nil, to: contentView, to: nil, to: topMoviePicksText)
+        
+        upComingMoviePicksText.pinToRightAndBottomOfSomething(height: 35, to: contentView, to: nil, to: movieListPlaceholderTopMovie)
+        movieListPlaceholderUpcomingMovie.pinToRightAndBottomOfSomething(to: contentView, to: nil, to: upComingMoviePicksText)
         seeAllButtonWithTopMovie.pinButtonToBottomOfSomethingTrailing(to: contentView, to: topMoviePicksText)
         seeAllButtonWithUpcomingMovie.pinButtonToBottomOfSomethingTrailing(to: contentView, to: upComingMoviePicksText)
-        
-        
-        
-        NSLayoutConstraint.activate([
-            
-//            self.upComingMoviePicksText.topAnchor.constraint(equalTo: topMoviePicksText.bottomAnchor, constant: 750),
-//            self.upComingMoviePicksText.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-//            self.upComingMoviePicksText.widthAnchor.constraint(equalTo: contentView.widthAnchor),
-//            self.upComingMoviePicksText.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.05),
-            
-//            self.movieDetailsButton.bottomAnchor.constraint(equalTo: self.logOutButton.bottomAnchor, constant: -20),
-//            self.movieDetailsButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-//            self.movieDetailsButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
-//            self.movieDetailsButton.heightAnchor.constraint(equalToConstant: 25),
-//            
-//            self.logOutButton.bottomAnchor.constraint(equalTo: self.deleteAccountButton.bottomAnchor, constant: -20),
-//            self.logOutButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-//            self.logOutButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
-//            self.logOutButton.heightAnchor.constraint(equalToConstant: 25),
-//            
-////            self.deleteAccountButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
-//            self.deleteAccountButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-//            self.deleteAccountButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
-//            self.deleteAccountButton.heightAnchor.constraint(equalToConstant: 25),
-//            
-//            self.deleteAccountButton.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
-        ])
     }
     
-    private func setupMovieListViewController(to bottomOf: UIView) {
+    private func setupMovieListViewController(to placeholder: UIView) {
         let movieListVC = TopMovieViewController()
         
         self.addChild(movieListVC)
-        self.view.addSubview(movieListVC.view)
+        placeholder.addSubview(movieListVC.view)
         movieListVC.didMove(toParent: self)
         
         movieListVC.view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            movieListVC.view.topAnchor.constraint(equalTo: /*self.*/bottomOf.bottomAnchor),
-            movieListVC.view.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            movieListVC.view.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-            movieListVC.view.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.25)
-            
+            movieListVC.view.topAnchor.constraint(equalTo: placeholder.topAnchor),
+            movieListVC.view.leadingAnchor.constraint(equalTo: placeholder.leadingAnchor),
+            movieListVC.view.trailingAnchor.constraint(equalTo: placeholder.trailingAnchor),
+            movieListVC.view.bottomAnchor.constraint(equalTo: placeholder.bottomAnchor)
         ])
     }
     
-    private func setupMovieSlideListViewController(to bottomOf: UIView) {
+    private func setupMovieSlideListViewController(to placeholder: UIView) {
         let movieListVC = WatchListViewController()
         
         self.addChild(movieListVC)
-        self.view.addSubview(movieListVC.view)
+        placeholder.addSubview(movieListVC.view)
         movieListVC.didMove(toParent: self)
         
         movieListVC.view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            movieListVC.view.topAnchor.constraint(equalTo: /*self.*/bottomOf.bottomAnchor),
-            movieListVC.view.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            movieListVC.view.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-            movieListVC.view.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.25)
-            
+            movieListVC.view.topAnchor.constraint(equalTo: placeholder.topAnchor),
+            movieListVC.view.leadingAnchor.constraint(equalTo: placeholder.leadingAnchor),
+            movieListVC.view.trailingAnchor.constraint(equalTo: placeholder.trailingAnchor),
+            movieListVC.view.bottomAnchor.constraint(equalTo: placeholder.bottomAnchor)
         ])
+//        NSLayoutConstraint.activate([
+//            movieListVC.view.topAnchor.constraint(equalTo: /*self.*/bottomOf.bottomAnchor),
+//            movieListVC.view.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+//            movieListVC.view.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+//            movieListVC.view.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.25)
+//            
+//        ])
     }
     
     @objc private func didTapSeeAll() {

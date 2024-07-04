@@ -9,9 +9,12 @@ import Foundation
 import UIKit
 
 
-func createPaddedContainer(for view: UIView, padding: UIEdgeInsets, cornerRadius: CGFloat, borderWidth: CGFloat, borderColor: UIColor? = nil) -> UIView {
+func createPaddedContainer(for view: UIView, padding: UIEdgeInsets, cornerRadius: CGFloat, borderWidth: CGFloat, borderColor: UIColor? = nil, backgroundColor: UIColor? = nil) -> UIView {
     
     let containerView = UIView()
+    if let backgroundColorSet = backgroundColor {
+        containerView.backgroundColor = backgroundColorSet
+    }
     containerView.translatesAutoresizingMaskIntoConstraints = false
 
     containerView.addSubview(view)

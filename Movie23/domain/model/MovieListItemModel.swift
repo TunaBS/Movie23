@@ -12,6 +12,7 @@ struct MovieListItemModel: Identifiable {
     var id: Int
     var title: String
     var poster: String
+    var backgroundImage: String
     var rating: Double
     var releaseYear: Int
     var mpaRating: String
@@ -23,6 +24,7 @@ struct MovieListItemModel: Identifiable {
         id: Int,
         title: String,
         poster: String,
+        backgroundImage: String,
         rating: Double,
         releaseYear: Int,
         mpaRating: String,
@@ -33,6 +35,7 @@ struct MovieListItemModel: Identifiable {
         self.id = id
         self.title = title
         self.poster = poster
+        self.backgroundImage = backgroundImage
         self.rating = rating
         self.releaseYear = releaseYear
         self.mpaRating = mpaRating
@@ -46,6 +49,7 @@ struct MovieListItemModel: Identifiable {
             id: movie.id,
             title: movie.title,
             poster: movie.largeCoverImage,
+            backgroundImage: movie.backgroundImage,
             rating: movie.rating,
             releaseYear: movie.year,
             mpaRating: movie.mpaRating,
