@@ -24,5 +24,9 @@ func convertMinutesToHoursAndMinutes(minutes: Int) -> String {
         result += "\(remainingMinutes)M"
     }
     
+    if hours == 0 && remainingMinutes == 0 {
+        result = "N/A"
+    }
+    
     return result
 }

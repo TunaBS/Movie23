@@ -55,6 +55,7 @@ class MovieListTableViewCell: UITableViewCell {
     
     func setCellValue(movie: MovieListItemModel) {
         movieImage.setImage(with: movie.poster)
+//        movieImage.image = UIImage(named: "background_dummy_img")
         var genreList = genresString(from: movie.genre)
         movieGenre.text = genreList
         movieTitle.text = movie.title
@@ -93,11 +94,14 @@ class MovieListTableViewCell: UITableViewCell {
     }
     
     func setImageConstraints() {
-        movieImage.translatesAutoresizingMaskIntoConstraints = false
-        movieImage.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        movieImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
-        movieImage.heightAnchor.constraint(equalToConstant: 90).isActive = true
-        movieImage.widthAnchor.constraint(equalTo: movieImage.heightAnchor, multiplier: 0.75).isActive = true
+//        DispatchQueue.main.async {
+            self.movieImage.translatesAutoresizingMaskIntoConstraints = false
+            self.movieImage.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+            self.movieImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
+            self.movieImage.heightAnchor.constraint(equalToConstant: 90).isActive = true
+            self.movieImage.widthAnchor.constraint(equalTo: self.movieImage.heightAnchor, multiplier: 0.75).isActive = true
+//        }
+        
     }
     
     private func genresString(from genres: [String]) -> String {

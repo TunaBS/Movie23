@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WatchListViewController: UIViewController {
+class SlideShowViewController: UIViewController {
 
     let viewModel = MovieListViewModel(movieRepository: MovieRepositoryImpl(apiService: APIServiceImplemention(apiClient: APIClientImp())))
     
@@ -261,150 +261,18 @@ class WatchListViewController: UIViewController {
         
         return paddedView
     }
-    /*
-    private func movieBannerView(movie: MovieListItemModel) -> UIView {
-        let fullView = UIView()
-        fullView.translatesAutoresizingMaskIntoConstraints = true
-        
-        var movieImage = UIImageView()
-        var movieGenre = UILabel()
-        var movieTitle = UILabel()
-        var mpaRating = PaddedLabel()
-        var year = PaddedLabel()
-        var time = PaddedLabel()
-        var starIcon = UIImageView(image: UIImage(systemName: "star.fill"))
-        var rating = UILabel()
-        let watchListButton = CustomButton(title: "Add to WatchList", hasBackground: true, fontSize: .small)
-        
-        movieImage.translatesAutoresizingMaskIntoConstraints = false
-        movieGenre.translatesAutoresizingMaskIntoConstraints = false
-        movieTitle.translatesAutoresizingMaskIntoConstraints = false
-        mpaRating.translatesAutoresizingMaskIntoConstraints = false
-        year.translatesAutoresizingMaskIntoConstraints = false
-        time.translatesAutoresizingMaskIntoConstraints = false
-        starIcon.translatesAutoresizingMaskIntoConstraints = false
-        rating.translatesAutoresizingMaskIntoConstraints = false
-        watchListButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        fullView.addSubview(movieImage)
-        fullView.addSubview(movieTitle)
-        fullView.addSubview(movieGenre)
-        fullView.addSubview(mpaRating)
-        fullView.addSubview(year)
-        fullView.addSubview(time)
-        fullView.addSubview(starIcon)
-        fullView.addSubview(rating)
-        fullView.addSubview(watchListButton)
-        
-        movieImage.setImage(with: movie.backgroundImage)
-        let genre = genresString(from: movie.genre)
-        movieGenre.text = genre
-        movieTitle.text = movie.title
-        mpaRating.text = movie.mpaRating
-        year.text = "\(movie.releaseYear)"
-        time.text = movie.duration
-        rating.text = "\(movie.rating)"
-        
-        //configuring views
-        movieImage.contentMode = .scaleAspectFill
-        movieImage.clipsToBounds = true
-        movieImage.layer.cornerRadius = 20
-        
-        movieTitle.font = .boldSystemFont(ofSize: 20)
-        movieTitle.numberOfLines = 1
-        
-        movieGenre.font = .systemFont(ofSize: 16)
-        movieGenre.numberOfLines = 1
-        
-        rating.font = .systemFont(ofSize: 14)
-        starIcon.tintColor = .darkerYellow
-        
-        mpaRating.font = .systemFont(ofSize: 14)
-        mpaRating.layer.borderWidth = 1
-        mpaRating.layer.cornerRadius = 5
-        mpaRating.layer.borderColor = UIColor.black.cgColor
-        mpaRating.textAlignment = .center
-        mpaRating.clipsToBounds = true
-        
-        year.font = .systemFont(ofSize: 14)
-        year.layer.borderWidth = 1
-        year.layer.cornerRadius = 5
-        year.layer.borderColor = UIColor.black.cgColor
-        year.textAlignment = .center
-        year.clipsToBounds = true
-        
-        time.font = .systemFont(ofSize: 14)
-        time.layer.borderWidth = 1
-        time.layer.cornerRadius = 5
-        time.layer.borderColor = UIColor.black.cgColor
-        time.textAlignment = .center
-        time.clipsToBounds = true
-        //configured views
-        
-        movieImage.pin(to: fullView)
-        
-        starIcon.leadingAnchor.constraint(equalTo: fullView.leadingAnchor, constant: 16).isActive = true
-        starIcon.topAnchor.constraint(equalTo: fullView.topAnchor, constant: 16).isActive = true
-        starIcon.widthAnchor.constraint(equalToConstant: 24).isActive = true
-        starIcon.heightAnchor.constraint(equalToConstant: 24).isActive = true
-        
-        // rating constraints
-        rating.leadingAnchor.constraint(equalTo: starIcon.trailingAnchor, constant: 8).isActive = true
-        rating.centerYAnchor.constraint(equalTo: starIcon.centerYAnchor).isActive = true
-                
-        // movieTitle constraints
-        movieTitle.leadingAnchor.constraint(equalTo: fullView.leadingAnchor, constant: 16).isActive = true
-        movieTitle.bottomAnchor.constraint(equalTo: fullView.bottomAnchor, constant: -16).isActive = true
-        
-        // movieGenre constraints
-        movieGenre.leadingAnchor.constraint(equalTo: movieTitle.leadingAnchor).isActive = true
-        movieGenre.topAnchor.constraint(equalTo: movieTitle.bottomAnchor, constant: 8).isActive = true
-        
-        // mpaRating constraints
-        mpaRating.leadingAnchor.constraint(equalTo: movieTitle.leadingAnchor).isActive = true
-        mpaRating.topAnchor.constraint(equalTo: movieGenre.bottomAnchor, constant: 8).isActive = true
-        
-        // year constraints
-        year.leadingAnchor.constraint(equalTo: mpaRating.trailingAnchor, constant: 8).isActive = true
-        year.centerYAnchor.constraint(equalTo: mpaRating.centerYAnchor).isActive = true
-        
-        // time constraints
-        time.leadingAnchor.constraint(equalTo: year.trailingAnchor, constant: 8).isActive = true
-        time.centerYAnchor.constraint(equalTo: year.centerYAnchor).isActive = true
-        
-        // watchListButton constraints
-        watchListButton.trailingAnchor.constraint(equalTo: fullView.trailingAnchor, constant: -16).isActive = true
-        watchListButton.centerYAnchor.constraint(equalTo: mpaRating.centerYAnchor).isActive = true
-        
-        return fullView
-    }
-     */
     
     private func configureView (with movie: MovieListItemModel) {
         
     }
     
-//    func setImageConstraints(movieImage: UIImageView) {
-//        movieImage.translatesAutoresizingMaskIntoConstraints = false
-//        movieImage.centerXAnchor.constraint(equalTo: stackview.centerXAnchor).isActive = true
-//        movieImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
-//        movieImage.heightAnchor.constraint(equalToConstant: 90).isActive = true
-//        movieImage.widthAnchor.constraint(equalTo: movieImage.heightAnchor, multiplier: 0.75).isActive = true
-//    }
     
     private func genresString(from genres: [String]) -> String {
         genres.joined(separator: " • ")
     }
-//    private func setupRoundedCornersForLabels() {
-//        setupRoundedCorners(for: year)
-//        setupRoundedCorners(for: time)
-//        setupRoundedCorners(for: mpaRating)
-//    }
-    
-    
 }
 
-extension WatchListViewController: UIScrollViewDelegate {
+extension SlideShowViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let pageIndex = round(scrollView.contentOffset.x / scrollView.frame.width)
         pageControl.currentPage = Int(pageIndex)

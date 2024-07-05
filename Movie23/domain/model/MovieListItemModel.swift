@@ -54,7 +54,7 @@ struct MovieListItemModel: Identifiable {
             releaseYear: movie.year,
             mpaRating: movie.mpaRating,
             duration: convertMinutesToHoursAndMinutes(minutes: movie.runtime),
-            genre: movie.genres,
+            genre: movie.genres ?? [""],
             isFavourite: isFavourite
         )
     }

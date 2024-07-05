@@ -22,7 +22,7 @@ class TabBarController: UITabBarController {
 
     private func setUpTabs() {
         let homeVC = self.createNav(with: "Home", and: UIImage(systemName: "house"), vc: HomeViewController())
-        let watchListVC = self.createNav(with: "WatchList", and: UIImage(systemName: "list.bullet"), vc: WatchListViewController())
+        let watchListVC = self.createNav(with: "WatchList", and: UIImage(systemName: "list.bullet"), vc: SlideShowViewController())
         let settingsVC = self.createNav(with: "Settings", and: UIImage(systemName: "gearshape.fill"), vc: SettingsViewController())
         let searchVC = self.createNav(with: "Search", and: UIImage(systemName: "magnifyingglass"), vc: SearchViewController())
         self.setViewControllers([homeVC, searchVC, watchListVC, settingsVC], animated: true)
@@ -42,6 +42,12 @@ class TabBarController: UITabBarController {
         titleLabel.sizeToFit()
         let leftItem = UIBarButtonItem(customView: titleLabel)
         vc.navigationItem.leftBarButtonItem = leftItem
+        
+//        if title == "Search" {
+//            let filterImageRight = UIImageView(image: UIImage(systemName: "slider.vertical.3"))
+//            let rightItem = UIBarButtonItem(customView: filterImageRight)
+//            vc.navigationItem.leftBarButtonItem = rightItem
+//        }
         return nav
     }
 

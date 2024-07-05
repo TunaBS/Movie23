@@ -23,7 +23,7 @@ struct MovieListResponse: Codable {
         let year : Int
         let rating : Double
         let runtime : Int
-        let genres : [String]
+        let genres : [String]?
         let descriptionFull : String
         let backgroundImage : String
         let largeCoverImage :  String

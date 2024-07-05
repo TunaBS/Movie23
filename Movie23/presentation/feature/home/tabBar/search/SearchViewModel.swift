@@ -9,7 +9,13 @@ import Foundation
 
 class SearchViewModel {
     
-    var movieList: [MovieListItemModel] = []
+    var movieList: [MovieListItemModel] = [] {
+        didSet {
+            self.movieListUpdated?()
+        }
+    }
+    
+    var movieListUpdated: (() -> Void)?
     
     private var movieRepository: MovieRepository
 //    private var navigationViewModel: NavigationViewModel

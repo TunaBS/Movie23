@@ -81,9 +81,9 @@ class HomeViewController: UIViewController {
         movieSlideListPlaceholder.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
         movieSlideListPlaceholder.heightAnchor.constraint(equalToConstant: 230).isActive = true
         movieListPlaceholderTopMovie.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
-        movieListPlaceholderTopMovie.heightAnchor.constraint(equalToConstant: 160).isActive = true
+        movieListPlaceholderTopMovie.heightAnchor.constraint(equalToConstant: 230).isActive = true
         movieListPlaceholderUpcomingMovie.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
-        movieListPlaceholderUpcomingMovie.heightAnchor.constraint(equalToConstant: 160).isActive = true
+        movieListPlaceholderUpcomingMovie.heightAnchor.constraint(equalToConstant: 230).isActive = true
 //        movieListPlaceholderUpcomingMovie.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
 
         
@@ -117,7 +117,7 @@ class HomeViewController: UIViewController {
     }
     
     private func setupMovieSlideListViewController(to placeholder: UIView) {
-        let movieListVC = WatchListViewController()
+        let movieListVC = SlideShowViewController()
         
         self.addChild(movieListVC)
         placeholder.addSubview(movieListVC.view)
@@ -130,13 +130,6 @@ class HomeViewController: UIViewController {
             movieListVC.view.trailingAnchor.constraint(equalTo: placeholder.trailingAnchor),
             movieListVC.view.bottomAnchor.constraint(equalTo: placeholder.bottomAnchor)
         ])
-//        NSLayoutConstraint.activate([
-//            movieListVC.view.topAnchor.constraint(equalTo: /*self.*/bottomOf.bottomAnchor),
-//            movieListVC.view.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-//            movieListVC.view.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-//            movieListVC.view.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.25)
-//            
-//        ])
     }
     
     @objc private func didTapSeeAll() {

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		4B3917F12C35249700D37050 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3917F02C35249700D37050 /* SearchViewController.swift */; };
 		4B3917F32C3524CC00D37050 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3917F22C3524CC00D37050 /* SettingsViewController.swift */; };
-		4B3917F52C3524DD00D37050 /* WatchListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3917F42C3524DD00D37050 /* WatchListViewController.swift */; };
+		4B3917F52C3524DD00D37050 /* SlideShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3917F42C3524DD00D37050 /* SlideShowViewController.swift */; };
 		4B3917F72C3528FE00D37050 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3917F62C3528FE00D37050 /* TabBarController.swift */; };
 		4B3917F92C3532DB00D37050 /* PaddingForUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3917F82C3532DB00D37050 /* PaddingForUIView.swift */; };
 		4B48B06C2C2EE53200266B78 /* DiContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B48B06B2C2EE53200266B78 /* DiContainer.swift */; };
@@ -70,7 +70,7 @@
 /* Begin PBXFileReference section */
 		4B3917F02C35249700D37050 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		4B3917F22C3524CC00D37050 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		4B3917F42C3524DD00D37050 /* WatchListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchListViewController.swift; sourceTree = "<group>"; };
+		4B3917F42C3524DD00D37050 /* SlideShowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideShowViewController.swift; sourceTree = "<group>"; };
 		4B3917F62C3528FE00D37050 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		4B3917F82C3532DB00D37050 /* PaddingForUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingForUIView.swift; sourceTree = "<group>"; };
 		4B48B06B2C2EE53200266B78 /* DiContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiContainer.swift; sourceTree = "<group>"; };
@@ -144,10 +144,10 @@
 		4B3917ED2C35244C00D37050 /* tabBar */ = {
 			isa = PBXGroup;
 			children = (
+				4B3917F62C3528FE00D37050 /* TabBarController.swift */,
+				4B8C3C752C37CE5600C5EF30 /* settings */,
 				4B8BB9CE2C36CF45000B9995 /* search */,
 				4B8BB6E02C3668C400EE712C /* watchList */,
-				4B3917F22C3524CC00D37050 /* SettingsViewController.swift */,
-				4B3917F62C3528FE00D37050 /* TabBarController.swift */,
 			);
 			path = tabBar;
 			sourceTree = "<group>";
@@ -206,6 +206,7 @@
 		4B48B0652C2EE20C00266B78 /* home */ = {
 			isa = PBXGroup;
 			children = (
+				4B3917F42C3524DD00D37050 /* SlideShowViewController.swift */,
 				4B3917ED2C35244C00D37050 /* tabBar */,
 				4B48B0682C2EE34C00266B78 /* movieDetails */,
 				4B48B0662C2EE27100266B78 /* movieList */,
@@ -419,7 +420,6 @@
 		4B8BB6E02C3668C400EE712C /* watchList */ = {
 			isa = PBXGroup;
 			children = (
-				4B3917F42C3524DD00D37050 /* WatchListViewController.swift */,
 			);
 			path = watchList;
 			sourceTree = "<group>";
@@ -431,6 +431,14 @@
 				4B8BB9CF2C36CF65000B9995 /* SearchViewModel.swift */,
 			);
 			path = search;
+			sourceTree = "<group>";
+		};
+		4B8C3C752C37CE5600C5EF30 /* settings */ = {
+			isa = PBXGroup;
+			children = (
+				4B3917F22C3524CC00D37050 /* SettingsViewController.swift */,
+			);
+			path = settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -563,7 +571,7 @@
 				4B48B06E2C2EE56E00266B78 /* DiModule.swift in Sources */,
 				4B893F292C296CD7004720C4 /* HomeViewController.swift in Sources */,
 				4BAACE102C2D5E4300832C34 /* PaddedLabel.swift in Sources */,
-				4B3917F52C3524DD00D37050 /* WatchListViewController.swift in Sources */,
+				4B3917F52C3524DD00D37050 /* SlideShowViewController.swift in Sources */,
 				4B4F8F6D2C2C0EC6007415F5 /* MovieListTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

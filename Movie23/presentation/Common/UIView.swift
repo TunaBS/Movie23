@@ -19,11 +19,14 @@ extension UIView {
     }
     
     func pinButtonToBottomTrailing(to superview: UIView) {
-        translatesAutoresizingMaskIntoConstraints = false
-        trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -5).isActive = true
-        bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: -10).isActive = true
-        heightAnchor.constraint(equalToConstant: 30).isActive = true
-        widthAnchor.constraint(equalTo: superview.widthAnchor, multiplier: 0.4).isActive = true
+//        DispatchQueue.main.async {
+            self.translatesAutoresizingMaskIntoConstraints = false
+            self.trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -5).isActive = true
+            self.bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: -10).isActive = true
+            self.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            self.widthAnchor.constraint(equalTo: superview.widthAnchor, multiplier: 0.4).isActive = true
+//        }
+        
     }
     
     func pinButtonToBottomOfSomethingTrailing(to superview: UIView, to levelWithYAxis: UIView? = nil) {
@@ -36,17 +39,20 @@ extension UIView {
     
     func pinToTheRightAndBottomOfSomething(height: Float, to superview: UIView, to rightOf: UIView? = nil, to bottomOf: UIView? = nil, topPlace: Bool? = nil){
         
-        translatesAutoresizingMaskIntoConstraints = false
-        if let topPlace = topPlace {
-            if topPlace {
-                topAnchor.constraint(equalTo: superview.layoutMarginsGuide.topAnchor).isActive = true
+//        DispatchQueue.main.async {
+            self.translatesAutoresizingMaskIntoConstraints = false
+            if let topPlace = topPlace {
+                if topPlace {
+                    self.topAnchor.constraint(equalTo: superview.layoutMarginsGuide.topAnchor).isActive = true
+                }
+            } else {
+                self.topAnchor.constraint(equalTo: bottomOf?.bottomAnchor ?? superview.topAnchor, constant: 10).isActive = true
             }
-        } else {
-            topAnchor.constraint(equalTo: bottomOf?.bottomAnchor ?? superview.topAnchor, constant: 10).isActive = true
-        }
-        leadingAnchor.constraint(equalTo: rightOf?.trailingAnchor ?? superview.leadingAnchor, constant: 10).isActive = true
-//        heightAnchor.constraint(equalToConstant: 25).isActive = true
-        heightAnchor.constraint(equalTo: superview.heightAnchor, multiplier: CGFloat(height)).isActive = true
+            self.leadingAnchor.constraint(equalTo: rightOf?.trailingAnchor ?? superview.leadingAnchor, constant: 10).isActive = true
+    //        heightAnchor.constraint(equalToConstant: 25).isActive = true
+            self.heightAnchor.constraint(equalTo: superview.heightAnchor, multiplier: CGFloat(height)).isActive = true
+//        }
+        
     }
     
     func pinToRightAndBottomOfSomething(height: Float? = nil, to superview: UIView, to rightOf: UIView? = nil, to bottomOf: UIView? = nil, topPlace: Bool? = nil){

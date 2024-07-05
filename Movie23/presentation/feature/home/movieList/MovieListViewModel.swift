@@ -36,7 +36,7 @@ class MovieListViewModel {
                 movieList = try await movieRepository.getMovieList()
                 print("Movie List: \(movieList)")
             } catch {
-                print("Error: \(error)")
+                print("(In Movie List View Model) Error: \(error)")
             }
         }
     }

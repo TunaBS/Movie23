@@ -10,14 +10,11 @@ import UIKit
 class SearchViewController: UIViewController, UISearchResultsUpdating {
     
     let viewModel = SearchViewModel(movieRepository: MovieRepositoryImpl(apiService: APIServiceImplemention(apiClient: APIClientImp())))
-    
-    
-    
     private let searchController = UISearchController(searchResultsController: nil)
-
     var tableView = UITableView()
     var movies: [MovieListItemModel] = []
-//    var viewModel: MovieListViewModel?
+
+    let filterImageRight = UIImageView(image: UIImage(systemName: "slider.vertical.3"))
     
     struct Cells {
         static let movieCell = "MovieCell"
@@ -25,11 +22,10 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = "Movie Lists"
-//        movies = viewModel.movieList
-        bindViewModel()
+        setUpSearchController()
         setUpTableUI()
+        bindViewModel()
+        setUpFilterButton()
     }
     
     func setUpTableUI() {
@@ -47,14 +43,16 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
     }
     
     private func bindViewModel() {
-//        viewModel.movieListUpdated = { [weak self] in
-//            self?.loadMovies()
-//        }
+        viewModel.movieListUpdated = { [weak self] in
+            self?.loadMovies()
+        }
     }
     
     private func loadMovies() {
-        movies = viewModel.movieList
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.movies = self.viewModel.movieList
+            self.tableView.reloadData()
+        }
     }
     
     
@@ -70,14 +68,49 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
     }
     
     func updateSearchResults(for searchController: UISearchController) {
-        print("print searched value: ", searchController.searchBar.text)
+        print("print searched value: ", searchController.searchBar.text ?? "")
+//        bindViewModel()
+        viewModel.searchQuery = searchController.searchBar.text ?? ""
+    }
+    
+    private func setUpFilterButton() {
+        let filterButton = UIBarButtonItem(customView: filterImageRight)
+        filterImageRight.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(filterButtonTapped))
+        filterImageRight.addGestureRecognizer(tapGesture)
+        self.navigationItem.rightBarButtonItem = filterButton
+    }
+    
+    @objc private func filterButtonTapped() {
+        let filterSheet = UIAlertController(title: "Filter Options", message: "Choose your filter", preferredStyle: .actionSheet)
+        
+        filterSheet.addAction(UIAlertAction(title: "Option 1", style: .default, handler: { action in
+            print("Option 1 selected")
+            // Handle option 1 selection
+        }))
+        
+        filterSheet.addAction(UIAlertAction(title: "Option 2", style: .default, handler: { action in
+            print("Option 2 selected")
+            // Handle option 2 selection
+        }))
+        
+        filterSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        // For iPad compatibility
+        if let popoverController = filterSheet.popoverPresentationController {
+            popoverController.barButtonItem = self.navigationItem.rightBarButtonItem
+        }
+        
+        self.present(filterSheet, animated: true, completion: nil)
     }
 }
 
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(viewModel.movieList.count)
-        return viewModel.movieList.count
+//        print(viewModel.movieList.count)
+//        return viewModel.movieList.count
+        print("Found \(movies.count)")
+        return movies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
