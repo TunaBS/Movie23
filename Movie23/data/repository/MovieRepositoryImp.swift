@@ -27,8 +27,8 @@ class MovieRepositoryImpl: MovieRepository {
         }
     }
     
-    func getMovieListByQuery(query: String) async throws -> [MovieListItemModel] {
-        let response = try await apiService.getMovieListByQuery(query: query)
+    func getMovieListByQuery(query: String, sortBy: String? = nil, orderBy: String? = nil) async throws -> [MovieListItemModel] {
+        let response = try await apiService.getMovieListByQuery(query: query, sortBy: sortBy, orderBy: orderBy)
 //        let favouriteMovieIds = try await getFavouriteMovieIds()
         return response.data.movies.map{ movie in
             MovieListItemModel.fromMovie(
@@ -37,7 +37,6 @@ class MovieRepositoryImpl: MovieRepository {
             )
         }
     }
-    
     
     func getMovieDetails(movieId: Int) async throws -> MovieDetailsModel {
         let response = try await apiService.getMovieDetails(movieId: movieId)
@@ -48,4 +47,15 @@ class MovieRepositoryImpl: MovieRepository {
         )
     }
     
+    func getMovieListByGenre(genre: MovieGenre) async throws -> [MovieListItemModel] {
+            let response = try await apiService.getMovieListByGenre(genre: genre)
+            
+//            let favouriteMovieIds = try await getFavouriteMovieIds()
+            return response.data.movies.map{ movie in
+                MovieListItemModel.fromMovie(
+                    movie: movie//,
+//                    isFavourite: favouriteMovieIds.contains(movie.id)
+                )
+            }
+        }
 }

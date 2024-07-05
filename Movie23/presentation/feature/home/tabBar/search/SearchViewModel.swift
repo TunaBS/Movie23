@@ -33,6 +33,20 @@ class SearchViewModel {
         }
     }
     
+    var sortBy: String = "" {
+        didSet {
+            print("Sort By order now: \(sortBy)")
+            debouncedSearch()
+        }
+    }
+    
+    var orderBy: String = "" {
+        didSet {
+            print("Order By now: \(orderBy)")
+            debouncedSearch()
+        }
+    }
+    
     func onSearchSubmit() {
         print("Search query submitted: \(searchQuery)")
     }
@@ -47,7 +61,7 @@ class SearchViewModel {
         print("Fetching movie list using query: \(searchQuery)")
         Task {
             do {
-                movieList = try await movieRepository.getMovieListByQuery(query: searchQuery)
+                movieList = try await movieRepository.getMovieListByQuery(query: searchQuery, sortBy: sortBy, orderBy: sortBy)
                 print("Movie List: \(movieList)")
             } catch {
                 print("Error: \(error)")

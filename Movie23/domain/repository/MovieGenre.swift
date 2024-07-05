@@ -8,7 +8,7 @@
 import Foundation
 
 
-enum MovieGenre {
+enum MovieGenre: String, CaseIterable {
     case action, adventure, comedy, drama, horror, scifi, animation, crime, fantasy, mystery, romance, thriller, western, unknown;
     
     static func fromString(_ genre: String) -> MovieGenre {
