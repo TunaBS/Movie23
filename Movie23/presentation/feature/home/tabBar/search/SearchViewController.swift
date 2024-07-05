@@ -18,7 +18,6 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
     private var selectedSort: SortBy? = nil
     private var selectedOrder: OrderBy? = nil
     let filterImageRight = UIImageView(image: UIImage(systemName: "slider.vertical.3"))
-//    let filterView = FilterSearchView()
     
     struct Cells {
         static let movieCell = "MovieCell"
@@ -29,22 +28,6 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
         setUpSearchController()
         setUpTableUI()
         bindViewModel()
-//        setUpFilterButton()
-//        filterView.applyFilters = { [weak self] selectedGenres, selectedSort, selectedOrder in
-//            // Update the filters and fetch filtered data here
-//            self?.updateFilters(selectedGenres: selectedGenres, selectedSort: selectedSort, selectedOrder: selectedOrder)
-//        }
-    }
-    
-    private func updateFilters(selectedGenres: Set<MovieGenre>, selectedSort: SortBy?, selectedOrder: OrderBy?) {
-        // Apply filters and update UI accordingly
-        // Example: Reload table view data based on filtered values
-        print("Selected Genres: \(selectedGenres)")
-        print("Selected Sort: \(selectedSort?.rawValue ?? "None")")
-        print("Selected Order: \(selectedOrder?.rawValue ?? "None")")
-        
-        // You can trigger fetching of filtered data here
-        // Example: self.fetchFilteredMovies(genres: selectedGenres, sortBy: selectedSort, orderBy: selectedOrder)
     }
     
     func setUpTableUI() {
@@ -85,7 +68,6 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
         self.definesPresentationContext = false
         self.navigationItem.hidesSearchBarWhenScrolling = false
         
-        // Adding filter button to the search bar
         let filterButton = UIBarButtonItem(image: UIImage(systemName: "slider.vertical.3"), style: .plain, target: self, action: #selector(filterButtonTapped))
         self.navigationItem.rightBarButtonItem = filterButton
     }
@@ -97,7 +79,6 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
     private func presentFilterSearchView() {
         let filterSearchView = FilterSearchView()
         filterSearchView.applyFilters = { [weak self] selectedGenres, selectedSort, selectedOrder in
-            // Handle the selected filters here
             self?.handleSelectedFilters(genres: selectedGenres, sort: selectedSort, order: selectedOrder)
             self?.dismiss(animated: true, completion: nil)
         }
@@ -109,7 +90,6 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
     }
     
     private func handleSelectedFilters(genres: Set<MovieGenre>, sort: SortBy?, order: OrderBy?) {
-        // Store the selected filters
         self.selectedGenres = genres
         self.selectedSort = sort
         self.selectedOrder = order
@@ -117,79 +97,26 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
         let sortType = selectedSort?.rawValue
         let orderType = selectedOrder?.rawValue
         
-        // Update your search or filtering logic here
         print("Selected Genres: \(genres)")
         print("Selected Sort in VC: \(sortType))")
         print("Selected Order in VC: \(orderType)")
         
-        // Perform the search or update the UI with the filtered data
-//        performSearch()
+        viewModel.sortBy = selectedSort?.rawValue ?? ""
+        viewModel.orderBy = selectedOrder?.rawValue ?? ""
+
     }
-    
-//    @objc private func showFilterSheet() {
-//        let filterView = FilterSearchView()
-//        filterView.translatesAutoresizingMaskIntoConstraints = false
-//        let hostingController = UIViewController()
-//        hostingController.view.addSubview(filterView)
-//        
-//        NSLayoutConstraint.activate([
-//            filterView.topAnchor.constraint(equalTo: hostingController.view.topAnchor),
-//            filterView.leadingAnchor.constraint(equalTo: hostingController.view.leadingAnchor),
-//            filterView.trailingAnchor.constraint(equalTo: hostingController.view.trailingAnchor),
-//            filterView.bottomAnchor.constraint(equalTo: hostingController.view.bottomAnchor)
-//        ])
-//        
-//        hostingController.modalPresentationStyle = .pageSheet
-//        if let sheet = hostingController.sheetPresentationController {
-//            sheet.detents = [.medium(), .large()]
-//        }
-//        present(hostingController, animated: true, completion: nil)
-//    }
     
     func updateSearchResults(for searchController: UISearchController) {
         print("print searched value: ", searchController.searchBar.text ?? "")
-//        bindViewModel()
         viewModel.searchQuery = searchController.searchBar.text ?? ""
         viewModel.sortBy = selectedSort?.rawValue ?? ""
         viewModel.orderBy = selectedOrder?.rawValue ?? ""
     }
     
-//    private func setUpFilterButton() {
-//        let filterButton = UIBarButtonItem(customView: filterImageRight)
-//        filterImageRight.isUserInteractionEnabled = true
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(filterButtonTapped))
-//        filterImageRight.addGestureRecognizer(tapGesture)
-//        self.navigationItem.rightBarButtonItem = filterButton
-//    }
-    
-//    @objc private func filterButtonTapped() {
-//        let filterSheet = UIAlertController(title: "Sort and Filter", message: "Choose your filter", preferredStyle: .actionSheet)
-//        
-//        filterSheet.addAction(UIAlertAction(title: "Option 1", style: .default, handler: { action in
-//            print("Option 1 selected")
-//            // Handle option 1 selection
-//        }))
-//        
-//        filterSheet.addAction(UIAlertAction(title: "Option 2", style: .default, handler: { action in
-//            print("Option 2 selected")
-//            // Handle option 2 selection
-//        }))
-//        
-//        filterSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-//        
-//        // For iPad compatibility
-//        if let popoverController = filterSheet.popoverPresentationController {
-//            popoverController.barButtonItem = self.navigationItem.rightBarButtonItem
-//        }
-//        
-//        self.present(filterSheet, animated: true, completion: nil)
-//    }
 }
 
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        print(viewModel.movieList.count)
-//        return viewModel.movieList.count
         print("Found \(movies.count)")
         return movies.count
     }
@@ -204,15 +131,8 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedMovie = viewModel.movieList[indexPath.row]
-        
-        // Instantiate the detail view controller
         let detailViewController = MovieDetailsViewController()
-        
-        // Pass the selected movie to the detail view controller
-//        detailViewController.movie = selectedMovie
         detailViewController.movieId = selectedMovie.id
-        
-        // Navigate to the detail view controller
         navigationController?.pushViewController(detailViewController, animated: true)
     }
 }

@@ -9,6 +9,10 @@ import Foundation
 
 class SearchViewModel {
     
+    private var hasSearchQueryChanged = false
+    private var hasSortByChanged = false
+    private var hasOrderByChanged = false
+    
     var movieList: [MovieListItemModel] = [] {
         didSet {
             self.movieListUpdated?()
@@ -29,26 +33,46 @@ class SearchViewModel {
     var searchQuery: String = "" {
         didSet {
             print("Search query changed: \(searchQuery)")
-            debouncedSearch()
+            hasSearchQueryChanged = true
+            checkAndDebounceSearch()
+//            debouncedSearch()
         }
     }
     
     var sortBy: String = "" {
         didSet {
             print("Sort By order now: \(sortBy)")
-            debouncedSearch()
+            hasSortByChanged = true
+            checkAndDebounceSearch()
+//            debouncedSearch()
         }
     }
     
     var orderBy: String = "" {
         didSet {
             print("Order By now: \(orderBy)")
-            debouncedSearch()
+            hasOrderByChanged = true
+            checkAndDebounceSearch()
+//            debouncedSearch()
         }
     }
     
     func onSearchSubmit() {
         print("Search query submitted: \(searchQuery)")
+    }
+    
+    private func checkAndDebounceSearch() {
+        if hasSearchQueryChanged || hasSortByChanged || hasOrderByChanged {
+//            hasSearchQueryChanged = true
+//            hasSortByChanged = true
+//            hasOrderByChanged = true
+            debouncedSearch()
+        } else {
+//            debouncedSearch()
+            print("Nothing updated")
+        }
+        refreshValues()
+//        onRefresh()
     }
     
     private func debouncedSearch() {
@@ -58,25 +82,35 @@ class SearchViewModel {
     }
     
     private func fetchMovieListUsingQuery() {
-        print("Fetching movie list using query: \(searchQuery)")
+        print("Fetching movie list using query: \(searchQuery) and \(sortBy) and \(orderBy)")
         Task {
             do {
-                movieList = try await movieRepository.getMovieListByQuery(query: searchQuery, sortBy: sortBy, orderBy: sortBy)
-                print("Movie List: \(movieList)")
+                if searchQuery == "" {
+                    movieList = []
+                } else {
+                    movieList = try await movieRepository.getMovieListByQuery(query: searchQuery, sortBy: sortBy, orderBy: orderBy)
+                }
+//                print("Movie List: \(movieList)")
             } catch {
                 print("Error: \(error)")
             }
         }
     }
     
+    func refreshValues() {
+        hasSearchQueryChanged = false
+        hasSortByChanged = false
+        hasOrderByChanged = false
+    }
+    
     func onRefresh() {
         fetchMovieListUsingQuery()
     }
     
-    func onClickedMovieItem(movieId: Int) {
-        print("Movie clicked: \(movieId)")
-//        navigationViewModel.navigateTo(screen: .movieDetails(id: movieId))
-    }
+//    func onClickedMovieItem(movieId: Int) {
+//        print("Movie clicked: \(movieId)")
+////        navigationViewModel.navigateTo(screen: .movieDetails(id: movieId))
+//    }
     
 //    func toggleFavourite(movie: MovieListItemModel) {
 //        Task {
