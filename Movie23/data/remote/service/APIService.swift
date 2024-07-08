@@ -9,7 +9,8 @@ import Foundation
 
 protocol APIService {
     func getMovieList() async throws -> BaseResponse<MovieListResponse>
-    func getMovieListByQuery(query: String, sortBy: String?, orderBy: String?) async throws -> BaseResponse<MovieListResponse>
+    func getMovieListByQuery(query: String) async throws -> BaseResponse<MovieListResponse>
+    func getMovieListByFilter(query: String, sortBy: String?, orderBy: String?) async throws -> BaseResponse<MovieListResponse>
     func getMovieListByGenre(genre: MovieGenre) async throws -> BaseResponse<MovieListResponse>
     func getMovieDetails(movieId: Int) async throws -> BaseResponse<MovieDetailsResponse>
 }

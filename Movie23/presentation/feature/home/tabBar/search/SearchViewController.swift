@@ -9,7 +9,9 @@ import UIKit
 
 class SearchViewController: UIViewController, UISearchResultsUpdating {
     
-    let viewModel = SearchViewModel(movieRepository: MovieRepositoryImpl(apiService: APIServiceImplemention(apiClient: APIClientImp())))
+//    let viewModel = SearchViewModel(movieRepository: MovieRepositoryImpl(apiService: APIServiceImplemention(apiClient: APIClientImp())))
+    
+    let filterViewModel = FilterViewModel(movieRepository: MovieRepositoryImpl(apiService: APIServiceImplemention(apiClient: APIClientImp())))
     private let searchController = UISearchController(searchResultsController: nil)
     var tableView = UITableView()
     var movies: [MovieListItemModel] = []
@@ -45,14 +47,14 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
     }
     
     private func bindViewModel() {
-        viewModel.movieListUpdated = { [weak self] in
+        filterViewModel.movieListUpdated = { [weak self] in
             self?.loadMovies()
         }
     }
     
     private func loadMovies() {
         DispatchQueue.main.async {
-            self.movies = self.viewModel.movieList
+            self.movies = self.filterViewModel.movieList
             self.tableView.reloadData()
         }
     }
@@ -89,28 +91,58 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
         present(filterSearchViewController, animated: true, completion: nil)
     }
     
-    private func handleSelectedFilters(genres: Set<MovieGenre>, sort: SortBy?, order: OrderBy?) {
-        self.selectedGenres = genres
+    private func handleSelectedFilters(genres: Set<MovieGenre>?, sort: SortBy?, order: OrderBy?) {
+        self.selectedGenres = genres ?? []
         self.selectedSort = sort
         self.selectedOrder = order
-        
         let sortType = selectedSort?.rawValue
         let orderType = selectedOrder?.rawValue
+        let genreType = selectedGenres.map { $0.rawValue }.joined(separator: ", ") ?? ""
+
         
-        print("Selected Genres: \(genres)")
+        print("Selected Genres: in VC: \(genres)")
         print("Selected Sort in VC: \(sortType))")
         print("Selected Order in VC: \(orderType)")
         
-        viewModel.sortBy = selectedSort?.rawValue ?? ""
-        viewModel.orderBy = selectedOrder?.rawValue ?? ""
-
+        filterViewModel.sortBy = selectedSort?.rawValue ?? ""
+        filterViewModel.orderBy = selectedOrder?.rawValue ?? ""
+//        filterViewModel.genreBy = selectedGenres
+        if let genreSelectd = genres {
+            self.movies = self.filterViewModel.filterMoviesByGenres(genres: selectedGenres, movieArray: movies)
+            print("Filtered Movies count: \(movies.count)")
+            print("Filtered Movies in Search VC: \(movies)")
+        }
     }
     
     func updateSearchResults(for searchController: UISearchController) {
         print("print searched value: ", searchController.searchBar.text ?? "")
-        viewModel.searchQuery = searchController.searchBar.text ?? ""
-        viewModel.sortBy = selectedSort?.rawValue ?? ""
-        viewModel.orderBy = selectedOrder?.rawValue ?? ""
+        filterViewModel.searchQuery = searchController.searchBar.text ?? ""
+        
+//        if let searchText = searchController.searchBar.text {
+//            if !searchText.isEmpty {
+//                filterViewModel.searchQuery = searchText
+//            } else {
+//                movies = []
+//                print("No movies to prints. Movie Count: \(movies)")
+//            }
+//        } else {
+//            movies = []
+//        }
+        
+        if let sortSelected = selectedSort?.rawValue {
+            filterViewModel.sortBy = sortSelected
+        }
+        if let orderSelected = selectedOrder?.rawValue {
+            filterViewModel.orderBy = orderSelected
+        }
+//        if let genreSelected = selectedGenres {
+        movies = filterViewModel.filterMoviesByGenres(genres: selectedGenres, movieArray: movies)
+        print("Filtered Movies count: \(movies.count)")
+        print("Filtered Movies in Search VC: \(movies)")
+//        }
+//        viewModel.sortBy = selectedSort?.rawValue ?? ""
+//        viewModel.orderBy = selectedOrder?.rawValue ?? ""
+//        viewModel.genreBy = selectedGenres
     }
     
 }
@@ -130,7 +162,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedMovie = viewModel.movieList[indexPath.row]
+        let selectedMovie = filterViewModel.movieList[indexPath.row]
         let detailViewController = MovieDetailsViewController()
         detailViewController.movieId = selectedMovie.id
         navigationController?.pushViewController(detailViewController, animated: true)

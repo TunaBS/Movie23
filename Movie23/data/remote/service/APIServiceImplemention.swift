@@ -24,7 +24,15 @@ class APIServiceImplemention: APIService {
         return response
     }
     
-    func getMovieListByQuery(query: String, sortBy: String? = nil, orderBy: String? = nil) async throws -> BaseResponse<MovieListResponse> {
+    func getMovieListByQuery(query: String) async throws -> BaseResponse<MovieListResponse> {
+        var components = URLComponents(url: baseURL.appendingPathComponent("/list_movies.json"), resolvingAgainstBaseURL: false)!
+        components.queryItems = [URLQueryItem(name: "query_term", value: query)]
+        let url = components.url!
+        let response: BaseResponse<MovieListResponse> = try await apiClient.get(url: url)
+        return response
+    }
+    
+    func getMovieListByFilter(query: String, sortBy: String? = nil, orderBy: String? = nil) async throws -> BaseResponse<MovieListResponse> {
         var components = URLComponents(url: baseURL.appendingPathComponent("/list_movies.json"), resolvingAgainstBaseURL: false)!
         
         var queryItems = [URLQueryItem(name: "query_term", value: query)]
@@ -35,7 +43,6 @@ class APIServiceImplemention: APIService {
         if let orderBy = orderBy {
             queryItems.append(URLQueryItem(name: "order_by", value: orderBy))
         }
-//        components.queryItems = [URLQueryItem(name: "query_term", value: query)]
         components.queryItems = queryItems
         let url = components.url!
         let response: BaseResponse<MovieListResponse> = try await apiClient.get(url: url)

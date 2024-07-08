@@ -11,8 +11,14 @@ class FilterSearchView: UIView {
 
     var movieName: String = ""
     var applyFilters: ((Set<MovieGenre>, SortBy?, OrderBy?) -> Void)?
+    
+    private var selectedGenres: Set<MovieGenre> = [] {
+        didSet {
+            updateGenreButtonSelection()
+        }
+    }
 
-    private var selectedGenres: Set<MovieGenre> = []
+//    private var selectedGenres: Set<MovieGenre> = []
     private var selectedSort: SortBy? = nil
     private var selectedOrder: OrderBy? = nil
     private var holdSort: String = ""
@@ -68,10 +74,6 @@ class FilterSearchView: UIView {
         setupGenreButtons()
         setupOrderButtons()
 
-//        applyButton.backgroundColor = .systemPurple
-//        applyButton.setTitle("Apply", for: .normal)
-//        applyButton.setTitleColor(.white, for: .normal)
-//        applyButton.layer.cornerRadius = 20
         applyButton.addTarget(self, action: #selector(applyButtonTapped), for: .touchUpInside)
 
         addSubview(titleLabel)
@@ -120,6 +122,7 @@ class FilterSearchView: UIView {
             stackView.spacing = 8
             genresStackView.addArrangedSubview(stackView)
         }
+        updateGenreButtonSelection() // Initial setup
     }
 
     private func setupOrderButtons() {
@@ -193,7 +196,18 @@ class FilterSearchView: UIView {
             selectedGenres.insert(genre)
         }
         print("Selected Genres \(selectedGenres)")
-        updateButtonSelection(sender, in: genresStackView)
+//        updateButtonSelection(sender, in: genresStackView)
+    }
+    
+    private func updateGenreButtonSelection() {
+        for case let stack as UIStackView in genresStackView.arrangedSubviews {
+            for case let button as UIButton in stack.arrangedSubviews {
+                let genre = MovieGenre(rawValue: button.title(for: .normal) ?? "") ?? MovieGenre.unknown
+                let isSelected = selectedGenres.contains(genre)
+                button.layer.borderColor = isSelected ? UIColor.blue.cgColor : UIColor.black.cgColor
+                button.setTitleColor(isSelected ? .blue : .black, for: .normal)
+            }
+        }
     }
 
     @objc private func orderButtonTapped(_ sender: UIButton) {
@@ -211,6 +225,7 @@ class FilterSearchView: UIView {
 
     private func updateButtonSelection(_ sender: UIButton, in stackView: UIStackView) {
         for case let button as UIButton in stackView.arrangedSubviews {
+            let genre = MovieGenre(rawValue: button.title(for: .normal) ?? "")
             button.layer.borderColor = (button == sender ? UIColor.blue.cgColor : UIColor.black.cgColor)
             button.setTitleColor(button == sender ? .blue : .black, for: .normal)
         }

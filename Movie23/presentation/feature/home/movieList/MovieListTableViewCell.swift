@@ -16,7 +16,7 @@ class MovieListTableViewCell: UITableViewCell {
     var time = PaddedLabel()
     var starIcon = UIImageView()
     var rating = UILabel()
-    var watchListButton = CustomButton(title: "Add to WatchList", hasBackground: true, fontSize: .small)
+    var watchListButton = WatchListButton(hasBackground: true, fontSize: .small)
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

@@ -9,11 +9,12 @@ import Foundation
 
 protocol MovieRepository {
     func getMovieList() async throws -> [MovieListItemModel]
-    func getMovieListByQuery(query: String, sortBy: String?, orderBy: String?) async throws -> [MovieListItemModel]
+    func getMovieListByQuery(query: String) async throws -> [MovieListItemModel]
+    func getMovieListByFilter(query: String, sortBy: String?, orderBy: String?) async throws -> [MovieListItemModel]
     func getMovieListByGenre(genre: MovieGenre) async throws -> [MovieListItemModel]
     func getMovieDetails(movieId: Int) async throws-> MovieDetailsModel
     
-//    func getFavoriteMovies() async throws -> [MovieListItemModel]
-//    func addFavoriteMovie(movie: MovieListItemModel) async throws -> Void
-//    func removeFavoriteMovie(movie: MovieListItemModel) async throws -> Void
+    func getFavoriteMovies() async throws -> [MovieListItemModel]
+    func addFavoriteMovie(movie: MovieListItemModel) async throws -> Void
+    func removeFavoriteMovie(movie: MovieListItemModel) async throws -> Void
 }

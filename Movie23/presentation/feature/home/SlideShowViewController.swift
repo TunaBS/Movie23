@@ -186,7 +186,7 @@ class SlideShowViewController: UIViewController {
         var mpaRating = PaddedLabel()
         var year = PaddedLabel()
         var time = PaddedLabel()
-        let watchListButton = CustomButton(title: "Add to WatchList", hasBackground: true, fontSize: .small)
+        let watchListButton = WatchListButton(hasBackground: true, fontSize: .small)
         
         movieGenre.translatesAutoresizingMaskIntoConstraints = false
         movieTitle.translatesAutoresizingMaskIntoConstraints = false
