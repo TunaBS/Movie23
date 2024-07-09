@@ -1,47 +1,47 @@
+////
+////  FavouriteMovieDatabaseModel.swift
+////  Movie23
+////
+////  Created by BS00880 on 9/7/24.
+////
 //
-//  FavouriteMovieDatabaseModel.swift
-//  Movie23
+//import Foundation
+//import SwiftData
 //
-//  Created by BS00880 on 1/7/24.
+////protocol PersistentModel: Equatable, Hashable {}
+//@available(iOS 17, *)
+//@Model
+//class FavouriteMovieDatabaseModel/*: PersistentModel*/ {
+//    var id: Int
+//    var title: String
+//    var poster: String
+//    var rating: Double
+//    var releaseYear: Int
 //
-
-import Foundation
-
-import SwiftData
-
-class FavouriteMovieDatabaseModel {
-    var id: Int
-    var title: String
-    var poster: String
-    var backgroundImage: String
-    var rating: Double
-    var releaseYear: Int
-    var mpaRating: String
-    var duration: String
-    var genre: [String]
-    var isFavourite: Bool
-
-    init(
-        id: Int, 
-        title: String,
-        poster: String,
-        backgroundImage: String,
-        rating: Double,
-        releaseYear: Int,
-        mpaRating: String,
-        duration: String,
-        genre: [String],
-        isFavourite: Bool
-    ) {
-        self.id = id
-        self.title = title
-        self.poster = poster
-        self.backgroundImage = backgroundImage
-        self.rating = rating
-        self.releaseYear = releaseYear
-        self.mpaRating = mpaRating
-        self.duration = duration
-        self.genre = genre
-        self.isFavourite = isFavourite
-    }
-}
+//    init(id: Int, title: String, poster: String, rating: Double, releaseYear: Int) {
+//        self.id = id
+//        self.title = title
+//        self.poster = poster
+//        self.rating = rating
+//        self.releaseYear = releaseYear
+//    }
+//    /*
+//    // Conform to Equatable
+//    static func == (lhs: FavouriteMovieDatabaseModel, rhs: FavouriteMovieDatabaseModel) -> Bool {
+//        return lhs.id == rhs.id &&
+//        lhs.title == rhs.title &&
+//        lhs.poster == rhs.poster &&
+//        lhs.rating == rhs.rating &&
+//        lhs.releaseYear == rhs.releaseYear
+//    }
+//    
+//    // Conform to Hashable
+//    func hash(into hasher: inout Hasher) {
+//        hasher.combine(id)
+//        hasher.combine(title)
+//        hasher.combine(poster)
+//        hasher.combine(rating)
+//        hasher.combine(releaseYear)
+//    }
+//     */
+//}

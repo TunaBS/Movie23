@@ -10,6 +10,7 @@ import UIKit
 class SlideShowViewController: UIViewController {
 
     let viewModel = MovieListViewModel(movieRepository: MovieRepositoryImpl(apiService: APIServiceImplemention(apiClient: APIClientImp())))
+    let watchListViewModel = WatchListViewModel.shared
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -186,7 +187,7 @@ class SlideShowViewController: UIViewController {
         var mpaRating = PaddedLabel()
         var year = PaddedLabel()
         var time = PaddedLabel()
-        let watchListButton = WatchListButton(hasBackground: true, fontSize: .small)
+        let watchListButton = WatchListButton(watchListViewModel: watchListViewModel, movieItem: movie, hasBackground: true, fontSize: .small)
         
         movieGenre.translatesAutoresizingMaskIntoConstraints = false
         movieTitle.translatesAutoresizingMaskIntoConstraints = false

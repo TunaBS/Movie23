@@ -12,6 +12,6 @@ struct User: Identifiable, Codable {
     let userName: String
     let email: String
 //    let password: String
-    var movies : [MovieDetailsResponse.Movie]?
-    static var userShowForTest = User(id: "10", userName: "Fairuz Ahmed", email: "fairuz@gmail.com", /*password: "fairuz",*/ movies: MovieDetailsResponse.Movie.movieArrayShowForTest)
+    var movies : [MovieListItemModel]?
+//    static var userShowForTest = User(id: "10", userName: "Fairuz Ahmed", email: "fairuz@gmail.com", /*password: "fairuz",*/ movies: MovieDetailsResponse.Movie.movieArrayShowForTest)
 }

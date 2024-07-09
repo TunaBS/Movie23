@@ -8,6 +8,8 @@
 import UIKit
 
 class MovieListTableViewCell: UITableViewCell {
+    
+    let watchListViewModel = WatchListViewModel.shared
     var movieImage = UIImageView()
     var movieGenre = UILabel()
     var movieTitle = UILabel()
@@ -16,7 +18,8 @@ class MovieListTableViewCell: UITableViewCell {
     var time = PaddedLabel()
     var starIcon = UIImageView()
     var rating = UILabel()
-    var watchListButton = WatchListButton(hasBackground: true, fontSize: .small)
+    var watchListButtonPlaceHolder = CustomButton(title: "", fontSize: .small)
+//    var isAlreadyInWatchlist = false
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -28,7 +31,7 @@ class MovieListTableViewCell: UITableViewCell {
         addSubview(time)
         addSubview(starIcon)
         addSubview(rating)
-        addSubview(watchListButton)
+        addSubview(watchListButtonPlaceHolder)
         
         configureImageView()
         configureGenreView()
@@ -44,7 +47,7 @@ class MovieListTableViewCell: UITableViewCell {
         year.pinToTheRightAndBottomOfSomething(height: 0.15, to: contentView, to: mpaRating, to: movieTitle)
         time.pinToTheRightAndBottomOfSomething(height: 0.15, to: contentView, to: year, to: movieTitle)
         
-        watchListButton.pinButtonToBottomTrailing(to: contentView)
+        watchListButtonPlaceHolder.pinButtonToBottomTrailing(to: contentView)
         starIcon.pinToTheRightAndBottomOfSomething(height: 0.15, to: contentView, to: movieImage, to: mpaRating)
         rating.pinToTheRightAndBottomOfSomething(height: 0.15, to: contentView, to: starIcon, to: mpaRating)
     }
@@ -53,7 +56,7 @@ class MovieListTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setCellValue(movie: MovieListItemModel) {
+    func setCellValue(movie: MovieListItemModel/*, isAlreadyInWatchList: Bool*/) {
         movieImage.setImage(with: movie.poster)
 //        movieImage.image = UIImage(named: "background_dummy_img")
         var genreList = genresString(from: movie.genre)
@@ -63,7 +66,10 @@ class MovieListTableViewCell: UITableViewCell {
         year.text = "\(movie.releaseYear)"
         time.text = movie.duration == "" ? "N/A" : movie.duration
         rating.text = "\(movie.rating)"
-        
+//        isAlreadyInWatchlist = isAlreadyInWatchList
+        var watchListButton = WatchListButton(watchListViewModel: watchListViewModel, movieItem: movie, hasBackground: true, fontSize: .small)
+        addSubview(watchListButton)
+        watchListButton.pinButtonToBottomTrailing(to: contentView)
     }
     
     func configureImageView() {

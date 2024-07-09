@@ -118,17 +118,6 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
         print("print searched value: ", searchController.searchBar.text ?? "")
         filterViewModel.searchQuery = searchController.searchBar.text ?? ""
         
-//        if let searchText = searchController.searchBar.text {
-//            if !searchText.isEmpty {
-//                filterViewModel.searchQuery = searchText
-//            } else {
-//                movies = []
-//                print("No movies to prints. Movie Count: \(movies)")
-//            }
-//        } else {
-//            movies = []
-//        }
-        
         if let sortSelected = selectedSort?.rawValue {
             filterViewModel.sortBy = sortSelected
         }

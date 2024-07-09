@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct MovieListItemModel: Identifiable {
+struct MovieListItemModel: Identifiable, Codable {
     var id: Int
     var title: String
     var poster: String
@@ -55,36 +55,6 @@ struct MovieListItemModel: Identifiable {
             mpaRating: movie.mpaRating,
             duration: convertMinutesToHoursAndMinutes(minutes: movie.runtime),
             genre: movie.genres ?? [""],
-            isFavourite: isFavourite
-        )
-    }
-    
-    static func fromFavouriteMovie(favouriteMovie: FavouriteMovieDatabaseModel) -> MovieListItemModel {
-        return MovieListItemModel(
-            id: favouriteMovie.id,
-            title: favouriteMovie.title,
-            poster: favouriteMovie.poster,
-            backgroundImage: favouriteMovie.backgroundImage,
-            rating: favouriteMovie.rating,
-            releaseYear: favouriteMovie.releaseYear,
-            mpaRating: favouriteMovie.mpaRating,
-            duration: favouriteMovie.duration,
-            genre: favouriteMovie.genre ?? [""],
-            isFavourite: favouriteMovie.isFavourite
-        )
-    }
-    
-    func toFavouriteMovie() -> FavouriteMovieDatabaseModel {
-        return FavouriteMovieDatabaseModel(
-            id: id,
-            title: title,
-            poster: poster,
-            backgroundImage: backgroundImage,
-            rating: rating,
-            releaseYear: releaseYear,
-            mpaRating: mpaRating,
-            duration: duration,
-            genre: genre,
             isFavourite: isFavourite
         )
     }

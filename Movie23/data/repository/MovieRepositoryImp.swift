@@ -11,9 +11,11 @@ class MovieRepositoryImpl: MovieRepository {
     
     
     private let apiService: APIService
+//    private let databaseService: DatabaseService
     
-    init(apiService: APIService) {
+    init(apiService: APIService/*, databaseService: DatabaseService*/) {
         self.apiService = apiService
+//        self.databaseService = databaseService
     }
     
     func getMovieList() async throws -> [MovieListItemModel] {
@@ -71,21 +73,21 @@ class MovieRepositoryImpl: MovieRepository {
         }
     }
     
-    func getFavoriteMovies() async throws -> [MovieListItemModel] {
-        let favouriteMovieList: [FavouriteMovieDatabaseModel] = try await databaseService.getFavouriteMovieList()
-        return favouriteMovieList.map{MovieListItemModel.fromFavouriteMovie(favouriteMovie: $0)}
-    }
-    
-    func addFavoriteMovie(movie: MovieListItemModel) async throws -> Void {
-        try await databaseService.addFavouriteMovie(movie: movie.toFavouriteMovie())
-    }
-    
-    func removeFavoriteMovie(movie: MovieListItemModel) async throws -> Void {
-        try await databaseService.removeFavouriteMovie(movieId: movie.id)
-    }
-    
-    private func getFavouriteMovieIds() async throws -> [Int] {
-        let favouriteMovieList: [FavouriteMovieDatabaseModel] = try await databaseService.getFavouriteMovieList()
-        return favouriteMovieList.map{$0.id}
-    }
+//    func getFavoriteMovies() async throws -> [MovieListItemModel] {
+//        let favouriteMovieList: [FavouriteMovieDatabaseModel] = try await databaseService.getFavouriteMovieList()
+//        return favouriteMovieList.map{MovieListItemModel.fromFavouriteMovie(favouriteMovie: $0)}
+//    }
+//    
+//    func addFavoriteMovie(movie: MovieListItemModel) async throws -> Void {
+//        try await databaseService.addFavouriteMovie(movie: movie.toFavouriteMovie())
+//    }
+//    
+//    func removeFavoriteMovie(movie: MovieListItemModel) async throws -> Void {
+//        try await databaseService.removeFavouriteMovie(movieId: movie.id)
+//    }
+//    
+//    private func getFavouriteMovieIds() async throws -> [Int] {
+//        let favouriteMovieList: [FavouriteMovieDatabaseModel] = try await databaseService.getFavouriteMovieList()
+//        return favouriteMovieList.map{$0.id}
+//    }
 }

@@ -32,7 +32,8 @@ class MovieDetailsViewController: UIViewController {
     let descriptionOfMovie = UILabel()
     let starIcon = UIImageView()
     var movieRating: Double = 0.0
-    let watchListButton = WatchListButton(hasBackground: true, fontSize: .small)
+//    let watchListButton = WatchListButton(hasBackground: true, fontSize: .small)
+    let watchListButton = CustomButton(title: "Add to WatchList", hasBackground: true, fontSize: .small)
     var setRatingView = UIView()
     let castText: UILabel = {
         let label = UILabel()

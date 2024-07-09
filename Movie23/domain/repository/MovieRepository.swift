@@ -14,7 +14,7 @@ protocol MovieRepository {
     func getMovieListByGenre(genre: MovieGenre) async throws -> [MovieListItemModel]
     func getMovieDetails(movieId: Int) async throws-> MovieDetailsModel
     
-    func getFavoriteMovies() async throws -> [MovieListItemModel]
-    func addFavoriteMovie(movie: MovieListItemModel) async throws -> Void
-    func removeFavoriteMovie(movie: MovieListItemModel) async throws -> Void
+//    func getFavoriteMovies() async throws -> [MovieListItemModel]
+//    func addFavoriteMovie(movie: MovieListItemModel) async throws -> Void
+//    func removeFavoriteMovie(movie: MovieListItemModel) async throws -> Void
 }
