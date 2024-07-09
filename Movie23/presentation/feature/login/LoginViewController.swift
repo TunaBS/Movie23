@@ -16,6 +16,7 @@ class LoginViewController: UIViewController {
     private let signInWithGoogle = CustomButton(title: "Sign In with Google", hasBackground: false, fontSize: .big, titleColor: .darkText)
     private let newUser = CustomButton(title: "Don't have an account? Create one", fontSize: .medium, titleColor: .darkGray)
     
+//    private let watchViewModel = WatchListViewModel.shared
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setUpUI()

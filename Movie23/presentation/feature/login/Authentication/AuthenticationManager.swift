@@ -13,13 +13,31 @@ import FirebaseFirestoreSwift
 
 class AuthenticationManager {
     public static let shared = AuthenticationManager()
+    private var authListenerHandle: AuthStateDidChangeListenerHandle?
     @Published var userFirebaseSession: FirebaseAuth.User?
+//    var userFirebaseSession: FirebaseAuth.User? {
+//        return Auth.auth().currentUser
+//    }
     @Published var currentUser: User?
     
-    /*private*/ init() { 
+    /*private*/ init() {
         self.userFirebaseSession = Auth.auth().currentUser
+        authListenerHandle = Auth.auth().addStateDidChangeListener { [weak self] auth, user in
+            guard let self = self else { return }
+            self.userFirebaseSession = user
+            Task {
+                await self.fetchUser()
+                NotificationCenter.default.post(name: .AuthStateDidChange, object: user)
+            }
+        }
         Task {
             await fetchUser()
+        }
+    }
+    
+    deinit {
+        if let handle = authListenerHandle {
+            Auth.auth().removeStateDidChangeListener(handle)
         }
     }
     
@@ -113,4 +131,7 @@ class AuthenticationManager {
 //            print("Error in creating user with google sign in \(error)")
 //        }
 //    }
+}
+extension Notification.Name {
+    static let AuthStateDidChange = Notification.Name("AuthStateDidChange")
 }
