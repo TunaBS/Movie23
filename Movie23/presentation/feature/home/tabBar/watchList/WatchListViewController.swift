@@ -42,7 +42,10 @@ class WatchListViewController: UIViewController {
     }
     
     private func bindViewModel() {
-        loadMovies()
+        viewModel.movieListUpdated = { [weak self] in
+            self?.loadMovies()
+        }
+        viewModel.notifyMovieListUpdated()
     }
     
     private func loadMovies() {
@@ -54,8 +57,8 @@ class WatchListViewController: UIViewController {
 
 extension WatchListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(viewModel.movieArray.count)
-        return viewModel.movieArray.count
+        print("Total found movies for the user is: \(movies.count)")
+        return movies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -68,16 +71,24 @@ extension WatchListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedMovie = viewModel.movieArray[indexPath.row]
-        
-        // Instantiate the detail view controller
         let detailViewController = MovieDetailsViewController()
-        
-        // Pass the selected movie to the detail view controller
-//        detailViewController.movie = selectedMovie
         detailViewController.movieId = selectedMovie.id
-        
-        // Navigate to the detail view controller
         navigationController?.pushViewController(detailViewController, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            tableView.beginUpdates()
+            movies.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            let indexSet = IndexSet(integer: indexPath.row)
+            viewModel.deleteItems(indexSet: indexSet)
+            tableView.endUpdates()
+        }
     }
 }
 

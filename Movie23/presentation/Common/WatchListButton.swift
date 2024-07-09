@@ -9,7 +9,8 @@ import UIKit
 
 class WatchListButton: UIButton {
 
-    var title = "Add to Watch List"
+    var title = ""
+    var alreadyInWatchList = false
     private var watchListViewModel: WatchListViewModel
     private var movieItem: MovieListItemModel
     enum FontSize {
@@ -25,6 +26,19 @@ class WatchListButton: UIButton {
         self.watchListViewModel = watchListViewModel
         self.movieItem = movieItem
         super.init(frame: .zero)
+        
+        if watchListViewModel.movieArray.contains(where: { $0.id == movieItem.id}) {
+            title = "Drop from Watchlist"
+            alreadyInWatchList = true
+        } else {
+            title = "Add to Watch List"
+            alreadyInWatchList = false
+        }
+//        if movieItem.isFavourite == false {
+//            title = "Add to Watch List"
+//        } else {
+//            title = "Remove from WatchList"
+//        }
         
         
         self.setTitle(title, for: .normal)
@@ -59,24 +73,28 @@ class WatchListButton: UIButton {
         guard let viewController = self.findViewController() else { return }
         var alertTitle = ""
         var alertMessage = ""
-        
-        
-        if watchListViewModel.itemAlreadyInWatchList == true {
+        var okButtonTitle = ""
+//        watchListViewModel.addItems(movie: movieItem)
+        if alreadyInWatchList == true {
+            okButtonTitle = "Delete"
             alertTitle = "Item exits"
             alertMessage = "Item already exists in your watch list. Do you want to remove it?"
         } else {
-//            watchListViewModel.addItems(movie: movieItem)
+            okButtonTitle = "Add"
             alertTitle = "Movie Adding"
-            alertMessage = "Do you want to save this movie to your watch list"
+            alertMessage = "This movie will be added to your watch list. Continue?"
+//            movieItem.isFavourite = true
         }
 //        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
 //        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
 //        viewController.present(alert, animated: true, completion: nil)
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-            if self.watchListViewModel.itemAlreadyInWatchList == true {
-//                watchListViewModel.deleteItems(indexSet: movieItem.)
+        let okAction = UIAlertAction(title: okButtonTitle, style: .default) { _ in
+            if self.alreadyInWatchList == true {
+//                self.movieItem.isFavourite = false
+                self.watchListViewModel.deleteItems(movie: self.movieItem)
+//                self.movieItem.isFavourite = false
             } else {
                 self.watchListViewModel.addItems(movie: self.movieItem)
             }
@@ -88,7 +106,6 @@ class WatchListButton: UIButton {
         
         alert.addAction(okAction)
         alert.addAction(cancelAction)
-        
         viewController.present(alert, animated: true, completion: nil)
     }
     
