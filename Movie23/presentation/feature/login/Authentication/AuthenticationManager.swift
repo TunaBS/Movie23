@@ -11,35 +11,20 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-class AuthenticationManager {
+@MainActor
+class AuthenticationManager: ObservableObject {
     public static let shared = AuthenticationManager()
-    private var authListenerHandle: AuthStateDidChangeListenerHandle?
     @Published var userFirebaseSession: FirebaseAuth.User?
-//    var userFirebaseSession: FirebaseAuth.User? {
-//        return Auth.auth().currentUser
-//    }
-    @Published var currentUser: User?
-    
-    /*private*/ init() {
+    @Published var currentUser: User? 
+
+    let userWatchListViewModel = WatchListViewModel.shared
+    init() {
         self.userFirebaseSession = Auth.auth().currentUser
-        authListenerHandle = Auth.auth().addStateDidChangeListener { [weak self] auth, user in
-            guard let self = self else { return }
-            self.userFirebaseSession = user
-            Task {
-                await self.fetchUser()
-                NotificationCenter.default.post(name: .AuthStateDidChange, object: user)
-            }
-        }
         Task {
             await fetchUser()
         }
     }
-    
-    deinit {
-        if let handle = authListenerHandle {
-            Auth.auth().removeStateDidChangeListener(handle)
-        }
-    }
+
     
     func fetchUser() async {
         print("into fetch user function from authentication manager")
@@ -50,6 +35,8 @@ class AuthenticationManager {
         print("From authentication manager Fetched current user \(self.currentUser)")
         print("From authentication manager current user name \(self.currentUser?.userName)")
         print("From authentication manager current user email id \(self.currentUser?.email)")
+        
+        userWatchListViewModel.setUser(userId: uid)
     }
     
     func signIn(email: String, password: String) async throws {
@@ -82,6 +69,8 @@ class AuthenticationManager {
             try Auth.auth().signOut()
             self.userFirebaseSession = nil
             self.currentUser = nil
+            userWatchListViewModel.resetUser()
+            
         } catch {
             print("Error while signing out \(error)")
         }
@@ -96,6 +85,7 @@ class AuthenticationManager {
             self.userFirebaseSession = nil
             self.currentUser = nil
             print("Account deleted")
+            userWatchListViewModel.resetUser()
         } catch {
             print("DEBUG: Failed to delete account with Error \(error)")
         }
@@ -131,7 +121,4 @@ class AuthenticationManager {
 //            print("Error in creating user with google sign in \(error)")
 //        }
 //    }
-}
-extension Notification.Name {
-    static let AuthStateDidChange = Notification.Name("AuthStateDidChange")
 }

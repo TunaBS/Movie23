@@ -29,8 +29,11 @@ func createPaddedContainer(for view: UIView, padding: UIEdgeInsets, cornerRadius
     
     containerView.layer.cornerRadius = cornerRadius
     containerView.layer.borderWidth = borderWidth
+//    containerView.layer.borderColor = getPrimaryColor().cgColor
     if let borderColor = borderColor {
         containerView.layer.borderColor = borderColor.cgColor
+    } else {
+        containerView.layer.borderColor = UIColor.systemGray2.cgColor
     }
     containerView.layer.masksToBounds = true
 

@@ -12,16 +12,15 @@ import FirebaseFirestoreSwift
 import FirebaseAuth
 @MainActor
 class WatchListViewModel: ObservableObject {
-    let currentUser = AuthenticationManager.shared.currentUser
+//    var currentUser = AuthenticationManager.shared.currentUser
     public static let shared = WatchListViewModel()
-//    @Published var currentUser: User?
+    @Published var currentUser: User?
     private var userId: String?
     @Published var itemAlreadyInWatchList: Bool = false
     
     @Published var movieArray: [MovieListItemModel] = [] {
         didSet {
             print("movie array didset called")
-//            self.movieListUpdated?()
             self.notifyMovieListUpdated()
             Task {
                 await saveItems()
@@ -31,14 +30,8 @@ class WatchListViewModel: ObservableObject {
     var movieListUpdated: (() -> Void)?
     
     init() {
-//        if let userId = Auth.auth().currentUser?.uid {
-//            self.userId = userId
-//            Task {
-//                await fetchUser()
-//            }
-//        }
-        NotificationCenter.default.addObserver(self, selector: #selector(userDidChange), name: .AuthStateDidChange, object: nil)
-        if let userId = currentUser?.id {
+        if let userId = Auth.auth().currentUser?.uid /*currentUser?.id*/ {
+            print("User id found in \(userId)")
             self.userId = userId
             Task {
                 await fetchUser()
@@ -46,29 +39,12 @@ class WatchListViewModel: ObservableObject {
         }
     }
     
-//    @objc private func userDidChange(notification: Notification) {
-//        guard let newUser = notification.object as? User else { return }
-//        self.userId = newUser.id
-//        Task {
-//            await fetchUser()
-//        }
-//    }
-    @objc private func userDidChange(notification: Notification) {
-        guard let newUser = notification.object as? FirebaseAuth.User else { return }
-        self.userId = newUser.uid
-        Task {
-            await fetchUser()
-        }
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
+
     
     func fetchUser() async {
-//        guard let uid = userId else { return }
-//        guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else { return }
-//        self.currentUser = try? snapshot.data(as: User.self)
+        guard let uid = userId else { return }
+        guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else { return }
+        self.currentUser = try? snapshot.data(as: User.self)
         print("From watchlist view model Fetched current user \(self.currentUser)")
         print("From watchlist view model current user name \(self.currentUser?.userName)")
         print("From watchlist view model current user email id \(self.currentUser?.email)")
@@ -123,6 +99,19 @@ class WatchListViewModel: ObservableObject {
             print("Document successfully updated")
         } catch {
             print("Error updating document: \(error)")
+        }
+    }
+    
+    func resetUser() {
+        self.currentUser = nil
+        self.movieArray = []
+        self.userId = nil
+    }
+    
+    func setUser(userId: String) {
+        self.userId = userId
+        Task {
+            await fetchUser()
         }
     }
     

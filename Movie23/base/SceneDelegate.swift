@@ -27,6 +27,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //
         self.window = window
         self.window?.makeKeyAndVisible()
+        let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
+        self.window?.overrideUserInterfaceStyle = isDarkMode ? .dark : .light
+        
         
         _ = AuthenticationManager.shared
         

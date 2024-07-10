@@ -36,6 +36,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
         UINavigationBar.appearance().compactAppearance = navigationBarAppearance
         UINavigationBar.appearance().tintColor = .systemBlue
+        
+        let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
+        UIApplication.shared.windows.forEach { window in
+            window.overrideUserInterfaceStyle = isDarkMode ? .dark : .light
+        }
                 
         return true
     }

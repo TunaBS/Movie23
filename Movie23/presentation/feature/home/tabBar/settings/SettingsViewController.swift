@@ -10,7 +10,12 @@ import UIKit
 class SettingsViewController: UIViewController {
     
 //    let authManager = AuthenticationManager.shared
-    
+//    var languageManager = LanguageManager.shared
+    let englishButton = CustomButton(title: "English", hasBackground: false, fontSize: .small, titleColor: .systemBlue)
+    let banglaButton = CustomButton(title: "Bengali", hasBackground: false, fontSize: .small, titleColor: .systemBlue)
+//    var language = "en"
+    var savedLanguage = UserDefaults.standard.string(forKey: "appLanguage")
+               
     let noName = "No name"
 
     let userNameOfCurrentUser = AuthenticationManager.shared.currentUser?.userName
@@ -21,10 +26,19 @@ class SettingsViewController: UIViewController {
     var appSupportBoxForLanguage = UIView()
     var accountSettingsBox = UIView()
     
+    let darkModeSwitch: UISwitch = {
+        let toggleSwitch = UISwitch()
+        toggleSwitch.addTarget(self, action: #selector(didChangeSwitch), for: .valueChanged)
+        return toggleSwitch
+    }()
+    let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .systemBackground
 
+        /*NotificationCenter.default.addObserver(self, selector: #selector(languageDidChange), name: .languageDidChange, object: nil)*/
+                
         userInfoBox = showUserInfo(userName: userNameOfCurrentUser ?? "No Name", email: emailOfCurrentUser ?? "No email")
         print("Current Username in settings view: \(userNameOfCurrentUser ?? noName)")
         print("Current User Email in settings view: \(emailOfCurrentUser ?? noName)")
@@ -34,17 +48,17 @@ class SettingsViewController: UIViewController {
         
         addSubViews()
         setUpUI()
+        darkModeSwitch.isOn = isDarkMode
+        applyTheme(isDarkMode: isDarkMode)
     }
     
     private func addSubViews() {
-//        view.addSubview(headerView)
         view.addSubview(userInfoBox)
         view.addSubview(appSupportBoxForDarkTheme)
         view.addSubview(appSupportBoxForLanguage)
         view.addSubview(accountSettingsBox)
     }
     private func setUpUI() {
-//        headerView.pinToRightAndBottomOfSomething(height: nil, to: self.view, to: nil, to: nil, topPlace: true)
         userInfoBox.pinToBottomOfSomethingCenter(height: nil, to: self.view, to: nil, width: 0.8, topPlace: true)
         appSupportBoxForDarkTheme.pinToBottomOfSomethingCenter(height: nil, to: self.view, to: userInfoBox, width: 0.9)
         appSupportBoxForLanguage.pinToBottomOfSomethingCenter(height: nil, to: self.view, to: appSupportBoxForDarkTheme, width: 0.9)
@@ -81,7 +95,7 @@ class SettingsViewController: UIViewController {
             for: fullView,
             padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10),
             cornerRadius: 10.0,
-            borderWidth: 0.5,
+            borderWidth: 0.8,
             borderColor: .systemGray2
         )
         
@@ -112,13 +126,13 @@ class SettingsViewController: UIViewController {
         bodyLineLabel.bottomAnchor.constraint(equalTo: fullView.bottomAnchor).isActive = true
         
         if(darkMode) {
-            let addSwitch = toggleSwitch()
-            fullView.addSubview(addSwitch)
-            addSwitch.translatesAutoresizingMaskIntoConstraints = false
-            addSwitch.centerYAnchor.constraint(equalTo: bodyLineLabel.centerYAnchor).isActive = true
-            addSwitch.leadingAnchor.constraint(equalTo: bodyLineLabel.trailingAnchor, constant: 10).isActive = true
-            addSwitch.trailingAnchor.constraint(equalTo: fullView.trailingAnchor, constant: -10).isActive = true
-        } else {
+            fullView.addSubview(darkModeSwitch)
+            darkModeSwitch.translatesAutoresizingMaskIntoConstraints = false
+            darkModeSwitch.centerYAnchor.constraint(equalTo: bodyLineLabel.centerYAnchor).isActive = true
+            darkModeSwitch.leadingAnchor.constraint(equalTo: bodyLineLabel.trailingAnchor, constant: 10).isActive = true
+            darkModeSwitch.trailingAnchor.constraint(equalTo: fullView.trailingAnchor, constant: -10).isActive = true
+            
+            } else {
             let languageButton = languageButton()
             fullView.addSubview(languageButton)
             languageButton.translatesAutoresizingMaskIntoConstraints = false
@@ -131,28 +145,30 @@ class SettingsViewController: UIViewController {
             for: fullView,
             padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10),
             cornerRadius: 10.0,
-            borderWidth: 0.5,
-            borderColor: .systemBackground
+            borderWidth: 0.0
         )
         
         return paddedView
     }
     
-    private func toggleSwitch() -> UISwitch {
-        let switchOnOff = UISwitch()
-        switchOnOff.setOn(false, animated: true)
-        switchOnOff.addTarget(self, action: #selector(updateSwitch), for: .valueChanged)
-        return switchOnOff
+    @objc func didChangeSwitch(_ sender: UISwitch) {
+        let isDarkMode = sender.isOn
+        applyTheme(isDarkMode: isDarkMode)
+        UserDefaults.standard.set(isDarkMode, forKey: "isDarkMode")
     }
-    
-    @objc func updateSwitch(){
-        print("Switch pressed")
+    func applyTheme(isDarkMode: Bool) {
+        UIApplication.shared.windows.forEach { window in
+            window.overrideUserInterfaceStyle = isDarkMode ? .dark : .light
+        }
+        UIColor.foregroundColor = isDarkMode ? UIColor(white: 1.0, alpha: 1) : UIColor(white: 0.0, alpha: 1)
     }
+
     
     private func languageButton() -> UIView {
         let fullView = UIView()
-        let englishButton = CustomButton(title: "English", hasBackground: false, fontSize: .small, titleColor: .systemBlue)
-        let banglaButton = CustomButton(title: "Bengali", hasBackground: false, fontSize: .small, titleColor: .systemBlue)
+        
+        englishButton.tag = 1
+        banglaButton.tag = 2
         
         englishButton.translatesAutoresizingMaskIntoConstraints = false
         banglaButton.translatesAutoresizingMaskIntoConstraints = false
@@ -169,19 +185,39 @@ class SettingsViewController: UIViewController {
         banglaButton.leadingAnchor.constraint(equalTo: englishButton.trailingAnchor, constant: 10).isActive = true
         banglaButton.bottomAnchor.constraint(equalTo: fullView.bottomAnchor).isActive = true
         banglaButton.trailingAnchor.constraint(equalTo: fullView.trailingAnchor).isActive = true
-//        deleteAccountButton.trailingAnchor.constraint(lessThanOrEqualTo: fullView.trailingAnchor, constant: -10).isActive = true
         return fullView
     }
     
-    @objc func languageButtonPressed() {
-        print("Language button pressed")
+    @objc func languageButtonPressed(sender: UIButton) {
+        switch sender.tag {
+        case 1:
+            print("en selected in Setting vc")
+//            languageManager.setLanguage(.english)
+            self.languageChanged(strLanguage: "en")
+            savedLanguage = "en"
+            print("Saved language after button is pressed \(savedLanguage)")
+        case 2:
+            print("bn selected in Setting vc")
+//            languageManager.setLanguage(.bengali)
+            self.languageChanged(strLanguage: "bn-BD")
+            savedLanguage = "bn-BD"
+            print("Saved language after button is pressed \(savedLanguage)")
+        default:
+            break
+        }
     }
+    
+    func languageChanged(strLanguage: String) {
+        englishButton.setTitle("Eng".localizableString(loc: strLanguage), for: .normal)
+        banglaButton.setTitle("Ban".localizableString(loc: strLanguage), for: .normal)
+    }
+    
     private func showAccountSettingsButtons() -> UIView{
         let fullView = UIView()
         fullView.translatesAutoresizingMaskIntoConstraints = true
         
         let headingLabel = UILabel()
-        headingLabel.text = "Account Settings"
+//        headingLabel.text = languageManager.localizedString(forKey: "User Profile")
         headingLabel.font = UIFont.boldSystemFont(ofSize: 24)
         headingLabel.translatesAutoresizingMaskIntoConstraints = false
         fullView.addSubview(headingLabel)
@@ -233,8 +269,7 @@ class SettingsViewController: UIViewController {
             for: fullView,
             padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10),
             cornerRadius: 10.0,
-            borderWidth: 2.0,
-            borderColor: .systemBackground
+            borderWidth: 0.0
         )
         
         return paddedView
@@ -259,5 +294,12 @@ class SettingsViewController: UIViewController {
                 print("into scene delegate")
             }
         }
+    }
+}
+extension String {
+    func localizableString(loc: String) -> String {
+        let path = Bundle.main.path(forResource: loc, ofType: "lproj")
+        let bundle = Bundle(path: path!)
+        return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
     }
 }

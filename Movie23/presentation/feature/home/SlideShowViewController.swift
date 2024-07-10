@@ -11,6 +11,7 @@ class SlideShowViewController: UIViewController {
 
     let viewModel = MovieListViewModel(movieRepository: MovieRepositoryImpl(apiService: APIServiceImplemention(apiClient: APIClientImp())))
     let watchListViewModel = WatchListViewModel.shared
+    let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -36,7 +37,6 @@ class SlideShowViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .blue
         bindViewModel()
         self.setUpUI()
     }
@@ -149,7 +149,7 @@ class SlideShowViewController: UIViewController {
         starIcon.translatesAutoresizingMaskIntoConstraints = false
         rating.translatesAutoresizingMaskIntoConstraints = false
         
-        starIcon.tintColor = .darkText
+        starIcon.tintColor = UIColor(named: "primaryColor")
         rating.text = "\(movieRating)"
         rating.font = .systemFont(ofSize: 14)
         
@@ -171,7 +171,6 @@ class SlideShowViewController: UIViewController {
             padding: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5),
             cornerRadius: 5.0,
             borderWidth: 0.5,
-            borderColor: .darkText,
             backgroundColor: .transparentGrayColor
         )
         
@@ -255,8 +254,7 @@ class SlideShowViewController: UIViewController {
             for: fullView,
             padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10),
             cornerRadius: 5.0,
-            borderWidth: 2.0,
-            borderColor: .darkText,
+            borderWidth: 0.5,
             backgroundColor: .transparentGrayColor
         )
         

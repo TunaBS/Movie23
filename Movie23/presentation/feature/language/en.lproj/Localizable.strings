@@ -1,0 +1,47 @@
+/* 
+  Localizable.strings
+  Movie23
+
+  Created by BS00880 on 10/7/24.
+  
+*/
+"Settings" = "Settings";
+"Language" = "Language";
+"Dark Theme" = "Theme";
+"Eng" = "English";
+"Ban" = "Bangla";
+"Add to Watchlist" = "Add to Watchlist";
+"Welcome Back" = "Welcome Back!";
+"User Name" = "User Name";
+"Add to WatchList" = "Add to WatchList";
+"Top Movie Picks" = "Top Movie Picks";
+"Upcoming Movies" = "Upcoming Movies";
+"See all" = "See all";
+"Search" = "Search";
+"Sort and Filter" = "Sort and Filter";
+"Sort by" = "Sort by";
+"Genres" = "Genres";
+"Order By" = "Order By";
+"Apply" = "Apply";
+"Watch List" = "Watch List";
+"Movie Details" = "Movie Details";
+"Please sign in to your account" = "Please sign in to your account";
+"Email" = "Email";
+"Password" = "Password";
+"Forgot Password" = "Forgot Password";
+"Don't have an account?" = "Don't have an account?";
+"Sign In" = "Sign In";
+"Don't have an account?" = "Don't have an account?";
+"Sign Up" = "Sign Up";
+"Welcome" = "Welcome";
+"Create new account" = "Create new account";
+"Confirm Password" = "Confirm Password";
+"Sign In With Google" = "Sign In With Google";
+"General" = "General";
+"User Profile" = "User Profile";
+"Sign Out" = "Sign Out";
+"Delete Account" = "Delete Account";
+"Item already exits in your watch list" = "Item already exits in your watch list";
+"Item added to your watch list" = "Item added to your watch list";
+"Alert" = "Alert";
+"OK" = "OK";

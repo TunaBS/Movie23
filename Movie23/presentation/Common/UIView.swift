@@ -108,8 +108,9 @@ extension UIView {
     func setupRoundedCorners(for label: PaddedLabel) {
         label.layer.cornerRadius = 10
         label.layer.masksToBounds = true
-        label.layer.borderColor = UIColor.black.cgColor
+        label.layer.borderColor = UIColor(named: "primaryColor")?.cgColor
         label.layer.borderWidth = 1.0
         label.textInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
     }
+    
 }

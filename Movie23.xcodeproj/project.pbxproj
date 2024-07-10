@@ -43,6 +43,9 @@
 		4B5BF9DB2C258937004370DE /* Cast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5BF9DA2C258937004370DE /* Cast.swift */; };
 		4B5BF9DE2C2595D6004370DE /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 4B5BF9DD2C2595D6004370DE /* FirebaseAuth */; };
 		4B5BF9E02C2595E6004370DE /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 4B5BF9DF2C2595E6004370DE /* FirebaseFirestore */; };
+		4B66DE822C3E8B4D009A7AFA /* PrimaryColorGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B66DE812C3E8B4D009A7AFA /* PrimaryColorGetter.swift */; };
+		4B66DE8E2C3EA3EB009A7AFA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4B66DE8C2C3EA3EB009A7AFA /* Localizable.strings */; };
+		4B66DE922C3EA48B009A7AFA /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B66DE912C3EA48B009A7AFA /* LanguageManager.swift */; };
 		4B685F5D2C3282DA00DE0E71 /* MovieRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B685F5C2C3282DA00DE0E71 /* MovieRepository.swift */; };
 		4B685F5F2C32835A00DE0E71 /* MovieListItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B685F5E2C32835A00DE0E71 /* MovieListItemModel.swift */; };
 		4B685F612C3283D400DE0E71 /* MovieDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B685F602C3283D400DE0E71 /* MovieDetailsModel.swift */; };
@@ -112,6 +115,10 @@
 		4B5BF9CE2C2582FA004370DE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4B5BF9D62C258843004370DE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4B5BF9DA2C258937004370DE /* Cast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cast.swift; sourceTree = "<group>"; };
+		4B66DE812C3E8B4D009A7AFA /* PrimaryColorGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryColorGetter.swift; sourceTree = "<group>"; };
+		4B66DE8D2C3EA3EB009A7AFA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4B66DE8F2C3EA40F009A7AFA /* bn-BD */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "bn-BD"; path = "bn-BD.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		4B66DE912C3EA48B009A7AFA /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 		4B685F5C2C3282DA00DE0E71 /* MovieRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepository.swift; sourceTree = "<group>"; };
 		4B685F5E2C32835A00DE0E71 /* MovieListItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListItemModel.swift; sourceTree = "<group>"; };
 		4B685F602C3283D400DE0E71 /* MovieDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsModel.swift; sourceTree = "<group>"; };
@@ -214,6 +221,7 @@
 				4BAACE132C2D604700832C34 /* UIColor.swift */,
 				4B3917F82C3532DB00D37050 /* PaddingForUIView.swift */,
 				4B5927C62C3C10AE008E69F4 /* WatchListButton.swift */,
+				4B66DE812C3E8B4D009A7AFA /* PrimaryColorGetter.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -221,6 +229,7 @@
 		4B48B0642C2EE1F700266B78 /* feature */ = {
 			isa = PBXGroup;
 			children = (
+				4B66DE8B2C3EA37D009A7AFA /* language */,
 				4B48B0672C2EE29A00266B78 /* login */,
 				4B48B0652C2EE20C00266B78 /* home */,
 			);
@@ -397,6 +406,15 @@
 			path = model;
 			sourceTree = "<group>";
 		};
+		4B66DE8B2C3EA37D009A7AFA /* language */ = {
+			isa = PBXGroup;
+			children = (
+				4B66DE8C2C3EA3EB009A7AFA /* Localizable.strings */,
+				4B66DE912C3EA48B009A7AFA /* LanguageManager.swift */,
+			);
+			path = language;
+			sourceTree = "<group>";
+		};
 		4B685F662C32AF4600DE0E71 /* repository */ = {
 			isa = PBXGroup;
 			children = (
@@ -537,6 +555,8 @@
 			knownRegions = (
 				en,
 				Base,
+				bn,
+				"bn-BD",
 			);
 			mainGroup = 4B5BF9AA2C254014004370DE;
 			packageReferences = (
@@ -558,6 +578,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B5BF9CF2C2582FA004370DE /* GoogleService-Info.plist in Resources */,
+				4B66DE8E2C3EA3EB009A7AFA /* Localizable.strings in Resources */,
 				4B5BF9C02C254015004370DE /* Assets.xcassets in Resources */,
 				4B5BF9C32C254015004370DE /* Base in Resources */,
 			);
@@ -599,10 +620,12 @@
 				4B69D7E62C2A9B6C0009D357 /* TopMovieViewController.swift in Sources */,
 				4B48B0762C2EE91400266B78 /* MovieDetailsResponse.swift in Sources */,
 				4B685F742C32D10100DE0E71 /* UIImageView + Extension.swift in Sources */,
+				4B66DE922C3EA48B009A7AFA /* LanguageManager.swift in Sources */,
 				4B893F2E2C297F93004720C4 /* AuthenticationManager.swift in Sources */,
 				4B893F1C2C294000004720C4 /* CustomTextField.swift in Sources */,
 				4B8BB9D02C36CF65000B9995 /* SearchViewModel.swift in Sources */,
 				4B818C602C3CF75B0062426F /* DatabaseService.swift in Sources */,
+				4B66DE822C3E8B4D009A7AFA /* PrimaryColorGetter.swift in Sources */,
 				4B48B0782C2EEE9800266B78 /* MovieListResponse.swift in Sources */,
 				4B4F8F692C2BED7D007415F5 /* UIView.swift in Sources */,
 				4B5927C72C3C10AE008E69F4 /* WatchListButton.swift in Sources */,
@@ -643,6 +666,15 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		4B66DE8C2C3EA3EB009A7AFA /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4B66DE8D2C3EA3EB009A7AFA /* en */,
+				4B66DE8F2C3EA40F009A7AFA /* bn-BD */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -651,6 +683,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -714,6 +747,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
