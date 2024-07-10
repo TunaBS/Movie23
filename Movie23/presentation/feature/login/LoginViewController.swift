@@ -16,6 +16,8 @@ class LoginViewController: UIViewController {
     private let signInWithGoogle = CustomButton(title: "Sign In with Google", hasBackground: false, fontSize: .big, titleColor: .darkText)
     private let newUser = CustomButton(title: "Don't have an account? Create one", fontSize: .medium, titleColor: .darkGray)
     
+    let authenticationManager = DiModule.shared.resolve(AuthenticationManager.self)!
+    
 //    private let watchViewModel = WatchListViewModel.shared
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,7 +85,7 @@ class LoginViewController: UIViewController {
         let email = emailField.text ?? ""
         let password = passwordField.text ?? ""
         Task {
-            try await AuthenticationManager.shared.signIn(email: email, password: password)
+            try await authenticationManager.signIn(email: email, password: password)
             print("login called")
             if let sceneDelegate = self.view.window?.windowScene?.delegate as? SceneDelegate {
                 await sceneDelegate.checkSignInUser()

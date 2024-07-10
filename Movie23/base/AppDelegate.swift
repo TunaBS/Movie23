@@ -41,6 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.windows.forEach { window in
             window.overrideUserInterfaceStyle = isDarkMode ? .dark : .light
         }
+        
+        DiModule.shared.injectDependencies()
                 
         return true
     }

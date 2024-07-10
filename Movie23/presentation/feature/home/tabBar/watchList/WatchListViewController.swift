@@ -9,8 +9,7 @@ import UIKit
 
 class WatchListViewController: UIViewController {
     
-    let viewModel = WatchListViewModel.shared
-//    let currentUserMovies = AuthenticationManager.shared.currentUser?.movies
+    let viewModel = DiModule.shared.resolve(WatchListViewModel.self)!
     
     var tableView = UITableView()
     var movies: [MovieListItemModel] = []
@@ -25,6 +24,7 @@ class WatchListViewController: UIViewController {
 //        title = "Watch List"
         self.setUpTableUI()
         bindViewModel()
+        viewModel.initData();
     }
     
     func setUpTableUI() {

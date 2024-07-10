@@ -9,6 +9,8 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    let authenticationManager = DiModule.shared.resolve(AuthenticationManager.self)!
+    
     private let scrollView: UIScrollView = {
         let sv = UIScrollView()
         return sv
@@ -18,8 +20,7 @@ class HomeViewController: UIViewController {
         let cv = UIView()
         return cv
     } ()
-    
-    let userNameOfCurrentUser = AuthenticationManager.shared.currentUser?.userName
+
     let noUser = "No user name found"
     var headerView = HeaderView(title: "Welcome", subTitle: "No user name found")
     private let topMoviePicksText = HeaderView(title: "Top Movie Picks")
@@ -33,7 +34,7 @@ class HomeViewController: UIViewController {
      
     override func viewDidLoad() {
         super.viewDidLoad()
-        headerView = HeaderView(title: "Welcome", subTitle: userNameOfCurrentUser)
+        headerView = HeaderView(title: "Welcome", subTitle: authenticationManager.currentUser?.userName)
         self.setUpUI()
         self.setupMovieSlideListViewController(to: movieSlideListPlaceholder)
         self.setupMovieListViewController(to: movieListPlaceholderTopMovie)

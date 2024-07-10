@@ -10,7 +10,7 @@ import UIKit
 class SlideShowViewController: UIViewController {
 
     let viewModel = MovieListViewModel(movieRepository: MovieRepositoryImpl(apiService: APIServiceImplemention(apiClient: APIClientImp())))
-    let watchListViewModel = WatchListViewModel.shared
+    let watchListViewModel = DiModule.shared.resolve(WatchListViewModel.self)!
     let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
     
     private let scrollView: UIScrollView = {

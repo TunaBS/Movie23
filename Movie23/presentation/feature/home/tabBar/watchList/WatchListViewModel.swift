@@ -12,9 +12,8 @@ import FirebaseFirestoreSwift
 import FirebaseAuth
 @MainActor
 class WatchListViewModel: ObservableObject {
-//    var currentUser = AuthenticationManager.shared.currentUser
-    public static let shared = WatchListViewModel()
-    @Published var currentUser: User?
+    let authenticationManger = DiModule.shared.resolve(AuthenticationManager.self)!
+    
     private var userId: String?
     @Published var itemAlreadyInWatchList: Bool = false
     
@@ -30,7 +29,11 @@ class WatchListViewModel: ObservableObject {
     var movieListUpdated: (() -> Void)?
     
     init() {
-        if let userId = Auth.auth().currentUser?.uid /*currentUser?.id*/ {
+        initData()
+    }
+    
+    func initData() {
+        if let userId = authenticationManger.currentUser?.id {
             print("User id found in \(userId)")
             self.userId = userId
             Task {
@@ -39,17 +42,8 @@ class WatchListViewModel: ObservableObject {
         }
     }
     
-
-    
     func fetchUser() async {
-        guard let uid = userId else { return }
-        guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else { return }
-        self.currentUser = try? snapshot.data(as: User.self)
-        print("From watchlist view model Fetched current user \(self.currentUser)")
-        print("From watchlist view model current user name \(self.currentUser?.userName)")
-        print("From watchlist view model current user email id \(self.currentUser?.email)")
-        print("From watchlist view model current movie \(self.currentUser?.movies)")
-        self.movieArray = currentUser?.movies ?? []
+        self.movieArray = authenticationManger.currentUser?.movies ?? []
         self.notifyMovieListUpdated()
     }
 
@@ -90,8 +84,8 @@ class WatchListViewModel: ObservableObject {
     }
     
     func updateInFirestore () async /*throws */{
-        guard let uid = currentUser?.id else { return }
-        guard var currentUserInfo = currentUser else { return }
+        guard let uid = authenticationManger.currentUser?.id else { return }
+        guard var currentUserInfo = authenticationManger.currentUser else { return }
         currentUserInfo.movies = movieArray
         let personInfo = Firestore.firestore().collection("users").document(uid)
         do {
@@ -103,7 +97,6 @@ class WatchListViewModel: ObservableObject {
     }
     
     func resetUser() {
-        self.currentUser = nil
         self.movieArray = []
         self.userId = nil
     }

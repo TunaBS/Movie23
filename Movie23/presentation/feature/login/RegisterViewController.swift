@@ -15,6 +15,8 @@ class RegisterViewController: UIViewController {
     private let passwordField = CustomTextField(fieldType: .password)
     private let signUp = CustomButton(title: "Create an account", hasBackground: true, fontSize: .big)
     
+    let authenticationManager = DiModule.shared.resolve(AuthenticationManager.self)!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setUpUI()
@@ -68,7 +70,7 @@ class RegisterViewController: UIViewController {
         let email = self.emailField.text ?? ""
         let password = self.passwordField.text ?? ""
         Task {
-            try await AuthenticationManager.shared.createUser(userName: userName, email: email, password: password)
+            try await authenticationManager.createUser(userName: userName, email: email, password: password)
             print("create account called")
             if let sceneDelegate = self.view.window?.windowScene?.delegate as? SceneDelegate {
                 await sceneDelegate.checkSignInUser()

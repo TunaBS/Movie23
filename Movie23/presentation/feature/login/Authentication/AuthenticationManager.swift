@@ -13,11 +13,9 @@ import FirebaseFirestoreSwift
 
 @MainActor
 class AuthenticationManager: ObservableObject {
-    public static let shared = AuthenticationManager()
     @Published var userFirebaseSession: FirebaseAuth.User?
-    @Published var currentUser: User? 
-
-    let userWatchListViewModel = WatchListViewModel.shared
+    @Published var currentUser: User?
+    
     init() {
         self.userFirebaseSession = Auth.auth().currentUser
         Task {
@@ -35,8 +33,6 @@ class AuthenticationManager: ObservableObject {
         print("From authentication manager Fetched current user \(self.currentUser)")
         print("From authentication manager current user name \(self.currentUser?.userName)")
         print("From authentication manager current user email id \(self.currentUser?.email)")
-        
-        userWatchListViewModel.setUser(userId: uid)
     }
     
     func signIn(email: String, password: String) async throws {
@@ -69,7 +65,6 @@ class AuthenticationManager: ObservableObject {
             try Auth.auth().signOut()
             self.userFirebaseSession = nil
             self.currentUser = nil
-            userWatchListViewModel.resetUser()
             
         } catch {
             print("Error while signing out \(error)")
@@ -85,7 +80,6 @@ class AuthenticationManager: ObservableObject {
             self.userFirebaseSession = nil
             self.currentUser = nil
             print("Account deleted")
-            userWatchListViewModel.resetUser()
         } catch {
             print("DEBUG: Failed to delete account with Error \(error)")
         }

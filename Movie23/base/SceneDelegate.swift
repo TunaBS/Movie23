@@ -10,6 +10,8 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    
+    var authenticationManager: AuthenticationManager? = nil
 
 
 //    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -30,8 +32,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
         self.window?.overrideUserInterfaceStyle = isDarkMode ? .dark : .light
         
-        
-        _ = AuthenticationManager.shared
+        authenticationManager = DiModule.shared.resolve(AuthenticationManager.self)!
         
         Task {
             await checkSignInUser()
@@ -42,7 +43,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func checkSignInUser() async {
         try? await Task.sleep(nanoseconds: 1_000_000_000)
         
-        if AuthenticationManager.shared.userFirebaseSession == nil {
+        if authenticationManager?.userFirebaseSession == nil {
             //go to sign in
             let vc = LoginViewController()
             let nav = UINavigationController(rootViewController: vc)

@@ -9,7 +9,7 @@ import UIKit
 
 class MovieListTableViewCell: UITableViewCell {
     
-    let watchListViewModel = WatchListViewModel.shared
+    let watchListViewModel = DiModule.shared.resolve(WatchListViewModel.self)!
     var movieImage = UIImageView()
     var movieGenre = UILabel()
     var movieTitle = UILabel()

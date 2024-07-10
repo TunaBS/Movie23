@@ -17,9 +17,9 @@ class SettingsViewController: UIViewController {
     var savedLanguage = UserDefaults.standard.string(forKey: "appLanguage")
                
     let noName = "No name"
+    
+    let authenticationManager = DiModule.shared.resolve(AuthenticationManager.self)!
 
-    let userNameOfCurrentUser = AuthenticationManager.shared.currentUser?.userName
-    let emailOfCurrentUser = AuthenticationManager.shared.currentUser?.email
 //    let headerView = HeaderView(title: "Settings")
     var userInfoBox = UIView()
     var appSupportBoxForDarkTheme = UIView()
@@ -39,9 +39,9 @@ class SettingsViewController: UIViewController {
 
         /*NotificationCenter.default.addObserver(self, selector: #selector(languageDidChange), name: .languageDidChange, object: nil)*/
                 
-        userInfoBox = showUserInfo(userName: userNameOfCurrentUser ?? "No Name", email: emailOfCurrentUser ?? "No email")
-        print("Current Username in settings view: \(userNameOfCurrentUser ?? noName)")
-        print("Current User Email in settings view: \(emailOfCurrentUser ?? noName)")
+        userInfoBox = showUserInfo(userName: authenticationManager.currentUser?.userName ?? "No Name", email: authenticationManager.currentUser?.email ?? "No email")
+//        print("Current Username in settings view: \(userNameOfCurrentUser ?? noName)")
+//        print("Current User Email in settings view: \(emailOfCurrentUser ?? noName)")
         appSupportBoxForDarkTheme = showSupports(heading: "Theme", bodyLine: "Dark Theme", darkMode: true)
         appSupportBoxForLanguage = showSupports(heading: "Language", bodyLine: "Language", darkMode: false)
         accountSettingsBox = showAccountSettingsButtons()
@@ -277,7 +277,7 @@ class SettingsViewController: UIViewController {
     
     @objc private func didTapLogOut() {
         Task {
-            try await AuthenticationManager.shared.signOut()
+            try await authenticationManager.signOut()
             if let sceneDelegate = self.view.window?.windowScene?.delegate as? SceneDelegate {
                 await sceneDelegate.checkSignInUser()
                 print("into scene delegate")
@@ -288,7 +288,7 @@ class SettingsViewController: UIViewController {
     
     @objc private func didTapDeleteAccount() {
         Task {
-            try await AuthenticationManager.shared.deleteAccount()
+            try await authenticationManager.deleteAccount()
             if let sceneDelegate = self.view.window?.windowScene?.delegate as? SceneDelegate {
                 await sceneDelegate.checkSignInUser()
                 print("into scene delegate")
