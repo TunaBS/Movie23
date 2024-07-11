@@ -20,7 +20,6 @@ class SettingsViewController: UIViewController {
     
     let authenticationManager = DiModule.shared.resolve(AuthenticationManager.self)!
 
-//    let headerView = HeaderView(title: "Settings")
     var userInfoBox = UIView()
     var appSupportBoxForDarkTheme = UIView()
     var appSupportBoxForLanguage = UIView()
@@ -31,7 +30,7 @@ class SettingsViewController: UIViewController {
         toggleSwitch.addTarget(self, action: #selector(didChangeSwitch), for: .valueChanged)
         return toggleSwitch
     }()
-    let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
+//    var isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,18 +39,21 @@ class SettingsViewController: UIViewController {
         /*NotificationCenter.default.addObserver(self, selector: #selector(languageDidChange), name: .languageDidChange, object: nil)*/
                 
         userInfoBox = showUserInfo(userName: authenticationManager.currentUser?.userName ?? "No Name", email: authenticationManager.currentUser?.email ?? "No email")
-//        print("Current Username in settings view: \(userNameOfCurrentUser ?? noName)")
-//        print("Current User Email in settings view: \(emailOfCurrentUser ?? noName)")
         appSupportBoxForDarkTheme = showSupports(heading: "Theme", bodyLine: "Dark Theme", darkMode: true)
         appSupportBoxForLanguage = showSupports(heading: "Language", bodyLine: "Language", darkMode: false)
         accountSettingsBox = showAccountSettingsButtons()
         
         addSubViews()
         setUpUI()
-        darkModeSwitch.isOn = isDarkMode
-        applyTheme(isDarkMode: isDarkMode)
+//        darkModeSwitch.isOn = isDarkMode
+//        applyTheme(isDarkMode: isDarkMode)
+        darkModeSwitch.isOn = ThemeManager.shared.isDarkMode
+//        NotificationCenter.default.addObserver(self, selector: #selector(themeDidChange), name: .themeDidChange, object: nil)
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .themeDidChange, object: nil)
+    }
     private func addSubViews() {
         view.addSubview(userInfoBox)
         view.addSubview(appSupportBoxForDarkTheme)
@@ -90,7 +92,9 @@ class SettingsViewController: UIViewController {
         emailLabel.trailingAnchor.constraint(equalTo: fullView.trailingAnchor).isActive = true
         emailLabel.bottomAnchor.constraint(equalTo: fullView.bottomAnchor).isActive = true
         
-        
+        ThemeManager.shared.initDarkMode()
+        let currentThemeIsDark = ThemeManager.shared.isDarkMode
+        print("Value of is darkMode in show UserInfo Box: \(currentThemeIsDark)")
         let paddedView = createPaddedContainer(
             for: fullView,
             padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10),
@@ -151,16 +155,9 @@ class SettingsViewController: UIViewController {
         return paddedView
     }
     
+    
     @objc func didChangeSwitch(_ sender: UISwitch) {
-        let isDarkMode = sender.isOn
-        applyTheme(isDarkMode: isDarkMode)
-        UserDefaults.standard.set(isDarkMode, forKey: "isDarkMode")
-    }
-    func applyTheme(isDarkMode: Bool) {
-        UIApplication.shared.windows.forEach { window in
-            window.overrideUserInterfaceStyle = isDarkMode ? .dark : .light
-        }
-        UIColor.foregroundColor = isDarkMode ? UIColor(white: 1.0, alpha: 1) : UIColor(white: 0.0, alpha: 1)
+        ThemeManager.shared.toggleDarkMode()
     }
 
     
@@ -217,7 +214,7 @@ class SettingsViewController: UIViewController {
         fullView.translatesAutoresizingMaskIntoConstraints = true
         
         let headingLabel = UILabel()
-//        headingLabel.text = languageManager.localizedString(forKey: "User Profile")
+        headingLabel.text = String("Account Settings")
         headingLabel.font = UIFont.boldSystemFont(ofSize: 24)
         headingLabel.translatesAutoresizingMaskIntoConstraints = false
         fullView.addSubview(headingLabel)

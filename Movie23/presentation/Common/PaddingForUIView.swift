@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-func createPaddedContainer(for view: UIView, padding: UIEdgeInsets, cornerRadius: CGFloat, borderWidth: CGFloat, borderColor: UIColor? = nil, backgroundColor: UIColor? = nil) -> UIView {
+func createPaddedContainer(for view: UIView, padding: UIEdgeInsets, cornerRadius: CGFloat, borderWidth: CGFloat, borderColor: UIColor? = nil, backgroundColor: UIColor? = nil, darkModeOn: Bool? = nil) -> UIView {
     
     let containerView = UIView()
     if let backgroundColorSet = backgroundColor {
@@ -29,7 +29,7 @@ func createPaddedContainer(for view: UIView, padding: UIEdgeInsets, cornerRadius
     
     containerView.layer.cornerRadius = cornerRadius
     containerView.layer.borderWidth = borderWidth
-//    containerView.layer.borderColor = getPrimaryColor().cgColor
+    containerView.layer.borderColor = getPrimaryColor().cgColor
     if let borderColor = borderColor {
         containerView.layer.borderColor = borderColor.cgColor
     } else {

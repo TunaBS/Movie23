@@ -31,7 +31,7 @@ class FilterViewModel {
 //        self.navigationViewModel = navigationViewModel
         fetchMovieListUsingQuery()
     }
-    
+    var allGenre = ""
     var searchQuery: String = "" {
         didSet {
             print("Search query changed: \(searchQuery)")
@@ -59,14 +59,17 @@ class FilterViewModel {
         }
     }
     
-//    var genreBy: Set<MovieGenre> = [] {
-//        didSet {
+    var genreBy: Set<MovieGenre> = [] {
+        didSet {
 //            print("Genre by now: \(genreBy)")
-//            movieList = filterMoviesByGenres(genres: genreBy, movieArray: movieList)
-//            print("GENRE BY MOVIES LIST: \(movieList.count) total movies")
-//            print("\(movieList)")
-//        }
-//    }
+//            allGenre = genreBy.map { "\($0.rawValue)" }.joined(separator: "&genre=")
+//                    print(allGenre) // This will print the generated string
+//            print("\(allGenre)")
+            print("Genre by now: \(genreBy)")
+            let allGenres = genreBy.map { $0.rawValue }
+            print("All genres: \(allGenres.joined(separator: ", "))")
+        }
+    }
     
     func onSearchSubmit() {
         print("Search query submitted: \(searchQuery)")
@@ -91,11 +94,12 @@ class FilterViewModel {
         print("Fetching movie list using query: \(searchQuery) and \(sortBy) and \(orderBy)")
         Task {
             do {
-                if searchQuery == "" {
-                    movieList = []
-                } else {
-                    movieList = try await movieRepository.getMovieListByFilter(query: searchQuery, sortBy: sortBy, orderBy: orderBy)
-                }
+                movieList = try await movieRepository.getMovieListByFilter(query: searchQuery, sortBy: sortBy, orderBy: orderBy, genre: [allGenre])
+//                if searchQuery == "" {
+//                    movieList = []
+//                } else {
+//                    movieList = try await movieRepository.getMovieListByFilter(query: searchQuery, sortBy: sortBy, orderBy: orderBy)
+//                }
             } catch {
                 print("Error: \(error)")
             }
@@ -108,12 +112,12 @@ class FilterViewModel {
 //            return genres.isSubset(of: movieGenres)
 //        }
 //    }
-    func filterMoviesByGenres(genres: Set<MovieGenre>, movieArray: [MovieListItemModel]) -> [MovieListItemModel] {
-        return movieArray.filter { movie in
-            let movieGenres = Set(movie.genre.compactMap { MovieGenre.fromString($0) })
-            return genres.isSubset(of: movieGenres)
-        }
-    }
+//    func filterMoviesByGenres(genres: Set<MovieGenre>, movieArray: [MovieListItemModel]) -> [MovieListItemModel] {
+//        return movieArray.filter { movie in
+//            let movieGenres = Set(movie.genre.compactMap { MovieGenre.fromString($0) })
+//            return genres.isSubset(of: movieGenres)
+//        }
+//    }
     
     func refreshValues() {
         hasSearchQueryChanged = false

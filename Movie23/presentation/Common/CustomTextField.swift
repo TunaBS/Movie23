@@ -28,7 +28,7 @@ class CustomTextField: UITextField {
         self.authFieldType = fieldType
         super.init(frame: .zero)
         
-        self.backgroundColor = .secondarySystemBackground
+        self.backgroundColor = UIColor(named: "textFieldColor")
         self.layer.cornerRadius = 10
         
         self.returnKeyType = .done

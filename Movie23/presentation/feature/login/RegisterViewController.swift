@@ -8,42 +8,65 @@
 import UIKit
 
 class RegisterViewController: UIViewController {
-
-    private let headerView = HeaderView(title: "Welcome", subTitle: "Create a new account")
+    private let imageView = UIImageView(image: UIImage(named: "registrationBackground"))
+    private let headerView = HeaderView(title: "Welcome", subTitle: nil)
+    private let subtitleHeaderView = HeaderView(title: nil, subTitle: "Create a new account")
     private let userNameField = CustomTextField(fieldType: .username)
     private let emailField = CustomTextField(fieldType: .email)
     private let passwordField = CustomTextField(fieldType: .password)
     private let signUp = CustomButton(title: "Create an account", hasBackground: true, fontSize: .big)
-    
+    private let oldUser = CustomButton(title: "Already have an account? Create one", fontSize: .medium, titleColor: .white)
     let authenticationManager = DiModule.shared.resolve(AuthenticationManager.self)!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setUpUI()
         self.signUp.addTarget(self, action: #selector(didTapSignUp), for: .touchUpInside)
+        self.oldUser.addTarget(self, action: #selector(didTapAlreadyHaveAnAccount), for: .touchUpInside)
     }
     
     private func setUpUI(){
         self.view.backgroundColor = .systemBackground
+        self.view.addSubview(imageView)
         self.view.addSubview(headerView)
+        self.view.addSubview(subtitleHeaderView)
         self.view.addSubview(userNameField)
         self.view.addSubview(emailField)
         self.view.addSubview(passwordField)
         self.view.addSubview(signUp)
+        self.view.addSubview(oldUser)
         
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         headerView.translatesAutoresizingMaskIntoConstraints = false
+        subtitleHeaderView.translatesAutoresizingMaskIntoConstraints = false
         userNameField.translatesAutoresizingMaskIntoConstraints = false
         emailField.translatesAutoresizingMaskIntoConstraints = false
         passwordField.translatesAutoresizingMaskIntoConstraints = false
         signUp.translatesAutoresizingMaskIntoConstraints = false
+        oldUser.translatesAutoresizingMaskIntoConstraints = false
+        
         
         NSLayoutConstraint.activate([
-            self.headerView.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor),
-            self.headerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            self.headerView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            self.headerView.heightAnchor.constraint(equalToConstant: 270),
+            self.imageView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            self.imageView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.imageView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.imageView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
             
-            self.userNameField.topAnchor.constraint(equalTo: self.headerView.bottomAnchor, constant: 30),
+            self.headerView.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor, constant: 50),
+//            self.headerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+//            self.headerView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.headerView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            self.headerView.heightAnchor.constraint(equalToConstant: 27),
+            
+            self.subtitleHeaderView.topAnchor.constraint(equalTo: self.headerView.bottomAnchor, constant: 5),
+//            self.headerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+//            self.headerView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.subtitleHeaderView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            self.subtitleHeaderView.heightAnchor.constraint(equalToConstant: 27),
+            
+            
+            self.userNameField.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
             self.userNameField.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
             self.userNameField.heightAnchor.constraint(equalToConstant: 55),
             self.userNameField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.85),
@@ -58,10 +81,15 @@ class RegisterViewController: UIViewController {
             self.passwordField.heightAnchor.constraint(equalToConstant: 55),
             self.passwordField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.85),
             
-            self.signUp.topAnchor.constraint(equalTo: passwordField.bottomAnchor, constant: 80),
+            self.signUp.topAnchor.constraint(equalTo: oldUser.topAnchor, constant: -80),
             self.signUp.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
             self.signUp.heightAnchor.constraint(equalToConstant: 55),
             self.signUp.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.85),
+            
+            self.oldUser.topAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -90),
+            self.oldUser.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
+            self.oldUser.heightAnchor.constraint(equalToConstant: 55),
+            self.oldUser.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.85),
         ])
     }
     
@@ -77,5 +105,10 @@ class RegisterViewController: UIViewController {
                 print("into scene delegate")
             }
         }
+    }
+    
+    @objc private func didTapAlreadyHaveAnAccount() {
+        let vc = LoginViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

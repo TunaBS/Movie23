@@ -58,11 +58,8 @@
 		4B685F7A2C32F02F00DE0E71 /* MovieDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B685F792C32F02F00DE0E71 /* MovieDetailsViewModel.swift */; };
 		4B69D7E42C2A90D40009D357 /* MoviePosterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B69D7E32C2A90D40009D357 /* MoviePosterView.swift */; };
 		4B69D7E62C2A9B6C0009D357 /* TopMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B69D7E52C2A9B6C0009D357 /* TopMovieViewController.swift */; };
-		4B818C5A2C3CF5990062426F /* DatabaseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B818C592C3CF5990062426F /* DatabaseClient.swift */; };
-		4B818C5C2C3CF5F60062426F /* FavouriteMoviesDatabaseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B818C5B2C3CF5F60062426F /* FavouriteMoviesDatabaseClient.swift */; };
+		4B7290562C3FA2B1006ABE9B /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7290552C3FA2B1006ABE9B /* ThemeManager.swift */; };
 		4B818C5E2C3CF6410062426F /* FavouriteMovieDatabaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B818C5D2C3CF6410062426F /* FavouriteMovieDatabaseModel.swift */; };
-		4B818C602C3CF75B0062426F /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B818C5F2C3CF75B0062426F /* DatabaseService.swift */; };
-		4B818C622C3CF77B0062426F /* DatabaseServiceImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B818C612C3CF77B0062426F /* DatabaseServiceImp.swift */; };
 		4B893F1C2C294000004720C4 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B893F1B2C294000004720C4 /* CustomTextField.swift */; };
 		4B893F1E2C29409D004720C4 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B893F1D2C29409D004720C4 /* CustomButton.swift */; };
 		4B893F232C294436004720C4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B893F222C294436004720C4 /* LoginViewController.swift */; };
@@ -130,11 +127,8 @@
 		4B685F792C32F02F00DE0E71 /* MovieDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewModel.swift; sourceTree = "<group>"; };
 		4B69D7E32C2A90D40009D357 /* MoviePosterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePosterView.swift; sourceTree = "<group>"; };
 		4B69D7E52C2A9B6C0009D357 /* TopMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMovieViewController.swift; sourceTree = "<group>"; };
-		4B818C592C3CF5990062426F /* DatabaseClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseClient.swift; sourceTree = "<group>"; };
-		4B818C5B2C3CF5F60062426F /* FavouriteMoviesDatabaseClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteMoviesDatabaseClient.swift; sourceTree = "<group>"; };
+		4B7290552C3FA2B1006ABE9B /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		4B818C5D2C3CF6410062426F /* FavouriteMovieDatabaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteMovieDatabaseModel.swift; sourceTree = "<group>"; };
-		4B818C5F2C3CF75B0062426F /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
-		4B818C612C3CF77B0062426F /* DatabaseServiceImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseServiceImp.swift; sourceTree = "<group>"; };
 		4B893F1B2C294000004720C4 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		4B893F1D2C29409D004720C4 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		4B893F222C294436004720C4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -229,6 +223,7 @@
 		4B48B0642C2EE1F700266B78 /* feature */ = {
 			isa = PBXGroup;
 			children = (
+				4B7290542C3FA2A2006ABE9B /* theme */,
 				4B66DE8B2C3EA37D009A7AFA /* language */,
 				4B48B0672C2EE29A00266B78 /* login */,
 				4B48B0652C2EE20C00266B78 /* home */,
@@ -426,19 +421,8 @@
 		4B685F692C32AFCA00DE0E71 /* local */ = {
 			isa = PBXGroup;
 			children = (
-				4B818C582C3CF5850062426F /* client */,
-				4B685F6A2C32AFE100DE0E71 /* service */,
 			);
 			path = local;
-			sourceTree = "<group>";
-		};
-		4B685F6A2C32AFE100DE0E71 /* service */ = {
-			isa = PBXGroup;
-			children = (
-				4B818C5F2C3CF75B0062426F /* DatabaseService.swift */,
-				4B818C612C3CF77B0062426F /* DatabaseServiceImp.swift */,
-			);
-			path = service;
 			sourceTree = "<group>";
 		};
 		4B685F6D2C32B2AC00DE0E71 /* database */ = {
@@ -449,13 +433,12 @@
 			path = database;
 			sourceTree = "<group>";
 		};
-		4B818C582C3CF5850062426F /* client */ = {
+		4B7290542C3FA2A2006ABE9B /* theme */ = {
 			isa = PBXGroup;
 			children = (
-				4B818C592C3CF5990062426F /* DatabaseClient.swift */,
-				4B818C5B2C3CF5F60062426F /* FavouriteMoviesDatabaseClient.swift */,
+				4B7290552C3FA2B1006ABE9B /* ThemeManager.swift */,
 			);
-			path = client;
+			path = theme;
 			sourceTree = "<group>";
 		};
 		4B893F182C293F44004720C4 /* base */ = {
@@ -593,7 +576,6 @@
 			files = (
 				4B893F232C294436004720C4 /* LoginViewController.swift in Sources */,
 				4B893F272C29675E004720C4 /* RegisterViewController.swift in Sources */,
-				4B818C5C2C3CF5F60062426F /* FavouriteMoviesDatabaseClient.swift in Sources */,
 				4B48B0832C2EF73300266B78 /* APIService.swift in Sources */,
 				4B3917F72C3528FE00D37050 /* TabBarController.swift in Sources */,
 				4B5BF9B72C254014004370DE /* AppDelegate.swift in Sources */,
@@ -610,6 +592,7 @@
 				4B685F762C32D72A00DE0E71 /* TimeConverter.swift in Sources */,
 				4B685F632C3283FE00DE0E71 /* MovieGenre.swift in Sources */,
 				4B18502C2C3CFC9800F89458 /* WatchListViewModel.swift in Sources */,
+				4B7290562C3FA2B1006ABE9B /* ThemeManager.swift in Sources */,
 				4B5927CC2C3C1B61008E69F4 /* WatchListViewController.swift in Sources */,
 				4B8BB9D22C36D954000B9995 /* Debouncer.swift in Sources */,
 				4B685F612C3283D400DE0E71 /* MovieDetailsModel.swift in Sources */,
@@ -624,12 +607,10 @@
 				4B893F2E2C297F93004720C4 /* AuthenticationManager.swift in Sources */,
 				4B893F1C2C294000004720C4 /* CustomTextField.swift in Sources */,
 				4B8BB9D02C36CF65000B9995 /* SearchViewModel.swift in Sources */,
-				4B818C602C3CF75B0062426F /* DatabaseService.swift in Sources */,
 				4B66DE822C3E8B4D009A7AFA /* PrimaryColorGetter.swift in Sources */,
 				4B48B0782C2EEE9800266B78 /* MovieListResponse.swift in Sources */,
 				4B4F8F692C2BED7D007415F5 /* UIView.swift in Sources */,
 				4B5927C72C3C10AE008E69F4 /* WatchListButton.swift in Sources */,
-				4B818C5A2C3CF5990062426F /* DatabaseClient.swift in Sources */,
 				4B685F652C32848200DE0E71 /* MovieListViewModel.swift in Sources */,
 				4B685F682C32AF8900DE0E71 /* MovieRepositoryImp.swift in Sources */,
 				4B48B06C2C2EE53200266B78 /* DiContainer.swift in Sources */,
@@ -638,7 +619,6 @@
 				4B8BB9D42C36D98A000B9995 /* VisualEffectView.swift in Sources */,
 				4B5BF9D72C258843004370DE /* User.swift in Sources */,
 				4B3917F32C3524CC00D37050 /* SettingsViewController.swift in Sources */,
-				4B818C622C3CF77B0062426F /* DatabaseServiceImp.swift in Sources */,
 				4BAACE162C2D9D9B00832C34 /* MovieDetailsViewController.swift in Sources */,
 				4B818C5E2C3CF6410062426F /* FavouriteMovieDatabaseModel.swift in Sources */,
 				4B3917F92C3532DB00D37050 /* PaddingForUIView.swift in Sources */,

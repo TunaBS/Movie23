@@ -104,19 +104,34 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
         print("Selected Sort in VC: \(sortType))")
         print("Selected Order in VC: \(orderType)")
         
-        filterViewModel.sortBy = selectedSort?.rawValue ?? ""
-        filterViewModel.orderBy = selectedOrder?.rawValue ?? ""
-//        filterViewModel.genreBy = selectedGenres
+        if let selectedSort = selectedSort?.rawValue {
+            filterViewModel.sortBy = selectedSort
+        }
+        if let selectedOrder = selectedOrder?.rawValue {
+            filterViewModel.orderBy = selectedOrder
+        }
+//        filterViewModel.sortBy = selectedSort?.rawValue ?? ""
+//        filterViewModel.orderBy = selectedOrder?.rawValue ?? ""
         if let genreSelectd = genres {
-            self.movies = self.filterViewModel.filterMoviesByGenres(genres: selectedGenres, movieArray: movies)
-            print("Filtered Movies count: \(movies.count)")
-            print("Filtered Movies in Search VC: \(movies)")
+            filterViewModel.genreBy = genreSelectd
+//            self.movies = filterMoviesByGenres(genres: selectedGenres, movieArray: movies)
+//            print("Filtered Movies count: \(movies.count)")
+//            print("Filtered Movies in Search VC: \(movies)")
+//            self.tableView.reloadData()
+        }
+    }
+    
+    func filterMoviesByGenres(genres: Set<MovieGenre>, movieArray: [MovieListItemModel]) -> [MovieListItemModel] {
+        return movieArray.filter { movie in
+            let movieGenres = Set(movie.genre.compactMap { MovieGenre.fromString($0) })
+            return genres.isSubset(of: movieGenres)
         }
     }
     
     func updateSearchResults(for searchController: UISearchController) {
         print("print searched value: ", searchController.searchBar.text ?? "")
         filterViewModel.searchQuery = searchController.searchBar.text ?? ""
+//        filterViewModel.fetchMovieListUsingQuery(movieName: searchController.searchBar.text ?? "", sortBy: selectedSort?.rawValue, orderBy: <#T##String?#>)
         
         if let sortSelected = selectedSort?.rawValue {
             filterViewModel.sortBy = sortSelected
@@ -124,14 +139,11 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
         if let orderSelected = selectedOrder?.rawValue {
             filterViewModel.orderBy = orderSelected
         }
-//        if let genreSelected = selectedGenres {
-        movies = filterViewModel.filterMoviesByGenres(genres: selectedGenres, movieArray: movies)
-        print("Filtered Movies count: \(movies.count)")
-        print("Filtered Movies in Search VC: \(movies)")
-//        }
-//        viewModel.sortBy = selectedSort?.rawValue ?? ""
-//        viewModel.orderBy = selectedOrder?.rawValue ?? ""
-//        viewModel.genreBy = selectedGenres
+        filterViewModel.genreBy = selectedGenres
+//        movies = filterMoviesByGenres(genres: selectedGenres, movieArray: movies)
+//        print("Filtered Movies count: \(movies.count)")
+//        print("Filtered Movies in Search VC: \(movies)")
+//        self.tableView.reloadData()
     }
     
 }

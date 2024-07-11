@@ -29,7 +29,7 @@ class HeaderView: UIView {
     }()
 
     // MARK: - LifeCycle
-    init(title: String, subTitle: String? = nil, backgroundColor: UIColor? = nil) {
+    init(title: String? = nil, subTitle: String? = nil, backgroundColor: UIColor? = nil) {
         super.init(frame: .zero)
         self.titleLabel.text = title
         self.subTitleLabel.text = subTitle

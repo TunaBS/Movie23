@@ -41,8 +41,8 @@ class MovieRepositoryImpl: MovieRepository {
            }
        }
     
-    func getMovieListByFilter(query: String, sortBy: String? = nil, orderBy: String? = nil) async throws -> [MovieListItemModel] {
-        let response = try await apiService.getMovieListByFilter(query: query, sortBy: sortBy, orderBy: orderBy)
+    func getMovieListByFilter(query: String, sortBy: String? = nil, orderBy: String? = nil, genre: [String]? = nil) async throws -> [MovieListItemModel] {
+        let response = try await apiService.getMovieListByFilter(query: query, sortBy: sortBy, orderBy: orderBy, genre: genre)
 //        let favouriteMovieIds = try await getFavouriteMovieIds()
         return response.data.movies.map{ movie in
             MovieListItemModel.fromMovie(
