@@ -28,10 +28,10 @@ class WatchListButton: UIButton {
         super.init(frame: .zero)
         
         if watchListViewModel.movieArray.contains(where: { $0.id == movieItem.id}) {
-            title = "Drop from Watchlist"
+            title = LocalizedStringKey.dropFromWatchlist.localized()//"Drop from Watchlist"
             alreadyInWatchList = true
         } else {
-            title = "Add to Watch List"
+            title = LocalizedStringKey.addToWatchlist.localized()
             alreadyInWatchList = false
         }
 //        if movieItem.isFavourite == false {

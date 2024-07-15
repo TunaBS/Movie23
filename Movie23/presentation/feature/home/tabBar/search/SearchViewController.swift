@@ -64,7 +64,7 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
         self.searchController.searchResultsUpdater = self
         self.searchController.obscuresBackgroundDuringPresentation = false
         self.searchController.hidesNavigationBarDuringPresentation = false
-        self.searchController.searchBar.placeholder = "Search Movies"
+        self.searchController.searchBar.placeholder = LocalizedStringKey.search.localized()
         
         self.navigationItem.searchController = searchController
         self.definesPresentationContext = false

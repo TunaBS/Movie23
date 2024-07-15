@@ -21,10 +21,10 @@ class TabBarController: UITabBarController {
     
 
     private func setUpTabs() {
-        let homeVC = self.createNav(with: "Home", and: UIImage(systemName: "house"), vc: HomeViewController())
-        let watchListVC = self.createNav(with: "WatchList", and: UIImage(systemName: "list.bullet"), vc: WatchListViewController())
-        let settingsVC = self.createNav(with: "Settings", and: UIImage(systemName: "gearshape.fill"), vc: SettingsViewController())
-        let searchVC = self.createNav(with: "Search", and: UIImage(systemName: "magnifyingglass"), vc: SearchViewController())
+        let homeVC = self.createNav(with: LocalizedStringKey.home.localized() /*"Home"*/, and: UIImage(systemName: "house"), vc: HomeViewController())
+        let watchListVC = self.createNav(with: LocalizedStringKey.watchList.localized()/*"WatchList"*/, and: UIImage(systemName: "list.bullet"), vc: WatchListViewController())
+        let settingsVC = self.createNav(with: LocalizedStringKey.settings.localized() /*"Settings"*/, and: UIImage(systemName: "gearshape.fill"), vc: SettingsViewController())
+        let searchVC = self.createNav(with: LocalizedStringKey.search.localized() /*"Search"*/, and: UIImage(systemName: "magnifyingglass"), vc: SearchViewController())
         self.setViewControllers([homeVC, searchVC, watchListVC, settingsVC], animated: true)
     }
     

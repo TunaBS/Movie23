@@ -22,11 +22,11 @@ class HomeViewController: UIViewController {
     } ()
 
     let noUser = "No user name found"
-    var headerView = HeaderView(title: "Welcome", subTitle: "No user name found")
-    private let topMoviePicksText = HeaderView(title: "Top Movie Picks")
-    private let upComingMoviePicksText = HeaderView(title: "Up coming Movie Picks")
-    private let seeAllButtonWithTopMovie = CustomButton(title: "See all", fontSize: .small, titleColor: UIColor(named: "primaryColor"))
-    private let seeAllButtonWithUpcomingMovie = CustomButton(title: "See all", fontSize: .small, titleColor: UIColor(named: "primaryColor"))
+    var headerView = HeaderView(title: LocalizedStringKey.welcome.localized(), subTitle: "No user name found")
+    private let topMoviePicksText = HeaderView(title: LocalizedStringKey.topMoviePicks.localized())
+    private let upComingMoviePicksText = HeaderView(title: LocalizedStringKey.upcomingMovies.localized())
+    private let seeAllButtonWithTopMovie = CustomButton(title: LocalizedStringKey.seeAll.localized(), fontSize: .small, titleColor: UIColor(named: "primaryColor"))
+    private let seeAllButtonWithUpcomingMovie = CustomButton(title: LocalizedStringKey.seeAll.localized(), fontSize: .small, titleColor: UIColor(named: "primaryColor"))
     let movieSlideListPlaceholder = UIView()
     let movieListPlaceholderTopMovie = UIView()
     let movieListPlaceholderUpcomingMovie = UIView()
@@ -34,7 +34,7 @@ class HomeViewController: UIViewController {
      
     override func viewDidLoad() {
         super.viewDidLoad()
-        headerView = HeaderView(title: "Welcome", subTitle: authenticationManager.currentUser?.userName)
+        headerView = HeaderView(title: LocalizedStringKey.welcome.localized(), subTitle: authenticationManager.currentUser?.userName)
         self.setUpUI()
         self.setupMovieSlideListViewController(to: movieSlideListPlaceholder)
         self.setupMovieListViewController(to: movieListPlaceholderTopMovie)
