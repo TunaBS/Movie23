@@ -37,7 +37,7 @@ class FilterSearchView: UIView {
 
     init() {
         super.init(frame: .zero)
-        self.backgroundColor = .white
+        self.backgroundColor = .primary
         setupViews()
         setupConstraints()
     }
@@ -49,6 +49,7 @@ class FilterSearchView: UIView {
     private func setupViews() {
         titleLabel.font = .boldSystemFont(ofSize: 24)
         titleLabel.text = "Sort and Filter"
+        titleLabel.textColor = UIColor(named: "primaryColor")
         
         sortByLabel.font = .boldSystemFont(ofSize: 18)
         sortByLabel.text = "Sort By"

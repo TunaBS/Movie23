@@ -13,13 +13,11 @@ class MovieDetailsViewController: UIViewController {
     
     private let scrollView: UIScrollView = {
         let sv = UIScrollView()
-//        sv.backgroundColor = .cyan
         return sv
     } ()
     
     private let contentView: UIView = {
         let cv = UIView()
-//        cv.backgroundColor = .darkerYellow
         return cv
     } ()
     
@@ -32,8 +30,7 @@ class MovieDetailsViewController: UIViewController {
     let descriptionOfMovie = UILabel()
     let starIcon = UIImageView()
     var movieRating: Double = 0.0
-//    let watchListButton = WatchListButton(hasBackground: true, fontSize: .small)
-    let watchListButton = CustomButton(title: "Add to WatchList", hasBackground: true, fontSize: .small)
+    var watchListButtonPlaceHolder = UIView()
     var setRatingView = UIView()
     let castText: UILabel = {
         let label = UILabel()
@@ -41,8 +38,9 @@ class MovieDetailsViewController: UIViewController {
         return label
     }()
 
-//    var castView = UIView()
     var castValue: [Cast]? = nil
+    let watchListViewModel = DiModule.shared.resolve(WatchListViewModel.self)!
+    var alreadyInWatchList = false
     
     override func viewDidLoad() {
         self.view.backgroundColor = .systemBackground
@@ -51,8 +49,10 @@ class MovieDetailsViewController: UIViewController {
             return
         }
         viewModel = MovieDetailsViewModel(movieRepositoy: MovieRepositoryImpl(apiService: APIServiceImplemention(apiClient: APIClientImp())), movieId: movieId)
+        
         bindViewModel()
         setUpScrollView()
+//        self.watchListButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }
     
     private func setUpScrollView() {
@@ -80,7 +80,8 @@ class MovieDetailsViewController: UIViewController {
         self.contentView.addSubview(time)
         self.contentView.addSubview(descriptionOfMovie)
         self.contentView.addSubview(starIcon)
-        self.contentView.addSubview(watchListButton)
+//        self.contentView.addSubview(watchListButton)
+        self.contentView.addSubview(watchListButtonPlaceHolder)
         self.contentView.addSubview(setRatingView)
         self.contentView.addSubview(castText)
         
@@ -94,19 +95,11 @@ class MovieDetailsViewController: UIViewController {
         year.pinToRightAndBottomOfSomething(height: 25, to: self.contentView, to: mpaRating, to: movieTitle)
         time.pinToRightAndBottomOfSomething(height: 25, to: self.contentView, to: year, to: movieTitle)
         descriptionOfMovie.pinToRightAndBottomOfSomething(height: 50, to: self.contentView, to: nil, to: mpaRating)
-
-        watchListButton.pinToBottomOfSomethingCenter(height: 50, to: self.contentView, to: descriptionOfMovie)
-        setRatingView.pinToBottomOfSomethingCenter(height: 80, to: self.contentView, to: watchListButton)
+        descriptionOfMovie.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9).isActive = true
+//        watchListButton.pinToBottomOfSomethingCenter(height: 50, to: self.contentView, to: descriptionOfMovie)
+        watchListButtonPlaceHolder.pinToBottomOfSomethingCenter(height: 50, to: self.contentView, to: descriptionOfMovie)
+        setRatingView.pinToBottomOfSomethingCenter(height: 80, to: self.contentView, to: watchListButtonPlaceHolder)
         castText.pinToRightAndBottomOfSomething(height: 20, to: self.contentView, to: nil, to: setRatingView)
-//        castView.pinToRightAndBottomOfSomething(height: 160, to: self.contentView, to: nil, to: setRatingView)
-//        castView.translatesAutoresizingMaskIntoConstraints = false
-//        castView.topAnchor.constraint(equalTo: setRatingView.bottomAnchor, constant: 10).isActive = true
-//        castView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 10).isActive = true
-//        castView.heightAnchor.constraint(equalToConstant: 160).isActive = true
-//        castView.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
-//        castView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-//        castView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor).isActive = true
-        
     }
     
     private func configureAllValues() {
@@ -137,6 +130,10 @@ class MovieDetailsViewController: UIViewController {
     }
     
     func setMovieValues(movie: MovieDetailsModel) {
+        guard let moviePassToButton = viewModel?.movieDetails?.toMovieListItem() else { return  }
+        let watchListButton = WatchListButton(movieItem: moviePassToButton, hasBackground: true, fontSize: .small)
+        watchListButtonPlaceHolder.addSubview(watchListButton)
+        watchListButton.pin(to: watchListButtonPlaceHolder)
         movieImage.setImage(with: movie.largeCoverImage)
         var genreList = genresString(from: movie.genres)
         movieGenre.text = genreList
@@ -150,19 +147,13 @@ class MovieDetailsViewController: UIViewController {
         print("Movie rating: \(movie.rating)")
         movieRating = movie.rating
         
-        // Now that movieRating is set, we can call setUpRatingView
-//        setRatingView.removeFromSuperview() // Remove the old rating view if it exists
-//        setRatingView = setUpRatingView(to: self.contentView, to: watchListButton, movieRatingValue: movieRating)
         setUpRatingView(movieRatingValue: movieRating).pin(to: setRatingView)
 
         print("The casts are: \(castValue)")
-//        castView.removeFromSuperview()
-//        castView = setUpCastView(to: self.contentView, to: setRatingView, cast: castValue)
         setUpCastView(cast: castValue)
     }
     
     func configureImageView() {
-//        movieImage.image = UIImage(named: "background_dummy_img")
         movieImage.layer.cornerRadius = 10
         movieImage.clipsToBounds = true
     }
@@ -194,19 +185,20 @@ class MovieDetailsViewController: UIViewController {
     }
     
     func watchListButtonAlignment() {
-        watchListButton.translatesAutoresizingMaskIntoConstraints = false
-        watchListButton.topAnchor.constraint(equalTo: descriptionOfMovie.bottomAnchor, constant: 10).isActive = true
-        watchListButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        watchListButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.9).isActive = true
+        watchListButtonPlaceHolder.translatesAutoresizingMaskIntoConstraints = false
+        watchListButtonPlaceHolder.topAnchor.constraint(equalTo: descriptionOfMovie.bottomAnchor, constant: 10).isActive = true
+        watchListButtonPlaceHolder.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        watchListButtonPlaceHolder.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.9).isActive = true
     }
     
-    private func setUpRatingView(/*to contentView: UIView,*/ /*to watchlistButton: UIView,*/ movieRatingValue: Double) -> UIView {
+    
+    private func setUpRatingView(movieRatingValue: Double) -> UIView {
         let fullView = UIView()
         fullView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(fullView)
         
-        var firstRatingView = setUpSingleRatingView(to: fullView, header: "Overall Rating", ratingValue: movieRatingValue)
-        var secondRatingView = setUpSingleRatingView(to: fullView, header: "Your Rating", ratingValue: 0.0)
+        var firstRatingView = setUpSingleRatingView(to: fullView, header: LocalizedStringKey.overallRating.localized() /*"Overall Rating"*/, ratingValue: movieRatingValue)
+        var secondRatingView = setUpSingleRatingView(to: fullView, header: LocalizedStringKey.yourRating.localized() /*"Your Rating"*/, ratingValue: 0.0)
         firstRatingView.leadingAnchor.constraint(equalTo: fullView.leadingAnchor).isActive = true
         secondRatingView.trailingAnchor.constraint(equalTo: fullView.trailingAnchor, constant: 5).isActive = true
         
@@ -282,19 +274,17 @@ class MovieDetailsViewController: UIViewController {
     
 
     
-    private func setUpCastView(/*to superView: UIView, to bottomOf: UIView, */cast: [Cast]?) {
+    private func setUpCastView(cast: [Cast]?) {
         
         let scrollCastView: UIScrollView = {
             let scrollCastView = UIScrollView()
             scrollCastView.showsVerticalScrollIndicator = false
-//            scrollCastView.backgroundColor = .blue         //use color for testing
             return scrollCastView
         } ()
         
         let stackCastview: UIStackView = {
             let stackCastView = UIStackView()
             stackCastView.axis = .horizontal
-//            stackCastView.backgroundColor = .red          //use color for testing
             stackCastView.distribution = .equalSpacing
             stackCastView.spacing = 10
             return stackCastView

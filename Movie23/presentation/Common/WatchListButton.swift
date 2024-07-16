@@ -9,9 +9,10 @@ import UIKit
 
 class WatchListButton: UIButton {
 
-    var title = ""
+    var title = LocalizedStringKey.addToWatchlist.localized()
     var alreadyInWatchList = false
-    private var watchListViewModel: WatchListViewModel
+//    private var watchListViewModel: WatchListViewModel
+    private var watchListViewModel = DiModule.shared.resolve(WatchListViewModel.self)!
     private var movieItem: MovieListItemModel
     enum FontSize {
         case big
@@ -20,26 +21,15 @@ class WatchListButton: UIButton {
     }
     
     
-    init(watchListViewModel: WatchListViewModel, movieItem: MovieListItemModel, hasBackground: Bool = false, fontSize: FontSize, titleColor: UIColor? = nil, backgroundColor: UIColor? = nil) {
-//        self.isFavourite = isFavourite
-//        self.onToggleFavourite = onToggleFavourite
-        self.watchListViewModel = watchListViewModel
+    init(/*watchListViewModel: WatchListViewModel, */movieItem: MovieListItemModel, hasBackground: Bool = false, fontSize: FontSize, titleColor: UIColor? = nil, backgroundColor: UIColor? = nil) {
         self.movieItem = movieItem
         super.init(frame: .zero)
         
-        if watchListViewModel.movieArray.contains(where: { $0.id == movieItem.id}) {
-            title = LocalizedStringKey.dropFromWatchlist.localized()//"Drop from Watchlist"
+        if self.watchListViewModel.movieArray.contains(where: { $0.id == movieItem.id}) {
             alreadyInWatchList = true
         } else {
-            title = LocalizedStringKey.addToWatchlist.localized()
             alreadyInWatchList = false
         }
-//        if movieItem.isFavourite == false {
-//            title = "Add to Watch List"
-//        } else {
-//            title = "Remove from WatchList"
-//        }
-        
         
         self.setTitle(title, for: .normal)
         self.layer.cornerRadius = 12
@@ -47,7 +37,6 @@ class WatchListButton: UIButton {
         
         self.backgroundColor = backgroundColor ?? (hasBackground ? .systemPurple : .clear)
         
-        // Use provided title color if any, otherwise use default
         let finalTitleColor: UIColor = titleColor ?? (hasBackground ? .white : .systemPurple)
         self.setTitleColor(finalTitleColor, for: .normal)
         
@@ -85,9 +74,6 @@ class WatchListButton: UIButton {
             alertMessage = "This movie will be added to your watch list. Continue?"
 //            movieItem.isFavourite = true
         }
-//        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//        viewController.present(alert, animated: true, completion: nil)
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
         
         let okAction = UIAlertAction(title: okButtonTitle, style: .default) { _ in

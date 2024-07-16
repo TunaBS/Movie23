@@ -62,6 +62,7 @@ class WatchListViewModel: ObservableObject {
         }
     }
     
+    
     func moveItems(from: IndexSet, to: Int) {
         movieArray.move(fromOffsets: from, toOffset: to)
     }
@@ -78,6 +79,7 @@ class WatchListViewModel: ObservableObject {
             await saveItems()
         }
     }
+    
     
     func saveItems() async {
         await updateInFirestore()

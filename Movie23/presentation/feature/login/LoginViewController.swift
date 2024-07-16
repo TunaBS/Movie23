@@ -10,14 +10,14 @@ import UIKit
 class LoginViewController: UIViewController {
 //    private let headerView = HeaderView(title: "Welcome Back", subTitle: "Sign in to your account")
     private let imageView = UIImageView(image: UIImage(named: "loginBackgroud"))
-    private let headerView = HeaderView(title: "Welcome Back", subTitle: nil)
-    private let subtitleHeaderView = HeaderView(title: nil, subTitle: "Sign in to your account")
+    private let headerView = HeaderView(title: LocalizedStringKey.welcomeBack.localized(), subTitle: nil)
+    private let subtitleHeaderView = HeaderView(title: nil, subTitle: LocalizedStringKey.pleaseSignInToYourAccount.localized() /*"Sign in to your account"*/)
     
     private let emailField = CustomTextField(fieldType: .email)
     private let passwordField = CustomTextField(fieldType: .password)
-    private let signInButton = CustomButton(title: "Sign In", hasBackground: true, fontSize: .big)
+    private let signInButton = CustomButton(title: LocalizedStringKey.signIn.localized() /*"Sign In"*/, hasBackground: true, fontSize: .big)
 //    private let signInWithGoogle = CustomButton(title: "Sign In with Google", hasBackground: false, fontSize: .big, titleColor: .darkText)
-    private let newUser = CustomButton(title: "Don't have an account? Create one", fontSize: .medium, titleColor: .white)
+    private let newUser = CustomButton(title: LocalizedStringKey.createNewAccount.localized() /*"Don't have an account? Create one"*/, fontSize: .medium, titleColor: .white)
     
     let authenticationManager = DiModule.shared.resolve(AuthenticationManager.self)!
     

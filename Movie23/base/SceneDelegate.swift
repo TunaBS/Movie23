@@ -12,7 +12,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     
     var authenticationManager: AuthenticationManager? = nil
-
+    var watchListViewModel: WatchListViewModel? = nil
 
 //    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 //        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -33,6 +33,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window?.overrideUserInterfaceStyle = isDarkMode ? .dark : .light
         
         authenticationManager = DiModule.shared.resolve(AuthenticationManager.self)!
+        watchListViewModel = DiModule.shared.resolve(WatchListViewModel.self)!
         
         Task {
             await checkSignInUser()
@@ -53,6 +54,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         } else {
             // go to home screen
 //            let vc = HomeViewController()
+            await watchListViewModel?.fetchUser()
             let vc = TabBarController()
             let nav = UINavigationController(rootViewController: vc)
             nav.modalPresentationStyle = .fullScreen

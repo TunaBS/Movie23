@@ -85,18 +85,18 @@ class SlideShowViewController: UIViewController {
             bannerView.translatesAutoresizingMaskIntoConstraints = false
             bannerView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
             
-//            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(bannerViewTapped(_:)))
-//            bannerView.isUserInteractionEnabled = true
-//            bannerView.addGestureRecognizer(tapGestureRecognizer)
-//            bannerView.tag = movie.id
+            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(bannerViewTapped(_:)))
+            bannerView.isUserInteractionEnabled = true
+            bannerView.addGestureRecognizer(tapGestureRecognizer)
+            bannerView.tag = movie.id
             
-            bannerView.tag = index
+//            bannerView.tag = index
         }
         pageControl.numberOfPages = viewModel.movieList.count
         pageControl.currentPage = 0
         
         scrollView.delegate = self
-        view.layoutIfNeeded() // Ensure the layout is updated
+        view.layoutIfNeeded() 
     }
     
     @objc private func bannerViewTapped(_ sender: UITapGestureRecognizer) {
@@ -186,7 +186,7 @@ class SlideShowViewController: UIViewController {
         var mpaRating = PaddedLabel()
         var year = PaddedLabel()
         var time = PaddedLabel()
-        let watchListButton = WatchListButton(watchListViewModel: watchListViewModel, movieItem: movie, hasBackground: true, fontSize: .small)
+        let watchListButton = WatchListButton(/*watchListViewModel: watchListViewModel,*/ movieItem: movie, hasBackground: true, fontSize: .small)
         
         movieGenre.translatesAutoresizingMaskIntoConstraints = false
         movieTitle.translatesAutoresizingMaskIntoConstraints = false

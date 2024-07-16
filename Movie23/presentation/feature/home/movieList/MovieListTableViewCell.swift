@@ -9,7 +9,7 @@ import UIKit
 
 class MovieListTableViewCell: UITableViewCell {
     
-    let watchListViewModel = DiModule.shared.resolve(WatchListViewModel.self)!
+//    let watchListViewModel = DiModule.shared.resolve(WatchListViewModel.self)!
     var movieImage = UIImageView()
     var movieGenre = UILabel()
     var movieTitle = UILabel()
@@ -18,7 +18,7 @@ class MovieListTableViewCell: UITableViewCell {
     var time = PaddedLabel()
     var starIcon = UIImageView()
     var rating = UILabel()
-    var watchListButtonPlaceHolder = CustomButton(title: "", fontSize: .small)
+    var watchListButtonPlaceHolder = CustomButton(title: "", hasBackground: false, fontSize: .small)
 //    var isAlreadyInWatchlist = false
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -56,7 +56,7 @@ class MovieListTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setCellValue(movie: MovieListItemModel/*, isAlreadyInWatchList: Bool*/) {
+    func setCellValue(movie: MovieListItemModel, showWatchListButton: Bool? = false) {
         movieImage.setImage(with: movie.poster)
 //        movieImage.image = UIImage(named: "background_dummy_img")
         var genreList = genresString(from: movie.genre)
@@ -67,9 +67,13 @@ class MovieListTableViewCell: UITableViewCell {
         time.text = movie.duration == "" ? "N/A" : movie.duration
         rating.text = "\(movie.rating)"
 //        isAlreadyInWatchlist = isAlreadyInWatchList
-        var watchListButton = WatchListButton(watchListViewModel: watchListViewModel, movieItem: movie, hasBackground: true, fontSize: .small)
-        addSubview(watchListButton)
-        watchListButton.pinButtonToBottomTrailing(to: contentView)
+        if let watchListButtonShow = showWatchListButton {
+            if watchListButtonShow {
+                var watchListButton = WatchListButton(/*watchListViewModel: watchListViewModel,*/ movieItem: movie, hasBackground: true, fontSize: .small)
+                addSubview(watchListButton)
+                watchListButton.pinButtonToBottomTrailing(to: contentView)
+            }
+        }
     }
     
     func configureImageView() {

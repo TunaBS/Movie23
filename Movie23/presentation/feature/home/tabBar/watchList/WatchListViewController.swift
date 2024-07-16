@@ -21,7 +21,6 @@ class WatchListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .darkerYellow
-//        title = "Watch List"
         self.setUpTableUI()
         bindViewModel()
         viewModel.initData();

@@ -9,13 +9,13 @@ import UIKit
 
 class RegisterViewController: UIViewController {
     private let imageView = UIImageView(image: UIImage(named: "registrationBackground"))
-    private let headerView = HeaderView(title: "Welcome", subTitle: nil)
-    private let subtitleHeaderView = HeaderView(title: nil, subTitle: "Create a new account")
+    private let headerView = HeaderView(title: LocalizedStringKey.welcome.localized(), subTitle: nil)
+    private let subtitleHeaderView = HeaderView(title: nil, subTitle: LocalizedStringKey.createNewAccount.localized())
     private let userNameField = CustomTextField(fieldType: .username)
     private let emailField = CustomTextField(fieldType: .email)
     private let passwordField = CustomTextField(fieldType: .password)
-    private let signUp = CustomButton(title: "Create an account", hasBackground: true, fontSize: .big)
-    private let oldUser = CustomButton(title: "Already have an account? Create one", fontSize: .medium, titleColor: .white)
+    private let signUp = CustomButton(title: LocalizedStringKey.createNewAccount.localized() /*"Create an account"*/, hasBackground: true, fontSize: .big)
+    private let oldUser = CustomButton(title: LocalizedStringKey.signIn.localized() /*/"Already have an account? Sign In"*/, fontSize: .medium, titleColor: .white)
     let authenticationManager = DiModule.shared.resolve(AuthenticationManager.self)!
     
     override func viewDidLoad() {

@@ -54,6 +54,9 @@ enum LocalizedStringKey: String {
     case itemAddedToYourWatchList
     case alert
     case oK
+    case overallRating
+    case yourRating
+
 
 
     func localized() -> String {

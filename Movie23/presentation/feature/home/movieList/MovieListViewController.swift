@@ -64,21 +64,14 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: Cells.movieCell) as! MovieListTableViewCell
         let singleMovie = movies[indexPath.row]
-        cell.setCellValue(movie: singleMovie)
+        cell.setCellValue(movie: singleMovie, showWatchListButton: true)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedMovie = viewModel.movieList[indexPath.row]
-        
-        // Instantiate the detail view controller
         let detailViewController = MovieDetailsViewController()
-        
-        // Pass the selected movie to the detail view controller
-//        detailViewController.movie = selectedMovie
         detailViewController.movieId = selectedMovie.id
-        
-        // Navigate to the detail view controller
         navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
